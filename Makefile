@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 18:17:02 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/13 18:30:44 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/12/13 18:47:03 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,13 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 NAME		=	miniRT
 LIBFT		=	libft.a
+LIBMLX		=	libmlx.a
 
 # Directories
 SRCS_DIR	=	./src/
 HEAD_DIR	=	./inc/
 LIBFT_DIR	=	./libft/
+LIBMLX_DIR	=	./minilibx-linux/
 OBJ_DIR		=	${SRCS_DIR}.o
 
 # Colours, symbols and utils
@@ -45,6 +47,7 @@ OBJS		=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${SRCS:.c=.o}}
 
 all:			project_logo ${OBJ_DIR}
 				@make -s ${LIBFT}
+				@make -s ${LIBMLX}
 				@make -s ${NAME}
 
 ${LIBFT}:
@@ -55,8 +58,17 @@ ${LIBFT}:
 				fi
 				make -C ${LIBFT_DIR}
 
+${LIBMLX}:
+				@echo "${CYAN}\nCOMPILING $$(echo ${LIBMLX} | tr '[:lower:]' '[:upper:]')${NC}"
+				@if [ -d ${LIBFT_DIR} ]; then \
+					wget https://cdn.intra.42.fr/document/document/22740/minilibx-linux.tgz; \
+					tar -xf minilibx-linux.tgz; \
+					rm minilibx-linux.tgz; \
+				fi
+				make -C ${LIBMLX_DIR}
+
 ${NAME}:		entry_message ${OBJS}
-				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${READLINE} -o ${NAME}
+				@${CC} ${CFLAGS} ${SRCS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} -o ${NAME}
 				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"
 
 ${OBJ_DIR}:
@@ -75,6 +87,7 @@ ${OBJ_DIR}/%.o:	${SRCS_DIR}%.c
 
 clean:
 				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
+				@make -sC ${LIBMLX_DIR} clean >/dev/null 2>&1
 				@if [ ! -d "${OBJ_DIR}" ]; \
 				then \
 					echo "Repo already clean"; \
@@ -85,8 +98,9 @@ clean:
 
 fclean:			clean
 				@make -sC ${LIBFT_DIR} fclean >/dev/null 2>&1
-				@echo "Removing ${NAME} and ${LIBFT} files from root"
-				@rm -f ${NAME} ${LIBFT}
+				@make -sC ${LIBMLX_DIR} clean >/dev/null 2>&1
+				@echo "Removing archive files ${LIBFT} and ${LIBMLX}, removing ${NAME} executable from root"
+				@rm -f ${NAME}
 
 re:				fclean all
 
