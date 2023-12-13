@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/13 18:17:02 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/13 18:47:03 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/12/13 18:50:30 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ ${LIBFT}:
 
 ${LIBMLX}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBMLX} | tr '[:lower:]' '[:upper:]')${NC}"
-				@if [ -d ${LIBFT_DIR} ]; then \
+				@if [ ! -d ${LIBMLX_DIR} ]; then \
 					wget https://cdn.intra.42.fr/document/document/22740/minilibx-linux.tgz; \
 					tar -xf minilibx-linux.tgz; \
 					rm minilibx-linux.tgz; \
