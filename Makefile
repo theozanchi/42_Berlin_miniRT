@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/14 15:47:00 by tzanchi          ###   ########.fr        #
+#    Updated: 2023/12/14 16:00:03 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address -lmlx -lXext -lX11 -lm
 NAME		=	miniRT
 LIBFT		=	libft.a
 LIBMLX		=	libmlx.a
