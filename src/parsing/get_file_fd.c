@@ -1,4 +1,4 @@
-#include "../../include/minirt.h"
+#include "../../inc/minirt.h"
 
 int	get_file_fd(char *s)
 {

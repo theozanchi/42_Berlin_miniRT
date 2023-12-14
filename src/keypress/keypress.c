@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:52:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 01:53:28 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:36:21 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h"
+#include "../../inc/minirt.h"
 
 int	handle_keypress(int keycode)
 {

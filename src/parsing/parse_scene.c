@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 02:07:23 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:36:37 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h"
+#include "../../inc/minirt.h"
 
 char	**read_file(int fd)
 {

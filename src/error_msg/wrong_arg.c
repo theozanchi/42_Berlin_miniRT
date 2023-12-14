@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   wrong_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/13 18:10:52 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:36:14 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h"
+#include "../../inc/minirt.h"
 
 int	wrong_arg(int fd)
 {
