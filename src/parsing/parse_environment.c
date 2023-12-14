@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 01:53:44 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:43:40 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ void	parse_environment(char **red, t_data *data)
 	{
 		if(red[i][0] == 'A')
 			data->ambient_lighting = parse_ambient_lighting(red[i]);
-		if(red[i][0] == 'c')
+		if(red[i][0] == 'C')
 			data->camera = parse_camera(red[i]);
-		if(red[i][0] == 'l')
+		if(red[i][0] == 'L')
 			data->light = parse_light(red[i]);
 		i++;
 	}
