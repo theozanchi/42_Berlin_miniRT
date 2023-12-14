@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/14 15:51:03 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:32:02 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,17 @@ typedef struct s_object // can be type casted to any object using id
 	struct t_object	*next;
 }				t_object;
 
+typedef struct s_window
+{
+	unsigned int	height;
+	unsigned int	width;
+}				t_window;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_window	window;
 	t_object	*first;
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;

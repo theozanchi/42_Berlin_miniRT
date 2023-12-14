@@ -7,8 +7,8 @@ int	get_file_fd(char *s)
 
 	if (s == NULL || ft_strlen(s) == 0)
 		return (-2);
-	if(ft_strncmp(s, "scenes/", 7))
-		return (-2);
+	// if(ft_strncmp(s, "scenes/", 7))
+	// 	return (-2);
 	i = ft_strlen(s) -1;
 	if(s[i] != 't' && s[i] != 'r' && s[i] != '.')
 		return (-2);
