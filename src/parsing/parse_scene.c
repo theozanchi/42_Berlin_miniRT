@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/12/14 15:47:47 by helauren         ###   ########.fr       */
-=======
-/*   Updated: 2023/12/14 15:36:37 by tzanchi          ###   ########.fr       */
->>>>>>> b13c88dd301fc27b5509750e38624d79e3b79897
+/*   Updated: 2023/12/14 15:56:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +69,12 @@ float	get_float(char *s)
 	return (ret);
 }
 
-int	valid_file(char **red)
-{
-	
-}
-
 int	parse_scene(t_data *data, int fd)
 {
 	char	**red;
 
 	red = read_file(fd);
 	close(fd);
-	valid_file(red);
 	data->first = parse_objects(red);
 	parse_environment(red, data);
 	return (0);
