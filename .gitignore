@@ -55,4 +55,4 @@ dkms.conf
 
 #Libraries 
 libft*
-minilib*
+minilibx-linux*
