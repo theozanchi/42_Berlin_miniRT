@@ -1,15 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
+/*   Updated: 2023/12/14 15:40:27 by tzanchi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "../minilibx-linux/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "../minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
-#define KEY_ESC 65307
+# define KEY_ESC 65307
 
 typedef struct s_o_a // ambient lighting
 {

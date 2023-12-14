@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/12/14 15:30:04 by helauren         ###   ########.fr       */
+=======
+/*   Updated: 2023/12/14 15:36:33 by tzanchi          ###   ########.fr       */
+>>>>>>> b13c88dd301fc27b5509750e38624d79e3b79897
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h"
+#include "../../inc/minirt.h"
 
 t_object	*parse_sphere(char *s)
 {
