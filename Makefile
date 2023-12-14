@@ -6,13 +6,14 @@
 #    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/14 16:00:03 by helauren         ###   ########.fr        #
+#    Updated: 2023/12/14 16:05:30 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address -lmlx -lXext -lX11 -lm
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS		=	-lmlx -lXext -lX11 -lm
 NAME		=	miniRT
 LIBFT		=	libft.a
 LIBMLX		=	libmlx.a
@@ -70,7 +71,7 @@ ${LIBMLX}:
 				make -C ${LIBMLX_DIR}
 
 ${NAME}:		entry_message ${OBJS}
-				@${CC} ${CFLAGS} ${OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} -o ${NAME}
+				@${CC} ${CFLAGS} ${OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} ${LDFLAGS} -o ${NAME}
 				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"
 
 ${OBJ_DIR}:
