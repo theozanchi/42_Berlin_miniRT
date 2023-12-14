@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/12/14 15:22:33 by helauren         ###   ########.fr       */
+=======
+/*   Updated: 2023/12/14 15:35:25 by tzanchi          ###   ########.fr       */
+>>>>>>> b13c88dd301fc27b5509750e38624d79e3b79897
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minirt.h"
+#include "../inc/minirt.h"
 
 t_data	*init_data(void)
 {
