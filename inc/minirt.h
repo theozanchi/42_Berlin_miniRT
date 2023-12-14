@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/14 16:32:02 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:41:49 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ typedef struct s_o_cy // cylinder
 	float	x;
 	float	y;
 	float	z;
+	float	vx;
+	float	vy;
+	float	vz;
 	float	diameter;
 	float	height;
 	int		r;
@@ -97,7 +100,7 @@ typedef struct s_o_cy // cylinder
 typedef struct s_object // can be type casted to any object using id
 {
 	char	id;
-	struct t_object	*next;
+	struct s_object	*next;
 }				t_object;
 
 typedef struct s_window
@@ -111,14 +114,16 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_window	window;
-	t_object	*first;
+	t_object	*first_object;
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
 	t_o_l		*light;
 }				t_data;
 
+// debugging
+void	output_parse(t_data *data);
+
 // closing freeing
-int		press_esc(int keycode);
 
 // error message
 int		wrong_arg(int fd);

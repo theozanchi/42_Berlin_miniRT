@@ -6,13 +6,13 @@
 #    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/14 16:05:30 by helauren         ###   ########.fr        #
+#    Updated: 2023/12/14 16:46:39 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g
 LDFLAGS		=	-lmlx -lXext -lX11 -lm
 NAME		=	miniRT
 LIBFT		=	libft.a
