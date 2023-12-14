@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../minilibx/mlx.h"
+#include "../minilibx-linux/mlx.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 
