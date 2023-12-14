@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 15:50:44 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:43:03 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_object	*parse_plane(char *s)
 	t_o_pl	*pl;
 	int		i;
 
-    i = 0;
+	i = 0;
 	pl = malloc(sizeof(t_o_pl));
 	pl->id = 'p';
 	i = next_float_index(s, i);
@@ -71,7 +71,7 @@ t_object	*parse_cylinder(char *s)
 	t_o_cy	*cy;
 	int		i;
 
-    i = 0;
+	i = 0;
 	cy = malloc(sizeof(t_o_cy));
 	cy->id = 'c';
 	i = next_float_index(s, i);
@@ -80,6 +80,12 @@ t_object	*parse_cylinder(char *s)
 	cy->y = get_float(&s[i]);
 	i = next_float_index(s, i);
 	cy->z = get_float(&s[i]);
+	i = next_float_index(s, i);
+	cy->vx = get_float(&s[i]);
+	i = next_float_index(s, i);
+	cy->vy = get_float(&s[i]);
+	i = next_float_index(s, i);
+	cy->vz = get_float(&s[i]);
 	i = next_float_index(s, i);
 	cy->diameter = get_float(&s[i]);
 	i = next_float_index(s, i);
@@ -97,20 +103,35 @@ t_object	*parse_objects(char **red)
 {
 	int			i;
 	t_object	*objects;
+	t_object	*next;
 	t_object	*first;
 
 	i = 0;
-	objects = malloc(sizeof(t_object));
-	first = objects;
+	first = NULL;
 	while(red[i])
 	{
 		if(red[i][0] == 's')
-			objects = parse_sphere(red[i]);
+			next = parse_sphere(red[i]);
 		if(red[i][0] == 'p')
-			objects = parse_plane(red[i]);
+			next = parse_plane(red[i]);
 		if(red[i][0] == 'c')
-			objects = parse_cylinder(red[i]);
+			next = parse_cylinder(red[i]);
+		if(red[i][0] == 's' || red[i][0] == 'p' || red[i][0] == 'c')
+		{
+			if(first == NULL)
+			{
+				first = next;
+				first->next = NULL;
+				objects = first;
+			}
+			else
+			{
+				objects->next = next;
+				objects = next;
+				objects->next = NULL;
+			}
+		}
 		i++;
 	}
-    return (first);
+	return (first);
 }

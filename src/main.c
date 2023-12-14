@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 16:39:37 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:11:31 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 		printf("Could not parse, check the content of the .rt file\n");
 		return (0);
 	}
-	printf("parse finished\n");
+	output_parse(data);
 	mlx_key_hook(data->win_ptr, &handle_keypress, NULL);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
