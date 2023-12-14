@@ -6,19 +6,17 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:52:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 15:57:28 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:07:26 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-
-
 int	handle_keypress(int keycode)
 {
 	if(keycode == KEY_ESC)
 	{
-		// free_end();
+		
 		exit (0);
 	}
 	return (0);
