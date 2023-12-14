@@ -1,18 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 18:24:47 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/13 18:31:00 by tzanchi          ###   ########.fr       */
+/*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
+/*   Updated: 2023/12/14 01:52:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../include/minirt.h"
 
-# include "../libft/libft.h"
-
-#endif
