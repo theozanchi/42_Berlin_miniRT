@@ -6,12 +6,13 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 13:04:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:25:00 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/temp_theo.h"
+#include "../../inc/algebra.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
@@ -22,6 +23,13 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 }
 
 // To better understand: the equation of a ray is P = O + t * (V - O)
+
+int	hit_sphere(int x, int y, t_o_sp *sphere, t_data *data)
+{
+	t_vec3	oc;
+
+	oc = vec_sub(data->first)
+}
 
 void	render_scene(t_data *data)
 {
