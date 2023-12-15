@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:30:33 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:50:37 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
+# include "algebra.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -47,6 +48,8 @@ typedef struct s_o_c // camera
 	float	vx;
 	float	vy;
 	float	vz;
+	t_vec3	position;
+	t_vec3	orientation;
 	int		FOV;
 }	t_o_c;
 
@@ -55,6 +58,7 @@ typedef struct s_o_l // light
 	float	x;
 	float	y;
 	float	z;
+	t_vec3	position;
 	float	brightness_ratio;
 }	t_o_l;
 
@@ -64,6 +68,7 @@ typedef struct s_o_sp // sphere
 	float	x;
 	float	y;
 	float	z;
+	t_vec3	position;
 	float	diameter;
 	int		r;
 	int		g;
@@ -76,6 +81,8 @@ typedef struct s_o_pl // plane
 	float	x;
 	float	y;
 	float	z;
+	t_vec3	position;
+	t_vec3	orientation;
 	float	vx;
 	float	vy;
 	float	vz;
@@ -133,7 +140,6 @@ typedef struct s_data
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
 	t_o_l		*light;
-	t_img		img;
 }	t_data;
 
 /* free.c ******************************************************************* */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_calculation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:09:48 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:24:20 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 18:06:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,26 @@ t_vec3	vec_mul(t_vec3 A, t_vec3 B)
 float	dot_product(t_vec3 A, t_vec3 B)
 {
 	return (A.x * B.x + A.y * B.y + A.z * B.z);
+}
+
+t_vec3	vec_mul_scalar(t_vec3 v, float t)
+{
+	v.x *= t;
+	v.y *= t;
+	v.z *= t;
+	return (v);
+}
+
+t_vec3	vec_normalize(t_vec3 v)
+{
+	float length;
+	
+	length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    if (length)
+    {
+        v.x /= length;
+        v.y /= length;
+        v.z /= length;
+    }
+	return (v);
 }
