@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/15 17:09:12 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:15:01 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_data	*init_data(void)
 
 	data = malloc(sizeof(t_data));
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 800, 800, "AMAZING WINDOW !");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 1080, 720, "AMAZING WINDOW !");
+	data->img.img = mlx_new_image(data->mlx_ptr, 1080, 720);
 	return (data);
 }
 

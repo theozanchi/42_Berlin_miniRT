@@ -6,14 +6,14 @@
 #    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/14 16:46:39 by helauren         ###   ########.fr        #
+#    Updated: 2023/12/15 17:15:45 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
-LDFLAGS		=	-lmlx -lXext -lX11 -lm
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a
 LIBMLX		=	libmlx.a
@@ -36,11 +36,13 @@ RED			=	\033[1;31m
 LIGHT_RED	=	\033[1;91m
 NC			=	\033[0m
 BOLD		=	\033[1m
-
 TICK		=	✓
 
-#SRC			=	$(wildcard *.c) \
-#				$(wildcard */*.c)
+TEST_SRC	=	./src/ray_tracing/render_scene.c \
+				./src/ray_tracing/test_main.c \
+				./src/free/free.c
+
+TEST_OBJS	=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${TEST_SRC:.c=.o}}
 
 SRCS		=	$(wildcard src/*.c) \
 				$(wildcard src/*/*.c)
@@ -52,6 +54,21 @@ all:			project_logo ${OBJ_DIR}
 				@make -s ${LIBFT}
 				@make -s ${LIBMLX}
 				@make -s ${NAME}
+
+ttest:			${TEST_OBJS}
+				@${CC} ${CFLAGS} ${LDFLAGS} ${TEST_OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} -o ttest
+				@echo "${YELLOW}\nCompilation complete, test_theo executable at the root of the directory${NC}\n"
+
+tclean:
+				@if [ -d "${OBJ_DIR}" ]; \
+				then \
+					rm -r ${OBJ_DIR}; \
+				fi
+
+tfclean:		tclean
+				rm ttest
+
+tre:			tfclean ttest
 
 ${LIBFT}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBFT} | tr '[:lower:]' '[:upper:]')${NC}"

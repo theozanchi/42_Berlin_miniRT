@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:09:34 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:12:49 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_o_a // ambient lighting
 	int		r;
 	int		g;
 	int		b;
-}				t_o_a;
+}	t_o_a;
 
 typedef struct s_o_c // camera
 {
@@ -48,7 +48,7 @@ typedef struct s_o_c // camera
 	float	vy;
 	float	vz;
 	int		FOV;
-}				t_o_c;
+}	t_o_c;
 
 typedef struct s_o_l // light
 {
@@ -56,11 +56,11 @@ typedef struct s_o_l // light
 	float	y;
 	float	z;
 	float	brightness_ratio;
-}				t_o_l;
+}	t_o_l;
 
 typedef struct s_o_sp // sphere
 {
-	char	id;
+	int	id;
 	float	x;
 	float	y;
 	float	z;
@@ -68,12 +68,11 @@ typedef struct s_o_sp // sphere
 	int		r;
 	int		g;
 	int		b;
-	struct t_object	*next;
-}				t_o_sp;
+}	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
-	char	id;
+	int	id;
 	float	x;
 	float	y;
 	float	z;
@@ -83,12 +82,12 @@ typedef struct s_o_pl // plane
 	int		r;
 	int		g;
 	int		b;
-	struct t_object	*next;
-}				t_o_pl;
+	struct s_object	*next;
+}	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
-	char	id;
+	int	id;
 	float	x;
 	float	y;
 	float	z;
@@ -101,11 +100,11 @@ typedef struct s_o_cy // cylinder
 	int		g;
 	int		b;
 	struct t_object	*next;
-}				t_o_cy;
+}	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
-	char	id;
+	int	id;
 	struct s_object	*next;
 }				t_object;
 
@@ -113,7 +112,16 @@ typedef struct s_window
 {
 	unsigned int	height;
 	unsigned int	width;
-}				t_window;
+}	t_window;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 typedef struct s_data
 {
@@ -124,7 +132,12 @@ typedef struct s_data
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
 	t_o_l		*light;
-}				t_data;
+}	t_data;
+
+/* free.c ******************************************************************* */
+
+int		free_resources_and_quit(t_data *data);
+void	free_objects(t_data *data);
 
 // debugging
 void	output_parse(t_data *data);
