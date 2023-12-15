@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 10:10:33 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:08:02 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:22:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void	init_theo(t_data *data)
 	}
 }
 
-int	main(void)
-{
-	t_data	data;
+// int	main(void)
+// {
+// 	t_data	data;
 
-	init_theo(&data);
-	render_scene(&data);
-	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img, 0, 0);
-	mlx_hook(data.win_ptr, ON_DESTROY, 0, &free_resources_and_quit, &data);
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &keypress_theo, &data);
-	mlx_loop(data.mlx_ptr);
-}
+// 	init_theo(&data);
+// 	render_scene(&data);
+// 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.img, 0, 0);
+// 	mlx_hook(data.win_ptr, ON_DESTROY, 0, &free_resources_and_quit, &data);
+// 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &keypress_theo, &data);
+// 	mlx_loop(data.mlx_ptr);
+// }
