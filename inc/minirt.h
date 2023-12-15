@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/14 16:54:26 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 16:23:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,19 @@
 
 # define KEY_ESC 65307
 
+enum {
+	SPHERE,
+	CYLINDER,
+	PLANE
+};
+
 typedef struct s_o_a // ambient lighting
 {
 	float	ratio;
 	int		r;
 	int		g;
 	int		b;
-}				t_o_a;
+}	t_o_a;
 
 typedef struct s_o_c // camera
 {
@@ -42,7 +48,7 @@ typedef struct s_o_c // camera
 	float	vy;
 	float	vz;
 	int		FOV;
-}				t_o_c;
+}	t_o_c;
 
 typedef struct s_o_l // light
 {
@@ -50,7 +56,7 @@ typedef struct s_o_l // light
 	float	y;
 	float	z;
 	float	brightness_ratio;
-}				t_o_l;
+}	t_o_l;
 
 typedef struct s_o_sp // sphere
 {
@@ -62,8 +68,7 @@ typedef struct s_o_sp // sphere
 	int		r;
 	int		g;
 	int		b;
-	struct t_object	*next;
-}				t_o_sp;
+}	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
@@ -78,7 +83,7 @@ typedef struct s_o_pl // plane
 	int		g;
 	int		b;
 	struct t_object	*next;
-}				t_o_pl;
+}	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
@@ -92,19 +97,20 @@ typedef struct s_o_cy // cylinder
 	int		g;
 	int		b;
 	struct t_object	*next;
-}				t_o_cy;
+}	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
-	char	id;
-	struct t_object	*next;
-}				t_object;
+	int				type;
+	void			*data;
+	struct s_object	*next;
+}	t_object;
 
 typedef struct s_window
 {
 	unsigned int	height;
 	unsigned int	width;
-}				t_window;
+}	t_window;
 
 typedef struct s_img
 {
@@ -125,7 +131,12 @@ typedef struct s_data
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
 	t_o_l		*light;
-}				t_data;
+}	t_data;
+
+/* free.c ******************************************************************* */
+
+int		free_resources_and_quit(t_data *data);
+void	free_objects(t_data *data);
 
 // closing freeing
 int		press_esc(int keycode);
