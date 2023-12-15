@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 19:43:03 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:22:01 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_object	*parse_sphere(char *s)
 
     i = 0;
 	sp = malloc(sizeof(t_o_sp));
-	sp->id = 's';
+	sp->id = SPHERE;
 	i = next_float_index(s, i);
 	sp->x = get_float(&s[i]);
 	i = next_float_index(s, i);
@@ -44,7 +44,7 @@ t_object	*parse_plane(char *s)
 
 	i = 0;
 	pl = malloc(sizeof(t_o_pl));
-	pl->id = 'p';
+	pl->id = PLANE;
 	i = next_float_index(s, i);
 	pl->x = get_float(&s[i]);
 	i = next_float_index(s, i);
@@ -73,7 +73,7 @@ t_object	*parse_cylinder(char *s)
 
 	i = 0;
 	cy = malloc(sizeof(t_o_cy));
-	cy->id = 'c';
+	cy->id = CYLINDER;
 	i = next_float_index(s, i);
 	cy->x = get_float(&s[i]);
 	i = next_float_index(s, i);

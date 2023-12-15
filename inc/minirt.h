@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:12:49 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:24:02 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ enum {
 	SPHERE,
 	CYLINDER,
 	PLANE
-}
+};
 
 typedef struct s_o_a // ambient lighting
 {
@@ -128,10 +128,11 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_window	window;
-	t_object	*first_object;
+	t_object	*first;
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
 	t_o_l		*light;
+	t_img		img;
 }	t_data;
 
 /* free.c ******************************************************************* */
