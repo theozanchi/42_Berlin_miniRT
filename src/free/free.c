@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/15 16:30:55 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:08:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_objects(t_data *data)
 		temp = current;
 		current = current->next;
 		if (temp)
-			free_and_set_to_null(2, temp->data, temp);
+			free_and_set_to_null(1, temp);
 	}
 	data->first = NULL;
 }

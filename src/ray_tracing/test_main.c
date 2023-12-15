@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 10:10:33 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 16:25:07 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:08:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,10 @@ void	init_theo(t_data *data)
 		data->light->brightness_ratio = 0.6;
 	}
 	{
-		data->first = malloc(sizeof(t_object));
-		data->first->type = SPHERE;
+		data->first = malloc(sizeof(t_o_sp));
+		data->first->id = SPHERE;
 		{
-			data->first->data = malloc(sizeof(t_o_sp));
-			
-			t_o_sp	*sphere_data = data->first->data;
+			t_o_sp	*sphere_data = (t_o_sp *)data->first;
 			sphere_data->x = 0;
 			sphere_data->y = 0;
 			sphere_data->z = 20.6;
