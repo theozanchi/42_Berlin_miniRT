@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:26:55 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/15 17:30:28 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	hit_sphere(int x, int y, t_o_sp *sphere, t_data *data)
 {
 	t_vec3	oc;
 
-	oc = vec_sub(data->first)
+	oc = vec_sub(data->first);
 }
 
 void	render_scene(t_data *data)
