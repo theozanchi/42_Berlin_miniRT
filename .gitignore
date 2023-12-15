@@ -37,6 +37,7 @@
 *.x86_64
 *.hex
 miniRT
+ttest
 
 # Debug files
 *.dSYM/
