@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:19:45 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/15 16:50:31 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:51:49 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	output_parse(t_data *data)
 	output_c(camera);
 	printf("\n\nLIGHT\n");
 	output_l(light);
-	obj = data->first_object;
+	obj = data->first;
 	while(obj != NULL)
 	{
 		if(obj->id == 's')
