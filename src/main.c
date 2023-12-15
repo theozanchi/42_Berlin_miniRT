@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 19:11:31 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:09:12 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ int	main(int ac, char **av)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_loop(data->mlx_ptr);
+	// if(obj->id = 's')
+	// 	launch_sphere((t_o_sp *) obj);
 }

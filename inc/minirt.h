@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/14 19:41:49 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:09:34 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include <fcntl.h>
 
 # define KEY_ESC 65307
+
+enum {
+	SPHERE,
+	CYLINDER,
+	PLANE
+}
 
 typedef struct s_o_a // ambient lighting
 {
