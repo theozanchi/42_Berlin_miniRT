@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/15 17:22:01 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:04:00 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ t_object	*parse_sphere(char *s)
 	sp = malloc(sizeof(t_o_sp));
 	sp->id = SPHERE;
 	i = next_float_index(s, i);
-	sp->x = get_float(&s[i]);
+	sp->pos.x = get_double(&s[i]);
 	i = next_float_index(s, i);
-	sp->y = get_float(&s[i]);
+	sp->pos.y = get_double(&s[i]);
 	i = next_float_index(s, i);
-	sp->z = get_float(&s[i]);
+	sp->pos.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	sp->diameter = get_float(&s[i]);
+	sp->diameter = get_double(&s[i]);
 	i = next_float_index(s, i);
-	sp->r = ft_atoi(&s[i]);
+	sp->rgb.r = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	sp->g = ft_atoi(&s[i]);
+	sp->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	sp->b = ft_atoi(&s[i]);
+	sp->rgb.b = ft_atoi(&s[i]);
 	return ((t_object *)sp);
 }
 
@@ -46,23 +46,23 @@ t_object	*parse_plane(char *s)
 	pl = malloc(sizeof(t_o_pl));
 	pl->id = PLANE;
 	i = next_float_index(s, i);
-	pl->x = get_float(&s[i]);
+	pl->pos.x = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->y = get_float(&s[i]);
+	pl->pos.y = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->z = get_float(&s[i]);
+	pl->pos.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->vx = get_float(&s[i]);
+	pl->vector.x = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->vy = get_float(&s[i]);
+	pl->vector.y = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->vz = get_float(&s[i]);
+	pl->vector.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	pl->r = ft_atoi(&s[i]);
+	pl->rgb.r = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	pl->g = ft_atoi(&s[i]);
+	pl->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	pl->b = ft_atoi(&s[i]);
+	pl->rgb.b = ft_atoi(&s[i]);
 	return ((t_object *)pl);
 }
 
@@ -75,27 +75,27 @@ t_object	*parse_cylinder(char *s)
 	cy = malloc(sizeof(t_o_cy));
 	cy->id = CYLINDER;
 	i = next_float_index(s, i);
-	cy->x = get_float(&s[i]);
+	cy->pos.x = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->y = get_float(&s[i]);
+	cy->pos.y = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->z = get_float(&s[i]);
+	cy->pos.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->vx = get_float(&s[i]);
+	cy->vector.x = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->vy = get_float(&s[i]);
+	cy->vector.y = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->vz = get_float(&s[i]);
+	cy->vector.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->diameter = get_float(&s[i]);
+	cy->diameter = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->height = get_float(&s[i]);
+	cy->height = get_double(&s[i]);
 	i = next_float_index(s, i);
-	cy->r = ft_atoi(&s[i]);
+	cy->rgb.r = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	cy->g = ft_atoi(&s[i]);
+	cy->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
-	cy->b = ft_atoi(&s[i]);
+	cy->rgb.b = ft_atoi(&s[i]);
 	return ((t_object *)cy);
 }
 

@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/14 19:50:08 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:04:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	**read_file(int fd)
 		if(br == 0)
 			break ;
 	}
+	free(buff);
 	ret = ft_split(s, '\n');
 	free(s);
 	return (ret);
@@ -45,12 +46,12 @@ int	next_float_index(char *s, int i)
 	return (i);
 }
 
-float	get_float(char *s)
+double	get_double(char *s)
 {
-	float	ret;
+	double	ret;
 	int		i;
-	float	div;
-	float	a;
+	double	div;
+	double	a;
 	int		sign;
 
 	sign = 0;
@@ -88,10 +89,9 @@ int	parse_scene(t_data *data, int fd)
 	char	**red;
 
 	red = read_file(fd);
-	// for (int i = 0; red[i]; i++)
-	// 	printf("line = %s\n", red[i]);
 	close(fd);
 	parse_environment(red, data);
-	data->first_object = parse_objects(red);
+	data->first = parse_objects(red);
+	free_double_str(red);
 	return (0);
 }
