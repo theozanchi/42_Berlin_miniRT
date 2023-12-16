@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/12/15 19:52:46 by helauren         ###   ########.fr        #
+=======
+#    Updated: 2023/12/15 17:53:21 by tzanchi          ###   ########.fr        #
+>>>>>>> 0e973cda8a7cc171623ab9d655c667eb227ae62d
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +45,8 @@ TICK		=	✓
 
 TEST_SRC	=	./src/ray_tracing/render_scene.c \
 				./src/ray_tracing/test_main.c \
-				./src/free/free.c
+				./src/free/free.c \
+				./src/algebra_utils/matrix_calculation.c
 
 TEST_OBJS	=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${TEST_SRC:.c=.o}}
 
