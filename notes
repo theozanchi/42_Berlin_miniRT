@@ -1,0 +1,14 @@
+V = Viewport
+Vx_min = min x value on Viewport
+Vx_max = max x value on Viewport
+Vw = "Viewport width" Vx-max -Vx_min
+Vx_diff = 0 -Vx_min
+
+Cw = Canvas width
+Cx = Vx - Vx_diff * Cw/Vw
+
+Vy_min = min y value on Viewport
+
+C = canvas
+
+Cx = Vx + 

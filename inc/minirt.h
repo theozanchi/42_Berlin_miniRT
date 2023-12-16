@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/15 17:28:48 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:05:07 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,74 +31,64 @@ enum {
 	PLANE
 };
 
+typedef struct s_vec3
+{
+	double	x;
+	double	y;
+	double	z;
+}				t_vec3;
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_rgb;
+
 typedef struct s_o_a // ambient lighting
 {
-	float	ratio;
-	int		r;
-	int		g;
-	int		b;
+	double	ratio;
+	t_rgb	rgb;
 }	t_o_a;
 
 typedef struct s_o_c // camera
 {
-	float	x;
-	float	y;
-	float	z;
-	float	vx;
-	float	vy;
-	float	vz;
+	t_vec3	pos;
+	t_vec3	vector;
 	int		FOV;
 }	t_o_c;
 
 typedef struct s_o_l // light
 {
-	float	x;
-	float	y;
-	float	z;
-	float	brightness_ratio;
+	t_vec3	pos;
+	double	brightness_ratio;
 }	t_o_l;
 
 typedef struct s_o_sp // sphere
 {
 	int	id;
-	float	x;
-	float	y;
-	float	z;
-	float	diameter;
-	int		r;
-	int		g;
-	int		b;
+	t_vec3	pos;
+	double	diameter;
+	t_rgb	rgb;
 }	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
 	int	id;
-	float	x;
-	float	y;
-	float	z;
-	float	vx;
-	float	vy;
-	float	vz;
-	int		r;
-	int		g;
-	int		b;
+	t_vec3	pos;
+	t_vec3	vector;
+	t_rgb	rgb;
 	struct s_object	*next;
 }	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
 	int	id;
-	float	x;
-	float	y;
-	float	z;
-	float	vx;
-	float	vy;
-	float	vz;
-	float	diameter;
-	float	height;
-	int		r;
-	int		g;
-	int		b;
+	t_vec3	pos;
+	t_vec3	vector;
+	double	diameter;
+	double	height;
+	t_rgb	rgb;
 	struct t_object	*next;
 }	t_o_cy;
 
@@ -121,7 +111,19 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_img;
+}				t_img;
+
+typedef struct s_viewport // viewport dimensions are from a -100;100 size world
+{
+	int	min_x;
+	int	max_x;
+	int	min_y;
+	int	max_y;
+	int	min_z;
+	int	max_z;
+	int	width;
+	int	height;
+}				t_viewport;
 
 typedef struct s_data
 {
@@ -133,7 +135,8 @@ typedef struct s_data
 	t_o_c		*camera;
 	t_o_l		*light;
 	t_img		img;
-}	t_data;
+	t_viewport	*viewport;
+}				t_data;
 
 /* free.c ******************************************************************* */
 
@@ -151,7 +154,7 @@ int		wrong_arg(int fd);
 // parsing
 int			get_file_fd(char *s);
 char		**read_file(int fd);
-float		get_float(char *s);
+double		get_double(char *s);
 int			next_float_index(char *s, int i);
 void		parse_environment(char **red, t_data *data);
 t_object	*parse_objects(char **red);
