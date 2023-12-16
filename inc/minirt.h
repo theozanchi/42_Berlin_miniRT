@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/16 20:05:07 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:10:10 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
+# include "algebra.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -129,6 +130,7 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_img		img;
 	t_window	window;
 	t_object	*first;
 	t_o_a		*ambient_lighting;
