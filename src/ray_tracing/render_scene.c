@@ -49,6 +49,7 @@ void	render_loading_bar(void)
 
 	if (pix_ct == 0)
 	{
+		ft_putstr_fd(LOADING_HEADER, 2);
 		ft_putstr_fd(RED, 2);
 		ft_putstr_fd("Loading: ", 2);
 	}
@@ -56,9 +57,9 @@ void	render_loading_bar(void)
 		ft_putchar_fd(LOADING_BAR[bar_ct++], 2);
 	if ((bar_ct == 3) && ((pix_ct - 1) % pix_per_bar_el == 0))
 		ft_putstr_fd(ORANGE, 2);
-	else if ((bar_ct == 19) && ((pix_ct - 1) % pix_per_bar_el == 0))
+	else if ((bar_ct == 18) && ((pix_ct - 1) % pix_per_bar_el == 0))
 		ft_putstr_fd(YELLOW, 2);
-	else if ((bar_ct == 49) && ((pix_ct - 1) % pix_per_bar_el == 0))
+	else if ((bar_ct == 51) && ((pix_ct - 1) % pix_per_bar_el == 0))
 		ft_putstr_fd(GREEN, 2);
 	else if (pix_ct == pix_nb)
 	{
