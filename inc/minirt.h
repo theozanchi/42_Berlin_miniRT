@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/17 01:22:39 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:59:18 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINIRT_H
 
 # include "../libft/libft.h"
-# include "algebra.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -25,6 +24,14 @@
 # include <fcntl.h>
 
 # define KEY_ESC 65307
+
+# define LOADING_BAR "0% ------------ 25% ------------ 50% ------------ 75% ------------ 100% "
+# define RED "\033[1;31m"
+# define YELLOW "\033[1;33m"
+# define ORANGE "\033[38;5;208m"
+# define GREEN "\033[1;32m"
+# define NC "\033[0m"
+# define BOLD "\033[1m"
 
 enum {
 	SPHERE,
