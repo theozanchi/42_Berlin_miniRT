@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/12/15 19:52:46 by helauren         ###   ########.fr        #
-=======
-#    Updated: 2023/12/15 17:53:21 by tzanchi          ###   ########.fr        #
->>>>>>> 0e973cda8a7cc171623ab9d655c667eb227ae62d
+#    Updated: 2023/12/16 21:07:34 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
