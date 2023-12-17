@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/16 19:45:15 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/17 01:22:34 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ t_data	*init_data(void)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	data->window = malloc(sizeof(t_window));
+	data->window->width = 1080;
+	data->window->height = 1080;
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 1080, 720, "AMAZING WINDOW !");
 	data->img.img = mlx_new_image(data->mlx_ptr, 1080, 720);
@@ -38,6 +41,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	output_parse(data);
+	ray_after_ray(data->ray, data);
 	mlx_key_hook(data->win_ptr, &handle_keypress, NULL);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);

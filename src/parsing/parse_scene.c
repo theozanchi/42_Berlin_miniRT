@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/16 20:04:41 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/17 01:16:24 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,14 @@ double	get_double(char *s)
 	return (ret);
 }
 
+void	prep_ray(t_data *data)
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window->width;
+}
+
 int	parse_scene(t_data *data, int fd)
 {
 	char	**red;
@@ -92,6 +100,7 @@ int	parse_scene(t_data *data, int fd)
 	close(fd);
 	parse_environment(red, data);
 	data->first = parse_objects(red);
+	prep_ray(data);
 	free_double_str(red);
 	return (0);
 }
