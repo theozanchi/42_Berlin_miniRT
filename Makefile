@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/16 21:07:34 by helauren         ###   ########.fr        #
+#    Updated: 2023/12/18 10:49:50 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
-# -fsanitize=address
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g 
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a
