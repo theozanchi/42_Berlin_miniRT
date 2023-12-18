@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/17 20:11:40 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/18 11:11:28 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@
 
 # define KEY_ESC 65307
 
+# ifndef BACKGROUND_COLOUR
+#  define BACKGROUND_COLOUR 0x00FFFFFF
+# endif
+
+# ifndef WIDTH
+#  define WIDTH 1080
+# endif
+
+# ifndef HEIGTH
+#  define HEIGTH 720
+# endif
+
 # define LOADING_HEADER "         0%              25%              50%              75%              100%\n"
 # define LOADING_BAR "0% --------------|----------------|----------------|-------------- 100% "
 # define RED "\033[1;31m"
@@ -38,6 +50,16 @@ enum {
 	SPHERE,
 	CYLINDER,
 	PLANE
+};
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
 };
 
 typedef struct s_vec3
@@ -143,7 +165,7 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_window	*window;
+	t_window	window;
 	t_object	*first;
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
@@ -174,6 +196,10 @@ int			parse_scene(t_data *data, int fd);
 void		ray_after_ray(t_ray *rays, t_data *data);
 
 //keypress
-int			handle_keypress(int keycode);
+int			handle_keypress(int keycode, t_data *data);
+
+//rendering
+void	render_scene(t_data *data);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

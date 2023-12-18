@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/17 01:16:24 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/18 11:18:14 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	prep_ray(t_data *data)
 	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
-	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window->width;
+	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window.width;
 }
 
 int	parse_scene(t_data *data, int fd)
@@ -100,7 +100,7 @@ int	parse_scene(t_data *data, int fd)
 	close(fd);
 	parse_environment(red, data);
 	data->first = parse_objects(red);
-	prep_ray(data);
+	// prep_ray(data);
 	free_double_str(red);
 	return (0);
 }
