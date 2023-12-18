@@ -11,7 +11,6 @@
 // /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-#include "../../inc/temp_theo.h"
 #include "../../inc/algebra.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
