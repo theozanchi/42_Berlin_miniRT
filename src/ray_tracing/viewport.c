@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/20 01:47:07 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/20 22:56:26 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
 	center_vp->x = start_pos.x + data->camera->vector.x / magnitude;
 	center_vp->y = start_pos.y + data->camera->vector.y / magnitude;
 	center_vp->z = start_pos.z + data->camera->vector.z / magnitude;
+	printf("center x = %f, start pos x = %f, cam vector x = %f, magnitude = %f\n", center_vp->x, start_pos.x, data->camera->vector.x, magnitude);
+	printf("center y = %f, start pos y = %f, cam vector y = %f, magnitude = %f\n", center_vp->y, start_pos.y, data->camera->vector.y, magnitude);
+	printf("center z = %f, start pos z = %f, cam vector z = %f, magnitude = %f\n", center_vp->z, start_pos.z, data->camera->vector.z, magnitude);
 	return (center_vp);
 }
 
@@ -55,10 +58,56 @@ void	viewport_sides(t_data *data, t_vec3 *center)
 	rad = 55 * ((double)M_PI * 180);
 	CE = 1 * sin(rad); // length of CE
 	PE = sqrt(1 + (CE * CE) - (2 * (CE) * cos(180 - 90 - data->camera->FOV / 2))); // length of PE
+	printf("length of PE = %f\n", PE);
 	data->vp->min_x = center->x - PE;
 	data->vp->max_x = center->x + PE;
 	data->vp->min_y = center->y - PE;
 	data->vp->max_y = center->y + PE;
+	data->vp->width = data->vp->max_x - data->vp->min_x;
+	data->vp->height = data->vp->max_y - data->vp->min_y;
+}
+
+void	set_vector(double *arr, t_data *data)
+{
+	arr[3] = arr[0] - data->camera->pos.x;
+	arr[4] = arr[1] - data->camera->pos.y;
+	arr[5] = arr[2] - data->camera->pos.z;
+}
+
+double	***parse_dem_points(t_data *data)
+{
+	double			***ret;
+	unsigned int	x;
+	unsigned int	y;
+	double			pos_x_incr;
+	double			pos_y_incr;
+	double			pos_x;
+	double			pos_y;
+
+	ret = malloc(sizeof(double **) * data->window.width);
+	pos_x_incr = (double)data->vp->width / data->window.width;
+	pos_y_incr = (double)data->vp->height / data->window.height;
+	x = 0;
+	pos_x = pos_x_incr;
+	while(x < data->window.width)
+	{
+		ret[x] = malloc(sizeof(double *) * data->window.height);
+		y = 0;
+		pos_y = pos_y_incr;
+		while(y < data->window.height)
+		{
+			ret[x][y] = malloc(sizeof(double) * 6);
+			ret[x][y][0] = data->vp->min_x + pos_x;
+			ret[x][y][1] = data->vp->min_y + pos_y;
+			ret[x][y][2] = data->camera->vector.z + data->camera->pos.z;
+			set_vector(ret[x][y], data);
+			y++;
+			pos_y += pos_y_incr;
+		}
+		pos_x += pos_x_incr;
+		x++;
+	}
+	return (ret);
 }
 
 void	viewport(t_data *data)
@@ -69,7 +118,11 @@ void	viewport(t_data *data)
 	center = viewport_center(data, data->camera->pos);
 	viewport_trigo(data);
 	viewport_sides(data, center);
-	exit(EXIT_SUCCESS);
+	data->vp->points = parse_dem_points(data);
+	printf("min x = %f, max x = %f\n", data->vp->min_x, data->vp->max_x);
+	printf("min y = %f, max y = %f\n", data->vp->min_y, data->vp->max_y);
+	// output_viewport(data->vp->points, data);
+	// exit(EXIT_SUCCESS);
 }
 
 // void	viewport_left(t_data *data, t_vec3 *P)
@@ -94,7 +147,6 @@ void	viewport(t_data *data)
 // 	unit_vector_pc.x = (data->camera->pos.x - P->x) / magnitude_pc;
 // 	unit_vector_pc.y = (data->camera->pos.x - P->x) / magnitude_pc;
 // 	unit_vector_pc.z = (data->camera->pos.x - P->x) / magnitude_pc;
-	
 // }
 
 // void	ray_after_ray(t_data *data)
