@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/19 16:58:00 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/20 22:43:05 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,13 +173,14 @@ typedef struct s_trigo
 
 typedef struct s_vp
 {
-	t_trigo	trigo;
-	int	min_x;
-	int	max_x;
-	int	min_y;
-	int	max_y;
-	int	width;
-	int	height;
+	t_trigo		trigo;
+	double		min_x;
+	double		max_x;
+	double		min_y;
+	double		max_y;
+	double		width;
+	double		height;
+	double		***points;
 }				t_vp;
 
 typedef struct s_data
@@ -203,6 +204,7 @@ void	free_objects(t_data *data);
 // debugging
 void	output_parse(t_data *data);
 void	output_ray_vectors(t_data *data);
+void	output_viewport(double ***arr, t_data *data);
 
 // error message
 int		wrong_arg(int fd);
@@ -218,6 +220,7 @@ int			parse_scene(t_data *data, int fd);
 
 // RT
 void		ray_after_ray(t_data *data);
+void	viewport(t_data *data);
 
 //keypress
 int			handle_keypress(int keycode, t_data *data);

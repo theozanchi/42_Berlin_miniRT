@@ -32,10 +32,10 @@ int hit_sphere(t_o_sp *sphere, t_data *data)
 	float b = 2.0 * dot_product(oc, data->camera->vector);
 	float c = dot_product(oc, oc) - sphere->diameter * sphere->diameter / 4;
 	float discriminant = b * b - 4 * a * c;
-    if (discriminant >= 0)
-        return (1);
-    else
-        return (0);
+	if (discriminant >= 0)
+		return (1);
+	else
+		return (0);
 }
 
 void	render_loading_bar(void)
@@ -72,7 +72,7 @@ void	render_scene(t_data *data)
 	int		j;
 
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
-			&data->img.line_length, &data->img.endian);
+		&data->img.line_length, &data->img.endian);
 	i = 0;
 	j = 0;
 	while (i < WIDTH)
