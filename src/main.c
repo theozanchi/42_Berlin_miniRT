@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/18 19:30:40 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:26:35 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_data	*init_data(void)
 	data->window.width = WIDTH;
 	data->window.height = HEIGTH;
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1080, 720, "miniRT");
-	data->img.img = mlx_new_image(data->mlx_ptr, 1080, 720);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->window.width, data->window.height, "miniRT");
+	data->img.img = mlx_new_image(data->mlx_ptr, data->window.width, data->window.height);
 	return (data);
 }
 
@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	output_parse(data);
-	// ray_after_ray(data->ray, data);
+	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);

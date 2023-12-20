@@ -23,7 +23,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 // To better understand: the equation of a ray is P = O + t * (V - O)
 
-
 int hit_sphere(t_o_sp *sphere, t_data *data)
 {
 	t_vec3 oc;
