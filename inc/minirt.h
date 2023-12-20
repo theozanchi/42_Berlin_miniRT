@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/18 19:37:25 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:58:00 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "../minilibx-linux/mlx.h"
+# include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <sys/stat.h>
@@ -53,6 +54,12 @@ enum {
 };
 
 enum {
+	Vx,
+	Vy,
+	Vz,
+};
+
+enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -80,7 +87,7 @@ typedef struct s_o_a // ambient lighting
 {
 	double	ratio;
 	t_rgb	rgb;
-}	t_o_a;
+}				t_o_a;
 
 typedef struct s_o_c // camera
 {
@@ -93,7 +100,7 @@ typedef struct s_o_l // light
 {
 	t_vec3	pos;
 	double	brightness_ratio;
-}	t_o_l;
+}				t_o_l;
 
 typedef struct s_o_sp // sphere
 {
@@ -101,7 +108,7 @@ typedef struct s_o_sp // sphere
 	t_vec3	pos;
 	double	diameter;
 	t_rgb	rgb;
-}	t_o_sp;
+}				t_o_sp;
 
 typedef struct s_o_pl // plane
 {
@@ -110,7 +117,7 @@ typedef struct s_o_pl // plane
 	t_vec3			vector;
 	t_rgb			rgb;
 	struct s_object	*next;
-}	t_o_pl;
+}				t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
@@ -144,22 +151,36 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
-// typedef struct s_vp // viewport dimensions are from a -50;50 size world
-// {
-// 	int	min_x;
-// 	int	max_x;
-// 	int	min_y;
-// 	int	max_y;
-// 	int	width;
-// 	int	height;
-// }				t_vp;
-
 typedef struct s_ray
 {
 	double	angle_n;
 	double	angle;
 	double	angle_radient;
 }				t_ray;
+
+typedef struct s_trigo
+{
+	int	angle_a;
+	int	angle_b;
+	int	angle_c;
+	int	rad_a;
+	int	rad_b;
+	int	rad_c;
+	double	cote_ab;
+	double	cote_bc;
+	double	cote_ca;
+}				t_trigo;
+
+typedef struct s_vp
+{
+	t_trigo	trigo;
+	int	min_x;
+	int	max_x;
+	int	min_y;
+	int	max_y;
+	int	width;
+	int	height;
+}				t_vp;
 
 typedef struct s_data
 {
@@ -171,7 +192,7 @@ typedef struct s_data
 	t_o_c		*camera;
 	t_o_l		*light;
 	t_img		img;
-	t_ray		*ray;
+	t_vp		*vp;
 }				t_data;
 
 /* free.c ******************************************************************* */
@@ -181,6 +202,7 @@ void	free_objects(t_data *data);
 
 // debugging
 void	output_parse(t_data *data);
+void	output_ray_vectors(t_data *data);
 
 // error message
 int		wrong_arg(int fd);
@@ -193,7 +215,9 @@ int			next_float_index(char *s, int i);
 void		parse_environment(char **red, t_data *data);
 t_object	*parse_objects(char **red);
 int			parse_scene(t_data *data, int fd);
-void		ray_after_ray(t_ray *rays, t_data *data);
+
+// RT
+void		ray_after_ray(t_data *data);
 
 //keypress
 int			handle_keypress(int keycode, t_data *data);

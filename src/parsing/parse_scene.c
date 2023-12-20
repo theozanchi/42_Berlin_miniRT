@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/18 19:33:39 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:30:10 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,45 @@ double	get_double(char *s)
 	return (ret);
 }
 
-void	prep_ray(t_data *data)
-{
-	t_ray	*ray;
+// void	prep_ray(t_data *data)
+// {
+// 	t_ray	*ray;
 
-	ray = malloc(sizeof(t_ray));
-	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window.width;
-}
+// 	ray = malloc(sizeof(t_ray));
+// 	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window.width;
+	
+// }
+
+// t_ray	*parse_ray(t_data *data)
+// {
+// 	unsigned int	i;
+// 	unsigned int	j;
+
+// 	i = 0;
+// 	j = 0;
+// 	while(i < data->window.width)
+// 	{
+// 		data->rays[i] = malloc(sizeof(double*) * data->window.height);
+// 		j = 0;
+// 		while(j < data->window.height)
+// 		{
+// 			data->rays[i][j] = malloc(sizeof(double) * 3);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 int	parse_scene(t_data *data, int fd)
 {
-	char	**red;
+	char			**red;
 
 	red = read_file(fd);
 	close(fd);
 	parse_environment(red, data);
 	data->first = parse_objects(red);
-	// prep_ray(data);
+	// data->rays = parse_rays(data);
+	malloc(sizeof(double **) * data->window.width);
 	free_double_str(red);
 	return (0);
 }
