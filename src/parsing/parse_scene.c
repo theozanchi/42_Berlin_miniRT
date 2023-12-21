@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/19 17:30:10 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:26:05 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	parse_scene(t_data *data, int fd)
 	parse_environment(red, data);
 	data->first = parse_objects(red);
 	// data->rays = parse_rays(data);
-	malloc(sizeof(double **) * data->window.width);
+	// malloc(sizeof(double **) * data->window.width);
 	free_double_str(red);
 	return (0);
 }

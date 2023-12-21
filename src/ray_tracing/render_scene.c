@@ -42,7 +42,7 @@ void	render_loading_bar(void)
 {
 	static size_t		pix_ct = 0;
 	static size_t		bar_ct = 0;
-	static const int	pix_nb = WIDTH * HEIGTH;
+	static const size_t	pix_nb = WIDTH * HEIGTH;
 	static const int	pix_per_bar_el = pix_nb / 72;
 
 	if (pix_ct == 0)
