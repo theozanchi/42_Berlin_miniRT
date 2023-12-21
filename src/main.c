@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/20 22:39:06 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/21 22:32:32 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 		printf("Could not parse, check the content of the .rt file\n");
 		return (0);
 	}
-	output_parse(data);
+	// output_parse(data);
 	viewport(data);
 	// ray_after_ray(data);
 	render_scene(data);
