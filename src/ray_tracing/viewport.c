@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/21 23:15:43 by helauren         ###   ########.fr       */
+/*   Updated: 2023/12/22 01:10:30 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,8 @@ void	viewport(t_data *data)
 	data->vp->points = parse_dem_points(data);
 	printf("min x = %f, max x = %f\n", data->vp->min_x, data->vp->max_x);
 	printf("min y = %f, max y = %f\n", data->vp->min_y, data->vp->max_y);
-	output_viewport(data->vp->points, data);
+	free(center);
+	// output_viewport(data->vp->points, data);
 }
 
 // void	viewport_left(t_data *data, t_vec3 *P)
