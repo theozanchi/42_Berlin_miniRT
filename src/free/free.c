@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/18 11:20:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/22 01:23:45 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
-
 
 void	free_objects(t_data *data)
 {
@@ -33,7 +32,10 @@ int	free_resources_and_quit(t_data *data)
 {
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_image(data->mlx_ptr, data->img.img);
+	mlx_destroy_display(data->mlx_ptr);
 	free_objects(data);
+	free_triple_double(data->vp->points, data->window.width, data->window.height);
+	free(data->vp);
 	free_and_set_to_null(4, data->ambient_lighting, data->camera, data->light, data);
 	exit(EXIT_SUCCESS);
 	return (0);
