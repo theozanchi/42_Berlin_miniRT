@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/18 11:11:28 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/19 11:23:36 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,9 @@ typedef struct s_ray
 	double	angle_n;
 	double	angle;
 	double	angle_radient;
+	t_vec3	origin;
+	t_vec3	direction;
+	
 }				t_ray;
 
 typedef struct s_data
@@ -181,6 +184,7 @@ void	free_objects(t_data *data);
 
 // debugging
 void	output_parse(t_data *data);
+void	render_loading_bar(void);
 
 // error message
 int		wrong_arg(int fd);
