@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/18 11:12:55 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/22 01:26:52 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_data	*init_data(void)
 	data->window.width = WIDTH;
 	data->window.height = HEIGTH;
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1080, 720, "miniRT");
-	data->img.img = mlx_new_image(data->mlx_ptr, 1080, 720);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->window.width, data->window.height, "miniRT");
+	data->img.img = mlx_new_image(data->mlx_ptr, data->window.width, data->window.height);
 	return (data);
 }
 
@@ -39,8 +39,9 @@ int	main(int ac, char **av)
 		printf("Could not parse, check the content of the .rt file\n");
 		return (0);
 	}
-	output_parse(data);
-	// ray_after_ray(data->ray, data);
+	// output_parse(data);
+	viewport(data);
+	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
