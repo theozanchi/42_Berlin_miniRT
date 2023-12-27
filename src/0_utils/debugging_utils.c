@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debugging_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/18 15:23:46 by tzanchi           #+#    #+#             */
+/*   Updated: 2023/12/18 15:24:10 by tzanchi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../inc/minirt.h"
+
+void	render_loading_bar(void)
+{
+	static size_t		pix_ct = 0;
+	static size_t		bar_ct = 0;
+	static const int	pix_nb = WIDTH * HEIGTH;
+	static const int	pix_per_bar_el = pix_nb / 72;
+
+	if (pix_ct == 0)
+	{
+		ft_putstr_fd(LOADING_HEADER, 2);
+		ft_putstr_fd(RED, 2);
+		ft_putstr_fd("Loading: ", 2);
+	}
+	if (pix_ct++ % pix_per_bar_el == 0)
+		ft_putchar_fd(LOADING_BAR[bar_ct++], 2);
+	if ((bar_ct == 3) && ((pix_ct - 1) % pix_per_bar_el == 0))
+		ft_putstr_fd(ORANGE, 2);
+	else if ((bar_ct == 18) && ((pix_ct - 1) % pix_per_bar_el == 0))
+		ft_putstr_fd(YELLOW, 2);
+	else if ((bar_ct == 51) && ((pix_ct - 1) % pix_per_bar_el == 0))
+		ft_putstr_fd(GREEN, 2);
+	else if (pix_ct == pix_nb)
+	{
+		ft_putstr_fd("Done\n", 2);
+		ft_putstr_fd(NC, 2);
+	}
+}
