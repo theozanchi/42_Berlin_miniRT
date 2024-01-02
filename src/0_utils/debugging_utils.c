@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:23:46 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/18 15:24:10 by tzanchi          ###   ########.fr       */
+/*   Updated: 2023/12/27 13:46:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	render_loading_bar(void)
 {
-	static size_t		pix_ct = 0;
-	static size_t		bar_ct = 0;
+	static int			pix_ct = 0;
+	static int			bar_ct = 0;
 	static const int	pix_nb = WIDTH * HEIGTH;
 	static const int	pix_per_bar_el = pix_nb / 72;
 

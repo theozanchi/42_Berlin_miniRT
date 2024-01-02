@@ -57,7 +57,7 @@ t_vec3	vec_mul_scalar(t_vec3 v, double t)
 
 t_vec3	vec_normalize(t_vec3 v)
 {
-	float length;
+	double length;
 	
 	length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
     if (length)
@@ -67,4 +67,19 @@ t_vec3	vec_normalize(t_vec3 v)
         v.z /= length;
     }
 	return (v);
+}
+
+t_vec3	vec3(double x, double y, double z)
+{
+	t_vec3	vec3;
+
+	vec3.x = x;
+	vec3.y = y;
+	vec3.z = z;
+	return (vec3);
+}
+
+t_vec3	unit_vec3(double x, double y, double z)
+{
+	return (vec_normalize(vec3(x, y, z)));
 }
