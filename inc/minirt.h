@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/27 12:27:25 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/02 14:55:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 # endif
 
 # ifndef HEIGTH
-#  define HEIGTH 720
+#  define HEIGTH 1080
 # endif
 
 # define LOADING_HEADER "         0%              25%              50%              75%              100%\n"
-# define LOADING_BAR "0% --------------|----------------|----------------|-------------- 100% "
+# define LOADING_BAR "-----------------|----------------|----------------|-------------- 100% "
 # define RED "\033[1;31m"
 # define YELLOW "\033[1;33m"
 # define ORANGE "\033[38;5;208m"
@@ -47,10 +47,13 @@
 # define NC "\033[0m"
 # define BOLD "\033[1m"
 
+typedef int t_colour;
+
 enum {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	NONE
 };
 
 enum {
@@ -74,7 +77,9 @@ typedef struct s_vec3
 	double	x;
 	double	y;
 	double	z;
-}				t_vec3;
+}	t_vec3;
+
+typedef t_vec3 t_point3;
 
 typedef struct s_rgb
 {
@@ -201,17 +206,17 @@ typedef struct s_data
 
 /* free.c ******************************************************************* */
 
-int		free_resources_and_quit(t_data *data);
-void	free_objects(t_data *data);
+int			free_resources_and_quit(t_data *data);
+void		free_objects(t_data *data);
 
 // debugging
-void	output_parse(t_data *data);
-void	render_loading_bar(void);
-void	output_ray_vectors(t_data *data);
-void	output_viewport(double ***arr, t_data *data);
+void		output_parse(t_data *data);
+void		render_loading_bar(void);
+void		output_ray_vectors(t_data *data);
+void		output_viewport(double ***arr, t_data *data);
 
 // error message
-int		wrong_arg(int fd);
+int			wrong_arg(int fd);
 
 // parsing
 int			get_file_fd(char *s);
@@ -224,13 +229,24 @@ int			parse_scene(t_data *data, int fd);
 
 // RT
 void		ray_after_ray(t_data *data);
-void	viewport(t_data *data);
+void		viewport(t_data *data);
 
 //keypress
 int			handle_keypress(int keycode, t_data *data);
 
 //rendering
-void	render_scene(t_data *data);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		render_scene(t_data *data);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+t_colour	trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+
+//hit_object.c
+t_vec3		hit_point(t_data *data, int x, int y, double t);
+t_point3	hit_sphere(t_o_sp *sphere, t_data *data, int x, int y, t_object ***hitted);
+t_point3	hit_cylinder(t_o_cy *cylinder, t_data *data, int x, int y, t_object ***hitted);
+t_point3	hit_plane(t_o_pl *plane, t_data *data, int x, int y, t_object ***hitted);
+t_point3	hit_object(t_data *data, int x, int y, t_object **hitted);
+
+//normal_vector.c
+t_vec3	normal_vec3(t_point3 hit_point, t_object *hitted);
 
 #endif
