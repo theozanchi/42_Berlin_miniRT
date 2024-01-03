@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   output_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:19:45 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/16 21:16:20 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:56:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	output_a(t_o_a *ambient)
 	printf("blue = %d\n", ambient->rgb.b);
 }
 
-void output_c(t_o_c *camera)
+void	output_c(t_o_c *camera)
 {
 	printf("x = %f\n", camera->pos.x);
 	printf("y = %f\n", camera->pos.y);
@@ -28,10 +28,10 @@ void output_c(t_o_c *camera)
 	printf("vx = %f\n", camera->vector.x);
 	printf("vy = %f\n", camera->vector.y);
 	printf("vz = %f\n", camera->vector.z);
-	printf("FOV = %d\n", camera->FOV);
+	printf("FOV = %d\n", camera->fov);
 }
 
-void output_l(t_o_l *light)
+void	output_l(t_o_l *light)
 {
 	printf("x = %f\n", light->pos.x);
 	printf("y = %f\n", light->pos.y);
@@ -39,7 +39,7 @@ void output_l(t_o_l *light)
 	printf("brightness_ratio = %f\n", light->brightness_ratio);
 }
 
-void output_sp(t_o_sp *sphere)
+void	output_sp(t_o_sp *sphere)
 {
 	printf("\n\nSPHERE\n");
 	printf("id = %d\n", sphere->id);
@@ -52,7 +52,7 @@ void output_sp(t_o_sp *sphere)
 	printf("b = %d\n", sphere->rgb.b);
 }
 
-void output_pl(t_o_pl *plane)
+void	output_pl(t_o_pl *plane)
 {
 	printf("\n\nPLANE\n");
 	printf("id = %d\n", plane->id);
@@ -67,7 +67,7 @@ void output_pl(t_o_pl *plane)
 	printf("b = %d\n", plane->rgb.b);
 }
 
-void output_cy(t_o_cy *cylinder)
+void	output_cy(t_o_cy *cylinder)
 {
 	printf("\n\nCYLINDER\n");
 	printf("id = %d\n", cylinder->id);
@@ -86,11 +86,14 @@ void output_cy(t_o_cy *cylinder)
 
 void	output_parse(t_data *data)
 {
-	t_o_a	*ambient = data->ambient_lighting;
-	t_o_c	*camera = data->camera;
-	t_o_l	*light = data->light;
+	t_o_a		*ambient;
+	t_o_c		*camera;
+	t_o_l		*light;
 	t_object	*obj;
 
+	ambient = data->ambient_lighting;
+	camera = data->camera;
+	light = data->light;
 	printf("\nAMBIENT LIGHT\n");
 	output_a(ambient);
 	printf("\n\nCAMERA\n");
@@ -98,13 +101,13 @@ void	output_parse(t_data *data)
 	printf("\n\nLIGHT\n");
 	output_l(light);
 	obj = data->first;
-	while(obj != NULL)
+	while (obj != NULL)
 	{
-		if(obj->id == 0)
+		if (obj->id == 0)
 			output_sp((t_o_sp *) obj);
-		if(obj->id == 1)
+		if (obj->id == 1)
 			output_cy((t_o_cy *) obj);
-		if(obj->id == 2)
+		if (obj->id == 2)
 			output_pl((t_o_pl *) obj);
 		obj = obj->next;
 	}

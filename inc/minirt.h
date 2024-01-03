@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 18:06:12 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 19:35:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@
 #  define HEIGTH 1080
 # endif
 
-# define LOADING_HEADER "         0%              25%              50%              75%              100%\n"
-# define LOADING_BAR "-----------------|----------------|----------------|-------------- 100% "
+# define LOADING_HEADER "         0%              25%              50%         \
+     75%              100%\n"
+# define LOADING_BAR "-----------------|----------------|----------------|-----\
+--------- 100% "
 # define RED "\033[1;31m"
 # define YELLOW "\033[1;33m"
 # define ORANGE "\033[38;5;208m"
@@ -47,7 +49,7 @@
 # define NC "\033[0m"
 # define BOLD "\033[1m"
 
-typedef int t_colour;
+typedef int		t_colour;
 
 enum {
 	SPHERE,
@@ -79,7 +81,7 @@ typedef struct s_vec3
 	double	z;
 }	t_vec3;
 
-typedef t_vec3 t_point3;
+typedef t_vec3	t_point3;
 
 typedef struct s_rgb
 {
@@ -92,28 +94,28 @@ typedef struct s_o_a // ambient lighting
 {
 	double	ratio;
 	t_rgb	rgb;
-}				t_o_a;
+}	t_o_a;
 
 typedef struct s_o_c // camera
 {
 	t_vec3	pos;
 	t_vec3	vector;
-	int		FOV;
+	int		fov;
 }	t_o_c;
 
 typedef struct s_o_l // light
 {
 	t_vec3	pos;
 	double	brightness_ratio;
-}				t_o_l;
+}	t_o_l;
 
 typedef struct s_o_sp // sphere
 {
-	int	id;
+	int		id;
 	t_vec3	pos;
 	double	diameter;
 	t_rgb	rgb;
-}				t_o_sp;
+}	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
@@ -122,7 +124,7 @@ typedef struct s_o_pl // plane
 	t_vec3			vector;
 	t_rgb			rgb;
 	struct s_object	*next;
-}				t_o_pl;
+}	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
@@ -132,14 +134,14 @@ typedef struct s_o_cy // cylinder
 	double			diameter;
 	double			height;
 	t_rgb			rgb;
-	struct t_object	*next;
+	struct s_object	*next;
 }	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
 	int				id;
 	struct s_object	*next;
-}				t_object;
+}	t_object;
 
 typedef struct s_window
 {
@@ -154,7 +156,7 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img;
+}	t_img;
 
 typedef struct s_ray
 {
@@ -163,21 +165,20 @@ typedef struct s_ray
 	double	angle_radient;
 	t_vec3	*origin;
 	t_vec3	*direction;
-	
-}				t_ray;
+}	t_ray;
 
 typedef struct s_trigo
 {
-	int	angle_a;
-	int	angle_b;
-	int	angle_c;
-	int	rad_a;
-	int	rad_b;
-	int	rad_c;
+	int		angle_a;
+	int		angle_b;
+	int		angle_c;
+	int		rad_a;
+	int		rad_b;
+	int		rad_c;
 	double	cote_ab;
 	double	cote_bc;
 	double	cote_ca;
-}				t_trigo;
+}	t_trigo;
 
 typedef struct s_vp
 {
@@ -189,7 +190,7 @@ typedef struct s_vp
 	double		width;
 	double		height;
 	double		***points;
-}				t_vp;
+}	t_vp;
 
 typedef struct s_data
 {
@@ -202,7 +203,7 @@ typedef struct s_data
 	t_o_l		*light;
 	t_img		img;
 	t_vp		*vp;
-}				t_data;
+}	t_data;
 
 /* free.c ******************************************************************* */
 
@@ -237,7 +238,8 @@ int			handle_keypress(int keycode, t_data *data);
 //rendering
 void		render_scene(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
-t_colour	trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+t_colour	trgb(unsigned char t, unsigned char r, unsigned char g,
+				unsigned char b);
 
 //hit_object.c
 t_point3	point_on_ray(t_ray *ray, double t);

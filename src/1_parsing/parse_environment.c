@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_environment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/16 20:04:15 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:51:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_o_c	*parse_camera(char *s)
 	i = next_float_index(s, i);
 	camera->vector.z = get_double(&s[i]);
 	i = next_float_index(s, i);
-	camera->FOV = ft_atoi(&s[i]);
+	camera->fov = ft_atoi(&s[i]);
 	return (camera);
 }
 
@@ -77,13 +77,13 @@ void	parse_environment(char **red, t_data *data)
 	int	i;
 
 	i = 0;
-	while(red[i])
+	while (red[i])
 	{
-		if(red[i][0] == 'A')
+		if (red[i][0] == 'A')
 			data->ambient_lighting = parse_ambient_lighting(red[i]);
-		if(red[i][0] == 'C')
+		if (red[i][0] == 'C')
 			data->camera = parse_camera(red[i]);
-		if(red[i][0] == 'L' || red[i][0] == 'l')
+		if (red[i][0] == 'L' || red[i][0] == 'l')
 			data->light = parse_light(red[i]);
 		i++;
 	}

@@ -6,31 +6,75 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 18:10:57 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 20:06:12 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
 
+/**
+ * @brief Returns the point located at distance t from ray origin
+ * 
+ * @param ray t_ray
+ * @param t double
+ * @return t_point3 
+ */
+t_point3	point_on_ray(t_ray *ray, double t)
+{
+	t_point3	point;
+
+	point.x = ray->origin->x + t * ray->direction->x;
+	point.y = ray->origin->y + t * ray->direction->y;
+	point.z = ray->origin->z + t * ray->direction->z;
+	return (point);
+}
+
+/**
+ * @brief Computes the colour of a ray based on the object hitted
+ * 
+ * @param data Main data structure
+ * @param ray t_ray
+ * @return t_colour (trgb stored under an int)
+ */
 t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	double		t;
 	t_object	*hitted;
-	t_o_sp		*sphere;
-	// t_vec3		n;
+	t_vec3		n;
 
 	t = hit_object(data->first, ray, &hitted);
 	if (t > 0.0)
 	{
-		// n = normal_vec3(point_on_ray(ray, t), hitted);
-		// return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
-		sphere = (t_o_sp *)hitted;
-		return (trgb(255, sphere->rgb.r, sphere->rgb.g, sphere->rgb.b));
+		n = normal_vec3(point_on_ray(ray, t), hitted);
+		return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
 	}
 	return (BACKGROUND_COLOUR);
 }
 
+/**
+ * @brief Allocates memory for a t_ray pointer
+ * 
+ * @return t_ray* 
+ */
+t_ray	*init_ray(void)
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	ray->origin = malloc(sizeof(t_vec3));
+	ray->direction = malloc(sizeof(t_vec3));
+	return (ray);
+}
+
+/**
+ * @brief Get the ray object located at coordinates [x][y] in data->vp->points
+ * 
+ * @param ray The ray object to populate
+ * @param data Main data structure
+ * @param x Abscissa coordinate
+ * @param y Ordinate coordinate
+ */
 void	get_ray(t_ray *ray, t_data *data, int x, int y)
 {
 	{
@@ -45,6 +89,12 @@ void	get_ray(t_ray *ray, t_data *data, int x, int y)
 	}
 }
 
+/**
+ * @brief Renders the main scene by processing ray per ray, using the array
+ * located at data->vp->points
+ * 
+ * @param data Main data structure
+ */
 void	render_scene(t_data *data)
 {
 	int		x;
@@ -54,9 +104,7 @@ void	render_scene(t_data *data)
 
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
-	ray = malloc(sizeof(t_ray));
-	ray->origin = malloc(sizeof(t_vec3));
-	ray->direction = malloc(sizeof(t_vec3));
+	ray = init_ray();
 	x = 0;
 	while (x < WIDTH)
 	{
