@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 15:55:49 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:25:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,38 +48,34 @@ t_point3	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
 	}
 }
 
-t_point3	hit_cylinder(t_o_cy *cylinder, t_data *data, t_ray *ray, t_object ***hitted)
+t_point3	hit_cylinder(t_o_cy *cylinder, t_ray *ray, t_object ***hitted)
 {
 	(void)cylinder;
-	(void)data;
 	(void)ray;
 	**hitted = (t_object *)cylinder;
 	return (vec3(1.0, 1.0, 1.0));
 }
 
-t_point3	hit_plane(t_o_pl *plane, t_data *data, t_ray *ray, t_object ***hitted)
+t_point3	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
 {
 	(void)plane;
-	(void)data;
 	(void)ray;
 	**hitted = (t_object *)plane;;
 	return (vec3(1.0, 1.0, 1.0));
 }
 
-t_point3	hit_object(t_data *data, t_ray *ray, t_object **hitted)
+t_point3	hit_object(t_object *hittables, t_ray *ray, t_object **hitted)
 {
-	t_object	*hittables;
 	t_point3	hit_point;
 	
-	hittables = data->first;
 	while (hittables)
 	{
-		if (data->first->id == SPHERE)
+		if (hittables->id == SPHERE)
 			hit_point = hit_sphere((t_o_sp *)hittables, ray, &hitted);
 		else if (hittables->id == CYLINDER)
-			hit_point = hit_cylinder((t_o_cy *)hittables, data, ray, &hitted);
+			hit_point = hit_cylinder((t_o_cy *)hittables, ray, &hitted);
 		else if (hittables->id == PLANE)
-			hit_point = hit_plane((t_o_pl *)hittables, data, ray, &hitted);
+			hit_point = hit_plane((t_o_pl *)hittables, ray, &hitted);
 		else
 			hit_point = vec3(-1.0, -1.0, -1.0);
 		hittables = hittables->next;
