@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/22 00:45:37 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:51:38 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,17 @@ t_object	*parse_objects(char **red)
 
 	i = 0;
 	first = NULL;
-	while(red[i])
+	while (red[i])
 	{
-		if(red[i][0] == 's')
+		if (red[i][0] == 's')
 			next = parse_sphere(red[i]);
-		if(red[i][0] == 'p')
+		if (red[i][0] == 'p')
 			next = parse_plane(red[i]);
-		if(red[i][0] == 'c')
+		if (red[i][0] == 'c')
 			next = parse_cylinder(red[i]);
-		if(red[i][0] == 's' || red[i][0] == 'p' || red[i][0] == 'c')
+		if (red[i][0] == 's' || red[i][0] == 'p' || red[i][0] == 'c')
 		{
-			if(first == NULL)
+			if (first == NULL)
 			{
 				first = next;
 				first->next = NULL;

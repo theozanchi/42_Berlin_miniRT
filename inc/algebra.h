@@ -6,19 +6,19 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:05:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2023/12/29 18:18:10 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 19:15:41 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGEBRA_H
 # define ALGEBRA_H
 
-#include "minirt.h"
+# include "minirt.h"
 # include <math.h>
 
-#ifndef PI
-# define PI 3.14159265358979323846
-#endif
+# ifndef PI
+#  define PI 3.14159265358979323846
+# endif
 
 /* Functions **************************************************************** */
 

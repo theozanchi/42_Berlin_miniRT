@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/21 20:26:05 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:52:59 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ char	**read_file(int fd)
 	s = NULL;
 	buff = malloc(sizeof(char) * 101);
 	br = 0;
-	while(1)
+	while (1)
 	{
 		br = read(fd, buff, 100);
 		buff[br] = 0;
 		s = ft_strjoin_h(s, buff);
-		if(br == 0)
+		if (br == 0)
 			break ;
 	}
 	free(buff);
@@ -38,10 +38,10 @@ char	**read_file(int fd)
 
 int	next_float_index(char *s, int i)
 {
-	if(ft_isdigit(s[i]) == 1 || s[i] == '-')
-		while(s[i] && s[i] != ',' && s[i] != ' ')
+	if (ft_isdigit(s[i]) == 1 || s[i] == '-')
+		while (s[i] && s[i] != ',' && s[i] != ' ')
 			i++;
-	while(s[i] && ft_isdigit(s[i]) != 1 && s[i] != '-')
+	while (s[i] && ft_isdigit(s[i]) != 1 && s[i] != '-')
 		i++;
 	return (i);
 }
@@ -56,22 +56,22 @@ double	get_double(char *s)
 
 	sign = 0;
 	i = 0;
-	if(s[i] == '-')
+	if (s[i] == '-')
 	{
 		sign = -1;
 		i++;
 	}
 	ret = 0;
 	div = 10;
-	while(ft_isdigit(s[i]))
+	while (ft_isdigit(s[i]))
 	{
 		ret = ret * 10;
 		ret = ret + s[i] - '0';
 		i++;
 	}
-	if(s[i] == '.')
+	if (s[i] == '.')
 		i++;
-	while(s[i] && s[i] != ',' && s[i] != ' ')
+	while (s[i] && s[i] != ',' && s[i] != ' ')
 	{
 		a = s[i] - '0';
 		a = a / div;
@@ -79,7 +79,7 @@ double	get_double(char *s)
 		i++;
 		div = div * 10;
 	}
-	if(sign < 0)
+	if (sign < 0)
 		ret = -ret;
 	return (ret);
 }
@@ -90,7 +90,7 @@ double	get_double(char *s)
 
 // 	ray = malloc(sizeof(t_ray));
 // 	ray->angle_n = (double)(data->camera->FOV / 2) / (double)data->window.width;
-	
+
 // }
 
 // t_ray	*parse_ray(t_data *data)

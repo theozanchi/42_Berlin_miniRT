@@ -3,29 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/22 01:10:30 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 20:11:52 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../inc/minirt.h"
+#include "../../inc/minirt.h"
+#include "../../inc/algebra.h"
 
 void	viewport_trigo(t_data *data)
 {
-	double	pie;
-
-	pie = 3.14159265359;
 	data->vp->trigo.angle_a = 90;
-	data->vp->trigo.angle_b = data->camera->FOV / 2;
-	data->vp->trigo.angle_c = 180 - data->vp->trigo.angle_a - data->vp->trigo.angle_b;
-	data->vp->trigo.rad_a = data->vp->trigo.angle_a * (pie / 180);
-	data->vp->trigo.rad_b = data->vp->trigo.angle_b * (pie / 180);
-	data->vp->trigo.rad_c = data->vp->trigo.angle_c * (pie / 180);
+	data->vp->trigo.angle_b = data->camera->fov / 2;
+	data->vp->trigo.angle_c = 180 - data->vp->trigo.angle_a
+		- data->vp->trigo.angle_b;
+	data->vp->trigo.rad_a = data->vp->trigo.angle_a * (PI / 180);
+	data->vp->trigo.rad_b = data->vp->trigo.angle_b * (PI / 180);
+	data->vp->trigo.rad_c = data->vp->trigo.angle_c * (PI / 180);
 	data->vp->trigo.cote_ab = 1;
-	data->vp->trigo.cote_bc = ((data->vp->trigo.cote_ab * sin(data->vp->trigo.rad_a)) / sin(data->vp->trigo.rad_c));
-	data->vp->trigo.cote_ca = ((data->vp->trigo.cote_ab * sin(data->vp->trigo.rad_b)) / sin(data->vp->trigo.rad_c));
+	data->vp->trigo.cote_bc = ((data->vp->trigo.cote_ab
+				* sin(data->vp->trigo.rad_a)) / sin(data->vp->trigo.rad_c));
+	data->vp->trigo.cote_ca = ((data->vp->trigo.cote_ab
+				* sin(data->vp->trigo.rad_b)) / sin(data->vp->trigo.rad_c));
 }
 
 t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
@@ -34,25 +35,29 @@ t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
 	t_vec3	*center_vp;
 
 	center_vp = malloc(sizeof(center_vp));
-	magnitude = sqrt(((data->camera->vector.x) * (data->camera->vector.x)) +
-		((data->camera->vector.y) * (data->camera->vector.y)) +
-		((data->camera->vector.z) * (data->camera->vector.z)));
+	magnitude = sqrt(((data->camera->vector.x) * (data->camera->vector.x))
+			+ ((data->camera->vector.y) * (data->camera->vector.y))
+			+ ((data->camera->vector.z) * (data->camera->vector.z)));
 	center_vp->x = start_pos.x + data->camera->vector.x / magnitude;
 	center_vp->y = start_pos.y + data->camera->vector.y / magnitude;
 	center_vp->z = start_pos.z + data->camera->vector.z / magnitude;
-	printf("center x = %f, start pos x = %f, cam vector x = %f, magnitude = %f\n", center_vp->x, start_pos.x, data->camera->vector.x, magnitude);
-	printf("center y = %f, start pos y = %f, cam vector y = %f, magnitude = %f\n", center_vp->y, start_pos.y, data->camera->vector.y, magnitude);
-	printf("center z = %f, start pos z = %f, cam vector z = %f, magnitude = %f\n", center_vp->z, start_pos.z, data->camera->vector.z, magnitude);
+	printf("center x = %f, start pos x = %f, cam vector x = %f, magnitude = %f\
+		\n", center_vp->x, start_pos.x, data->camera->vector.x, magnitude);
+	printf("center y = %f, start pos y = %f, cam vector y = %f, magnitude = %f\
+		\n", center_vp->y, start_pos.y, data->camera->vector.y, magnitude);
+	printf("center z = %f, start pos z = %f, cam vector z = %f, magnitude = %f\
+		\n", center_vp->z, start_pos.z, data->camera->vector.z, magnitude);
 	return (center_vp);
 }
 
-	// double	CE;
-	// double	PE;
-	// double	rad;
-	// rad = 55 * ((double)M_PI * 180);
-	// CE = 1 * sin(rad); // length of CE
-	// PE = sqrt(1 + (CE * CE) - (2 * (CE) * cos(180 - 90 - data->camera->FOV / 2))); // length of PE
-	// printf("length of PE = %f\n", PE);
+// double	CE;
+// double	PE;
+// double	rad;
+// rad = 55 * ((double)M_PI * 180);
+// CE = 1 * sin(rad); // length of CE
+// PE = sqrt(1 + (CE * CE) - (2 * CE * cos(180 - 90 - data->camera->fov / 2)));
+// 	// length of PE
+// printf("length of PE = %f\n", PE);
 
 double	longueur_hypothenuse(t_data *data)
 {
@@ -60,7 +65,7 @@ double	longueur_hypothenuse(t_data *data)
 	double	rad;
 	double	degrees;
 
-	degrees = (double)(data->camera->FOV / 2.0);
+	degrees = (double)(data->camera->fov / 2.0);
 	// printf("FOV = %f, degrees = %f\n", (double)data->camera->FOV, degrees);
 	rad = degrees * (M_PI / 180.0);
 	// printf("rad = %f\n", rad);

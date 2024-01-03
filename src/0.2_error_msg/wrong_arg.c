@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrong_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/15 19:52:52 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:56:56 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	wrong_arg(int fd)
 {
 	printf("Invalid Input !!!!!!!!\n");
-	if(fd == -1)
+	if (fd == -1)
 		printf("Could not read from given file\n");
 	else
 	{
