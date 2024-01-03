@@ -6,32 +6,24 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 17:27:13 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 18:10:57 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
 
-int	exists(t_point3 hit_point)
-{
-	if (hit_point.x != -1.0 || hit_point.y != -1.0 || hit_point.z != -1.0)
-		return (1);
-	else
-		return (0);
-}
-
 t_colour	ray_colour(t_data *data, t_ray *ray)
 {
-	t_point3	hit_point;
+	double		t;
 	t_object	*hitted;
 	t_o_sp		*sphere;
 	// t_vec3		n;
 
-	hit_point = hit_object(data->first, ray, &hitted);
-	if (exists(hit_point))
+	t = hit_object(data->first, ray, &hitted);
+	if (t > 0.0)
 	{
-		// n = normal_vec3(hit_point, hitted);
+		// n = normal_vec3(point_on_ray(ray, t), hitted);
 		// return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
 		sphere = (t_o_sp *)hitted;
 		return (trgb(255, sphere->rgb.r, sphere->rgb.g, sphere->rgb.b));
