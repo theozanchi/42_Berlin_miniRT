@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 16:44:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 17:27:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	t_point3	hit_point;
 	t_object	*hitted;
-	t_vec3		n;
+	t_o_sp		*sphere;
+	// t_vec3		n;
 
-	hit_point = hit_object(data, ray, &hitted);
+	hit_point = hit_object(data->first, ray, &hitted);
 	if (exists(hit_point))
 	{
-		n = normal_vec3(hit_point, hitted);
-		return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
+		// n = normal_vec3(hit_point, hitted);
+		// return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
+		sphere = (t_o_sp *)hitted;
+		return (trgb(255, sphere->rgb.r, sphere->rgb.g, sphere->rgb.b));
 	}
 	return (BACKGROUND_COLOUR);
 }
