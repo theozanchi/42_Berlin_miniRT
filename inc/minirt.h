@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/02 14:55:02 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 15:56:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ typedef struct s_ray
 	double	angle_n;
 	double	angle;
 	double	angle_radient;
-	t_vec3	origin;
-	t_vec3	direction;
+	t_vec3	*origin;
+	t_vec3	*direction;
 	
 }				t_ray;
 
@@ -240,11 +240,11 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 t_colour	trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
 
 //hit_object.c
-t_vec3		hit_point(t_data *data, int x, int y, double t);
-t_point3	hit_sphere(t_o_sp *sphere, t_data *data, int x, int y, t_object ***hitted);
-t_point3	hit_cylinder(t_o_cy *cylinder, t_data *data, int x, int y, t_object ***hitted);
-t_point3	hit_plane(t_o_pl *plane, t_data *data, int x, int y, t_object ***hitted);
-t_point3	hit_object(t_data *data, int x, int y, t_object **hitted);
+t_vec3		hit_point(t_ray *ray, double t);
+t_point3	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted);
+t_point3	hit_cylinder(t_o_cy *cylinder, t_data *data, t_ray *ray, t_object ***hitted);
+t_point3	hit_plane(t_o_pl *plane, t_data *data, t_ray *ray, t_object ***hitted);
+t_point3	hit_object(t_data *data, t_ray *ray, t_object **hitted);
 
 //normal_vector.c
 t_vec3	normal_vec3(t_point3 hit_point, t_object *hitted);

@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2023/12/27 15:05:06 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:05:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	main(int ac, char **av)
 	if(parse_scene(data, fd))
 	{
 		printf("Could not parse, check the content of the .rt file\n");
-		return (0);
+		return (EXIT_FAILURE);
 	}
 	// output_parse(data);
 	viewport(data);
-	output_viewport(data->vp->points, data);
+	// output_viewport(data->vp->points, data);
 	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
