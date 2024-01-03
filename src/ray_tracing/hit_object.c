@@ -6,14 +6,14 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 17:25:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/03 18:53:57 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
 
-t_vec3	hit_point(t_ray *ray, double t)
+t_point3	point_on_ray(t_ray *ray, double t)
 {
 	t_point3	point;
 
@@ -23,7 +23,7 @@ t_vec3	hit_point(t_ray *ray, double t)
 	return (point);
 }
 
-t_point3	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
+double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
 {
 	t_vec3	oc;
 	double	a;
@@ -39,46 +39,61 @@ t_point3	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
 	if (discriminant < 0)
 	{
 		**hitted = NULL;
-		return (vec3(-1.0, -1.0, -1.0));
+		return (-1.0);
 	}
 	else
 	{
 		**hitted = (t_object *)sphere;
-		return (hit_point(ray, (-half_b - sqrt(discriminant)) / a));
+		return ((-half_b - sqrt(discriminant)) / a);
 	}
 }
 
-t_point3	hit_cylinder(t_o_cy *cylinder, t_ray *ray, t_object ***hitted)
+double	hit_cylinder(t_o_cy *cylinder, t_ray *ray, t_object ***hitted)
 {
 	(void)cylinder;
 	(void)ray;
 	**hitted = (t_object *)cylinder;
-	return (vec3(1.0, 1.0, 1.0));
+	return (1.0);
 }
 
-t_point3	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
+double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
 {
 	(void)plane;
 	(void)ray;
-	**hitted = (t_object *)plane;;
-	return (vec3(1.0, 1.0, 1.0));
+	**hitted = (t_object *)plane;
+	return (1.0);
 }
 
-t_point3	hit_object(t_object *hittables, t_ray *ray, t_object **hitted)
+double	get_t(t_object *hittables, t_ray *ray, t_object **temp_hitted)
 {
-	t_point3	hit_point;
-	
+	double		t;
+
+	if (hittables->id == SPHERE)
+		t = hit_sphere((t_o_sp *)hittables, ray, &temp_hitted);
+	else if (hittables->id == CYLINDER)
+		t = hit_cylinder((t_o_cy *)hittables, ray, &temp_hitted);
+	else
+		t = hit_plane((t_o_pl *)hittables, ray, &temp_hitted);
+	return (t);
+}
+
+double	hit_object(t_object *hittables, t_ray *ray, t_object **hitted)
+{
+	double		t;
+	double		temp_t;
+	t_object	*temp_hitted;
+
+	t = -1.0;
+	temp_hitted = NULL;
 	while (hittables)
 	{
-		if (hittables->id == SPHERE)
-			hit_point = hit_sphere((t_o_sp *)hittables, ray, &hitted);
-		else if (hittables->id == CYLINDER)
-			hit_point = hit_cylinder((t_o_cy *)hittables, ray, &hitted);
-		else if (hittables->id == PLANE)
-			hit_point = hit_plane((t_o_pl *)hittables, ray, &hitted);
-		else
-			hit_point = vec3(-1.0, -1.0, -1.0);
+		temp_t = get_t(hittables, ray, &temp_hitted);
+		if ((t < 0 && temp_t > 0) || (temp_t > 0 && temp_t < t))
+		{
+			t = temp_t;
+			*hitted = temp_hitted;
+		}
 		hittables = hittables->next;
 	}
-	return (hit_point);
+	return (t);
 }
