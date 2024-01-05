@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 13:59:40 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:28:07 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	double		t;
 	t_object	*hitted;
-	t_vec3		n;
+	// t_vec3		n;
 
 	t = hit_object(data->first, ray, &hitted);
 	if (t > 0.0)
 	{
-		n = normal_vec3(point_on_ray(ray, t), hitted);
-		return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
+	// 	n = normal_vec3(point_on_ray(ray, t), hitted);
+	// 	return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
+		return (trgb(255, hitted->rgb.r, hitted->rgb.g, hitted->rgb.b));
 	}
 	return (BACKGROUND_COLOUR);
 }

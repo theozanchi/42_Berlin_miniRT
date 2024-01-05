@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 14:11:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:23:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_o_cy // cylinder
 typedef struct s_object // can be type casted to any object using id
 {
 	int				id;
+	t_rgb			rgb;
 	struct s_object	*next;
 }	t_object;
 
