@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 17:20:08 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:46:12 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ typedef struct s_o_cy // cylinder
 	t_vec3			vector;
 	double			diameter;
 	double			height;
+	t_vec3			vec_hauteur;
+	t_vec3			vec_largeur;
+	t_point3		top;
+	t_point3		bottom;
 }	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id

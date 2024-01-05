@@ -1,3 +1,7 @@
+x=x0 + at
+y=y0 + bt
+z=z0 + ct
+​
 hypothenuse = cote adjacent / cos(angle adjacent)
 
 vectors 
@@ -19,7 +23,3 @@ Cw = Canvas width
 Cx = Vx - Vx_diff * Cw/Vw
 
 Vy_min = min y value on Viewport
-
-C = canvas
-
-Cx = Vx + 

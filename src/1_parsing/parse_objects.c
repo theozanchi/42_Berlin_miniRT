@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 19:51:38 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 20:45:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ t_object	*parse_plane(char *s)
 	return ((t_object *)pl);
 }
 
+void	set_top_bottom(t_o_cy *cy)
+{
+	cy->top = cy->pos;
+	cy->top.y = cy->top.y + cy->diameter;
+	cy->top.x = cy->vector.x;
+	cy->top.y = cy->vector.y;
+	cy->bottom = cy->pos;
+	cy->bottom.y = cy->bottom.y - cy->diameter;
+	cy->bottom.x = cy->vector.x;
+	cy->bottom.y = cy->vector.y;
+}
+
 t_object	*parse_cylinder(char *s)
 {
 	t_o_cy	*cy;
@@ -96,6 +108,11 @@ t_object	*parse_cylinder(char *s)
 	cy->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
 	cy->rgb.b = ft_atoi(&s[i]);
+	cy->vec_largeur = cy->vector;
+	cy->vec_hauteur.x = 0 + cy->vector.x;
+	cy->vec_hauteur.y = 1 + cy->vector.y;
+	cy->vec_hauteur.z = cy->vector.z;
+	set_top_bottom(cy);
 	return ((t_object *)cy);
 }
 
