@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 19:56:40 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:10:54 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@
 // 	}
 // }
 
-void	output_viewport(double ***arr, t_data *data)
+void	output_viewport(double ***arr)
 {
 	unsigned int	x;
 	unsigned int	y;
 
 	x = 0;
-	printf("window height = %u\n", data->window.height);
-	while (x < data->window.width)
+	printf("window height = %u\n", HEIGTH);
+	while (x < WIDTH)
 	{
 		y = 0;
-		while (y < data->window.height)
+		while (y < WIDTH)
 		{
 			if (x == 1079)
 			{

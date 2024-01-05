@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 20:02:39 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:12:31 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ t_data	*init_data(void)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-	data->window.width = WIDTH;
-	data->window.height = HEIGTH;
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->window.width,
-			data->window.height, "miniRT");
-	data->img.img = mlx_new_image(data->mlx_ptr, data->window.width,
-			data->window.height);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "miniRT");
+	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
 	return (data);
 }
 
@@ -43,7 +39,7 @@ int	main(int ac, char **av)
 	}
 	// output_parse(data);
 	viewport(data);
-	output_viewport(data->vp->points, data);
+	// output_viewport(data->vp->points);
 	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
