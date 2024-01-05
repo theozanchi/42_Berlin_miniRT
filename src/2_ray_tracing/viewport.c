@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 20:11:52 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:08:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,19 +117,19 @@ double	***parse_dem_points(t_data *data)
 
 	printf("min x = %f\n", data->vp->min_x);
 	printf("min y = %f\n", data->vp->min_y);
-	ret = malloc(sizeof(double **) * data->window.width);
-	pos_x_incr = ((double)data->vp->width) / (data->window.width - 1.0);
-	pos_y_incr = ((double)data->vp->height) / (data->window.height - 1.0);
+	ret = malloc(sizeof(double **) * WIDTH);
+	pos_x_incr = ((double)data->vp->width) / (WIDTH - 1.0);
+	pos_y_incr = ((double)data->vp->height) / (HEIGTH - 1.0);
 	printf("pos x incr = %f\n", pos_x_incr);
 	printf("pos y incr = %f\n", pos_y_incr);
 	x = 0;
 	pos_x = 0;
-	while(x < data->window.width)
+	while(x < WIDTH)
 	{
-		ret[x] = malloc(sizeof(double *) * data->window.height);
+		ret[x] = malloc(sizeof(double *) * HEIGTH);
 		y = 0;
 		pos_y = 0;
-		while(y < data->window.height)
+		while(y < HEIGTH)
 		{
 			ret[x][y] = malloc(sizeof(double) * 6);
 			ret[x][y][0] = data->vp->min_x + pos_x;

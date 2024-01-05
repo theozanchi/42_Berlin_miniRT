@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 19:35:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:11:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # endif
 
 # ifndef HEIGTH
-#  define HEIGTH 1080
+#  define HEIGTH 720
 # endif
 
 # define LOADING_HEADER "         0%              25%              50%         \
@@ -143,12 +143,6 @@ typedef struct s_object // can be type casted to any object using id
 	struct s_object	*next;
 }	t_object;
 
-typedef struct s_window
-{
-	unsigned int	height;
-	unsigned int	width;
-}	t_window;
-
 typedef struct s_img
 {
 	void	*img;
@@ -196,7 +190,6 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_window	window;
 	t_object	*first;
 	t_o_a		*ambient_lighting;
 	t_o_c		*camera;
@@ -214,7 +207,7 @@ void		free_objects(t_data *data);
 void		output_parse(t_data *data);
 void		render_loading_bar(void);
 void		output_ray_vectors(t_data *data);
-void		output_viewport(double ***arr, t_data *data);
+void		output_viewport(double ***arr);
 
 // error message
 int			wrong_arg(int fd);

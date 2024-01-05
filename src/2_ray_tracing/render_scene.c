@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 20:06:12 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 13:59:40 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ t_ray	*init_ray(void)
 void	get_ray(t_ray *ray, t_data *data, int x, int y)
 {
 	{
-		ray->origin->x = data->vp->points[x][y][0];
-		ray->origin->y = data->vp->points[x][y][1];
-		ray->origin->z = data->vp->points[x][y][2];
+		*ray->origin = data->camera->pos;
 	}
 	{
 		ray->direction->x = data->vp->points[x][y][3];
