@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/05 14:08:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 14:33:42 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ double	***parse_dem_points(t_data *data)
 	printf("min x = %f\n", data->vp->min_x);
 	printf("min y = %f\n", data->vp->min_y);
 	ret = malloc(sizeof(double **) * WIDTH);
-	pos_x_incr = ((double)data->vp->width) / (WIDTH - 1.0);
-	pos_y_incr = ((double)data->vp->height) / (HEIGTH - 1.0);
+	pos_x_incr = ((double)data->vp->width) / ((double)WIDTH - 1.0);
+	pos_y_incr = ((double)data->vp->height) / ((double)HEIGTH - 1.0);
 	printf("pos x incr = %f\n", pos_x_incr);
 	printf("pos y incr = %f\n", pos_y_incr);
 	x = 0;
@@ -157,7 +157,7 @@ void	viewport(t_data *data)
 	printf("min x = %f, max x = %f\n", data->vp->min_x, data->vp->max_x);
 	printf("min y = %f, max y = %f\n", data->vp->min_y, data->vp->max_y);
 	free(center);
-	// output_viewport(data->vp->points, data);
+	output_viewport(data->vp->points);
 }
 
 // void	viewport_left(t_data *data, t_vec3 *P)
