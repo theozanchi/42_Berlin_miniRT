@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 15:23:39 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 17:20:08 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,30 +111,31 @@ typedef struct s_o_l // light
 
 typedef struct s_o_sp // sphere
 {
-	int		id;
-	t_vec3	pos;
-	double	diameter;
-	t_rgb	rgb;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	t_vec3			pos;
+	double			diameter;
 }	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
 	int				id;
-	t_vec3			pos;
-	t_vec3			vector;
 	t_rgb			rgb;
 	struct s_object	*next;
+	t_vec3			pos;
+	t_vec3			vector;
 }	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
 	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
 	t_vec3			pos;
 	t_vec3			vector;
 	double			diameter;
 	double			height;
-	t_rgb			rgb;
-	struct s_object	*next;
 }	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
