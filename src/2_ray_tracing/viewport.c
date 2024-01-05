@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/05 14:33:42 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:11:53 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	viewport(t_data *data)
 	printf("min x = %f, max x = %f\n", data->vp->min_x, data->vp->max_x);
 	printf("min y = %f, max y = %f\n", data->vp->min_y, data->vp->max_y);
 	free(center);
-	output_viewport(data->vp->points);
+	// output_viewport(data->vp->points);
 }
 
 // void	viewport_left(t_data *data, t_vec3 *P)
