@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 18:38:20 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:27:29 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 	t_object	*hitted_object;
 	t_point3	hitted_point;
 	t_vec3		n;
+	t_rgb		rgb;
 
 	t = hit_object(data->first, ray, &hitted_object);
 	if (t > 0.0)
 	{
 		hitted_point = point_on_ray(ray, t);
-		n = normal_vec3(point_on_ray(ray, t), hitted_object);
-		//1: calcul angle lumiere et n 
-		//2: is there an object between them?
-		//3: ajout ambient light
-		//4: return the computed colour
-		//
-		// return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
-		return (trgb(255, hitted_object->rgb.r, hitted_object->rgb.g, hitted_object->rgb.b));
+		n = normal_vec3(hitted_point, hitted_object);
+		rgb = hitted_object->rgb;
+		// add_ambient_light(&rgb, data);
+		add_light(&rgb, spotlight_intensity(n, hitted_point, data));
+		return (compute_colour(rgb));
 	}
-	return (BACKGROUND_COLOUR);
+	ft_memset(&rgb, 0, sizeof(t_rgb));
+	add_ambient_light(&rgb, data);
+	return (compute_colour(rgb));
 }
 
 /**

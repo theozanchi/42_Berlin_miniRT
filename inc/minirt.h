@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 16:58:56 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:27:45 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ typedef t_vec3	t_point3;
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }	t_rgb;
 
 typedef struct s_o_a // ambient lighting
@@ -237,8 +237,7 @@ int			handle_keypress(int keycode, t_data *data);
 //rendering
 void		render_scene(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
-t_colour	trgb(unsigned char t, unsigned char r, unsigned char g,
-				unsigned char b);
+t_colour	compute_colour(t_rgb rgb);
 
 //hit_object.c
 t_point3	point_on_ray(t_ray *ray, double t);
@@ -247,5 +246,10 @@ double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
 //normal_vector.c
 t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
 t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted);
+
+//light.c
+double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
+void	add_ambient_light(t_rgb *rgb, t_data *data);
+void	add_light(t_rgb *rgb, double intensity);
 
 #endif
