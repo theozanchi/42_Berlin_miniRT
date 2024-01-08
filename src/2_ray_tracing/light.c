@@ -6,14 +6,14 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 16:43:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:02:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
 
-double	get_angle_with_light(t_vec3 n, t_point3 hitted_point, t_data *data)
+double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
 {
 	t_vec3	ray;
 
