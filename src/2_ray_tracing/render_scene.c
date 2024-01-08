@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 16:21:25 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:38:20 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 		//4: return the computed colour
 		//
 		// return (0.5 * trgb(255, n.x + 1, n.y + 1, n.z + 1));
-		// return (trgb(255, hitted_object->rgb.r, hitted_object->rgb.g, hitted_object->rgb.b));
+		return (trgb(255, hitted_object->rgb.r, hitted_object->rgb.g, hitted_object->rgb.b));
 	}
 	return (BACKGROUND_COLOUR);
 }

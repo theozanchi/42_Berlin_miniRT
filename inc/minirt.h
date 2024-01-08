@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 16:27:12 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:58:56 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ t_point3	point_on_ray(t_ray *ray, double t);
 double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
 
 //normal_vector.c
+t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
 t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 20:45:59 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:15:34 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
  * @param ray Pointer to the object
  * @param temp_hitted Pointer to update with the address of `object` if `object`
  * is hit by `ray`
- * @return `t` (double) or -1.0 if `object` is not hit by `ray` 
+ * @return `t` (double) or -1.0 if `object` is not hit by `ray`
  */
 double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted)
 {
