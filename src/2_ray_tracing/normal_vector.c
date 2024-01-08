@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 20:48:22 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:21:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	is_on_line(t_point3 center, t_vec3 vector, double len, t_point3 hit_point)
 int	hit_largeur(t_point3 hit_point, t_o_cy *cyl)
 {
 	if(is_on_line(cyl->bottom, cyl->vector, cyl->diameter, hit_point)
-		|| is_on_line(cyl->top, cyl->vector, cyl->diameter, hit_point));
+		|| is_on_line(cyl->top, cyl->vector, cyl->diameter, hit_point))
 		return (1);
 	return (0);
 }
