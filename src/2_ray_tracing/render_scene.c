@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/05 17:52:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/08 15:39:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 	if (t > 0.0)
 	{
 		hitted_point = point_on_ray(ray, t);
-		n = normal_vec3(point_on_ray(ray, t), hitted_object);
+		n = normal_vec3(hitted_point, hitted_object);
 		//1: calcul angle lumiere et n 
 		//2: is there an object between them?
 		//3: ajout ambient light
