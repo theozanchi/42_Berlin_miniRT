@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:22:52 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 19:05:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/08 19:03:51 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 }
 
 /**
- * @brief Computes a colour in format trgb
+ * @brief Computes a colour in format trgb for mlx library
  * 
- * @param t transparency (0-255)
- * @param r red (0-255)
- * @param g green (0-255)
- * @param b blue (0-255)
+ * @param rgb custom format
  * @return t_colour (int)
  */
-t_colour	trgb(unsigned char t, unsigned char r, unsigned char g,
-					unsigned char b)
+t_colour	compute_colour(t_rgb rgb)
 {
-	return (*(int *)(unsigned char [4]){b, g, r, t});
+	return (*(int *)(unsigned char [4]){rgb.b, rgb.g, rgb.r, 255});
 }
