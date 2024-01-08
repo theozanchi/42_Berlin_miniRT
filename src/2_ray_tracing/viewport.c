@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/05 15:11:53 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/08 16:26:05 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,6 @@ t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
 	return (center_vp);
 }
 
-// double	CE;
-// double	PE;
-// double	rad;
-// rad = 55 * ((double)M_PI * 180);
-// CE = 1 * sin(rad); // length of CE
-// PE = sqrt(1 + (CE * CE) - (2 * CE * cos(180 - 90 - data->camera->fov / 2)));
-// 	// length of PE
-// printf("length of PE = %f\n", PE);
-
 double	longueur_hypothenuse(t_data *data)
 {
 	double	hypothenuse;
@@ -86,14 +77,16 @@ void	viewport_width(t_data *data, t_vec3 *center)
 {
 	double	hypothenuse;
 	double	aigu;
+	double	win_ratio;
 
 	hypothenuse = longueur_hypothenuse(data);
 	aigu = longueur_aigu(hypothenuse);
+	win_ratio = (((double)HEIGTH / (double)WIDTH) * aigu);
 	printf("hypothenuse = %f, aigu = %f\n", hypothenuse, aigu);
 	data->vp->min_x = center->x - aigu;
 	data->vp->max_x = center->x + aigu;
-	data->vp->min_y = center->y - aigu;
-	data->vp->max_y = center->y + aigu;
+	data->vp->min_y = center->y - win_ratio;
+	data->vp->max_y = center->y + win_ratio;
 	data->vp->width = data->vp->max_x - data->vp->min_x;
 	data->vp->height = data->vp->max_y - data->vp->min_y;
 }
