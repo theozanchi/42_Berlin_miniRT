@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:27:45 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:26:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define KEY_ESC 65307
 
 # ifndef BACKGROUND_COLOUR
-#  define BACKGROUND_COLOUR 0x00FFFFFF
+#  define BACKGROUND_COLOUR 0x00000000
 # endif
 
 # ifndef WIDTH
@@ -237,7 +237,7 @@ int			handle_keypress(int keycode, t_data *data);
 //rendering
 void		render_scene(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
-t_colour	compute_colour(t_rgb rgb);
+t_colour	rgb_to_colour(t_rgb rgb);
 
 //hit_object.c
 t_point3	point_on_ray(t_ray *ray, double t);
@@ -249,7 +249,7 @@ t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted);
 
 //light.c
 double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
-void	add_ambient_light(t_rgb *rgb, t_data *data);
-void	add_light(t_rgb *rgb, double intensity);
+t_rgb	compute_colour(t_object *hitted_object, t_data *data);
+void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
 
 #endif
