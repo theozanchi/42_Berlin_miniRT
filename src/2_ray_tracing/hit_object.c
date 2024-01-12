@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 15:07:20 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:12:45 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,31 +83,22 @@ double	dot(t_vec3 v1, t_vec3 v2)
 	-1.0
  * if `plane` is not hit
  */
-double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted, t_o_c *cam)
+double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
 {
 	t_vec3	plane_to_ray_origin;
 	double	denominator;
 	double	t;
 
 	denominator = dot(*ray->direction, plane->vector);
-	if (fabs(denominator) > 1e-6)
+	if (denominator != 0)
 	{
-		plane_to_ray_origin.x = cam->pos.x - plane->pos.x;
-		plane_to_ray_origin.y = cam->pos.y - plane->pos.y;
-		plane_to_ray_origin.z = cam->pos.z - plane->pos.z;
-		t = -dot(plane_to_ray_origin, plane->vector) / denominator;
+		plane_to_ray_origin = vec_sub(*ray->origin, plane->pos);
+		t = -1 * dot(plane_to_ray_origin, plane->vector) / denominator;
 		**hitted = (t_object *)plane;
 		return (t);
 	}
 	return (-1.0);
 }
-// double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
-// {
-// 	double	points[3];
-
-// 	**hitted = (t_object *)plane;
-// 	return (1.0);
-// }
 
 /**
  * @brief Get the distance t from the origin of `ray` where `object` is hit,
@@ -119,7 +110,7 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted, t_o_c *cam)
  * is hit by `ray`
  * @return `t` (double) or -1.0 if `object` is not hit by `ray`
  */
-double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted, t_o_c *cam)
+double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted)
 {
 	double	t;
 
@@ -128,7 +119,7 @@ double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted, t_o_c *cam)
 	else if (object->id == CYLINDER)
 		t = hit_cylinder((t_o_cy *)object, ray, &temp_hitted);
 	else
-		t = hit_plane((t_o_pl *)object, ray, &temp_hitted, cam);
+		t = hit_plane((t_o_pl *)object, ray, &temp_hitted);
 	return (t);
 }
 
@@ -142,8 +133,7 @@ double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted, t_o_c *cam)
  * @return `t` (double), the distance from the ray origin where the object is
  * hit
  */
-double	hit_object(t_object *hittables, t_ray *ray, t_object **hitted,
-		t_data *data)
+double	hit_object(t_object *hittables, t_ray *ray, t_object **hitted)
 {
 	double		t;
 	double		temp_t;
@@ -153,7 +143,7 @@ double	hit_object(t_object *hittables, t_ray *ray, t_object **hitted,
 	temp_hitted = NULL;
 	while (hittables)
 	{
-		temp_t = get_t(hittables, ray, &temp_hitted, data->camera);
+		temp_t = get_t(hittables, ray, &temp_hitted);
 		if ((t < 0 && temp_t > 0) || (temp_t > 0 && temp_t < t))
 		{
 			t = temp_t;
