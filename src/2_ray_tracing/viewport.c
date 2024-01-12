@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/08 16:26:05 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:50:45 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
 	double	magnitude;
 	t_vec3	*center_vp;
 
-	center_vp = malloc(sizeof(center_vp));
+	center_vp = malloc(sizeof(t_vec3));
 	magnitude = sqrt(((data->camera->vector.x) * (data->camera->vector.x))
 			+ ((data->camera->vector.y) * (data->camera->vector.y))
 			+ ((data->camera->vector.z) * (data->camera->vector.z)));

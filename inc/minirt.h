@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:27:45 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 00:54:55 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,8 +240,9 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 t_colour	compute_colour(t_rgb rgb);
 
 //hit_object.c
+int			is_on_line(t_point3 center, t_vec3 vector, double len, t_point3 hit_point);
 t_point3	point_on_ray(t_ray *ray, double t);
-double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
+double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted, t_data *data);
 
 //normal_vector.c
 t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
