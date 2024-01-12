@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:27:29 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 00:55:07 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
  * 
  * @param ray t_ray
  * @param t double
- * @return t_point3 
+ * @return t_point3
  */
-
 t_point3	point_on_ray(t_ray *ray, double t)
 {
 	t_point3	point;
@@ -38,7 +37,6 @@ t_point3	point_on_ray(t_ray *ray, double t)
  * @param ray t_ray
  * @return t_colour (trgb stored under an int)
  */
-
 t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	double		t;
@@ -47,7 +45,7 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 	t_vec3		n;
 	t_rgb		rgb;
 
-	t = hit_object(data->first, ray, &hitted_object);
+	t = hit_object(data->first, ray, &hitted_object, data);
 	if (t > 0.0)
 	{
 		hitted_point = point_on_ray(ray, t);
@@ -67,7 +65,6 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
  * 
  * @return t_ray* 
  */
-
 t_ray	*init_ray(void)
 {
 	t_ray	*ray;
@@ -86,7 +83,6 @@ t_ray	*init_ray(void)
  * @param x Abscissa coordinate
  * @param y Ordinate coordinate
  */
-
 void	get_ray(t_ray *ray, t_data *data, int x, int y)
 {
 	{
@@ -105,7 +101,6 @@ void	get_ray(t_ray *ray, t_data *data, int x, int y)
  * 
  * @param data Main data structure
  */
-
 void	render_scene(t_data *data)
 {
 	int		x;
