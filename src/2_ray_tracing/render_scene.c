@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:27:29 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:19:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,11 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 	{
 		hitted_point = point_on_ray(ray, t);
 		n = normal_vec3(hitted_point, hitted_object);
-		rgb = hitted_object->rgb;
-		// add_ambient_light(&rgb, data);
-		add_light(&rgb, spotlight_intensity(n, hitted_point, data));
-		return (compute_colour(rgb));
+		rgb = compute_colour(hitted_object, data);
+		modify_intensity(&rgb, n, hitted_point, data);
+		return (rgb_to_colour(rgb));
 	}
-	ft_memset(&rgb, 0, sizeof(t_rgb));
-	add_ambient_light(&rgb, data);
-	return (compute_colour(rgb));
+	return (BACKGROUND_COLOUR);
 }
 
 /**
