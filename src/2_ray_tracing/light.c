@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 17:26:19 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:23:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
 	double	intensity;
 
 	ray = vec_normalize(vec_sub(data->light->pos, hitted_point));
-	intensity = dot_product(n, ray);
+	intensity = dot(n, ray);
 	if (intensity > 0)
 		return (intensity);
 	else

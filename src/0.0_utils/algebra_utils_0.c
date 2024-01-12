@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algebra_utils_0.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:09:48 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/11 18:54:36 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:17:01 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_vec3	vec_mul(t_vec3 A, t_vec3 B)
  * @param B t_vec3
  * @return double 
  */
-double	dot_product(t_vec3 A, t_vec3 B)
+double	dot(t_vec3 A, t_vec3 B)
 {
 	return (A.x * B.x + A.y * B.y + A.z * B.z);
 }
