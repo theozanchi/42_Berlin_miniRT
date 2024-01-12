@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 18:11:32 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:58:14 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,12 +245,12 @@ t_point3	point_on_ray(t_ray *ray, double t);
 double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
 
 //normal_vector.c
-t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
-t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted);
+// t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
+t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t);
 
 //light.c
-double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
-t_rgb	compute_colour(t_object *hitted_object, t_data *data);
-void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
+double		spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
+t_rgb		compute_colour(t_object *hitted_object, t_data *data);
+void		modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
 
 #endif

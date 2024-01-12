@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algebra_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:06:29 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:29:21 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:24:59 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,15 @@ t_vec3	vec3(double x, double y, double z)
 t_vec3	unit_vec3(double x, double y, double z)
 {
 	return (vec_normalize(vec3(x, y, z)));
+}
+
+/**
+ * @brief Returns the dot product square of a vector
+ * 
+ * @param v 
+ * @return double 
+ */
+double	dot2(t_vec3 v)
+{
+	return (dot(v, v));
 }

@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 18:12:45 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:26:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
 	double	discriminant;
 
 	oc = vec_sub(*ray->origin, sphere->pos);
-	a = dot_product(*ray->direction, *ray->direction);
-	half_b = dot_product(oc, *ray->direction);
-	c = dot_product(oc, oc) - sphere->diameter * sphere->diameter / 4;
+	a = dot2(*ray->direction);
+	half_b = dot(oc, *ray->direction);
+	c = dot2(oc) - sphere->diameter * sphere->diameter / 4;
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 	{
@@ -59,17 +59,29 @@ double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
  * @return `t` (double), the distance from the ray origin if `cylinder` is hit,
  * -1.0 if `cylinder` is not hit
  */
-double	hit_cylinder(t_o_cy *cylinder, t_ray *ray, t_object ***hitted)
+double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hitted)
 {
-	(void)cylinder;
-	(void)ray;
-	**hitted = (t_object *)cylinder;
-	return (1.0);
-}
+	t_vec3	oc;
+	double	a;
+	double	half_b;
+	double	c;
+	double	discriminant;
 
-double	dot(t_vec3 v1, t_vec3 v2)
-{
-	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+	oc = vec_sub(*ray->origin, cyl->pos);
+	a = dot2(*ray->direction) - square(dot(oc, cyl->vector));
+	half_b = dot(*ray->direction, oc) - dot(*ray->direction, cyl->vector) * dot(oc, cyl->vector);
+	c = dot2(oc) - square(dot(oc, cyl->vector)) - cyl->diameter * cyl->diameter / 4;
+	discriminant = half_b * half_b - a * c;
+	if (discriminant < 0)
+	{
+		**hitted = NULL;
+		return (-1.0);
+	}
+	else
+	{
+		**hitted = (t_object *)cyl;
+		return ((-half_b - sqrt(discriminant)) / a);
+	}
 }
 
 /**
@@ -85,19 +97,19 @@ double	dot(t_vec3 v1, t_vec3 v2)
  */
 double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
 {
-	t_vec3	plane_to_ray_origin;
+	t_vec3	oc;
+	double	numerator;
 	double	denominator;
-	double	t;
 
+	oc = vec_sub(*ray->origin, plane->pos);
 	denominator = dot(*ray->direction, plane->vector);
-	if (denominator != 0)
-	{
-		plane_to_ray_origin = vec_sub(*ray->origin, plane->pos);
-		t = -1 * dot(plane_to_ray_origin, plane->vector) / denominator;
-		**hitted = (t_object *)plane;
-		return (t);
-	}
-	return (-1.0);
+	if (denominator == 0)
+		return (-1.0);
+	numerator = -1 * dot(oc, plane->vector);
+	if (!same_sign_double(numerator, denominator))
+		return (-1.0);
+	**hitted = (t_object *)plane;
+	return (numerator / denominator);
 }
 
 /**
