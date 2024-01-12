@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 20:22:08 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/12 00:52:24 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
  * `hit_point - sph->pos`
  * 
  */
-
 t_vec3	sph_nor_vec3(t_point3 hit_point, t_o_sp *sph)
 {
 	return (unit_vec3(hit_point.x - sph->pos.x, hit_point.y - sph->pos.y,

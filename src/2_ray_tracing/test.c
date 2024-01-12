@@ -1,4 +1,13 @@
-// #include "../../inc/minirt.h"
+#include "../../inc/minirt.h"
+
+// int	main(void)
+// {
+// 	double	angle;
+
+// 	angle = acos((0 * 0 + 0 * 0 + 1 * 1) / sqrt((0 * 0) + (0 * 0) + (1 * 1)));
+// 	printf ("angle = %lf\n", angle);
+// 	return (0);
+// }
 
 // double	distance_between_two_points(t_point3 p1, t_point3 p2)
 // {
