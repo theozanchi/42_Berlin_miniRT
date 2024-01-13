@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:23:46 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 19:02:02 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:35:47 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 /**
  * @brief Renders a loading bar for 0 to 100%. Needs to be called before

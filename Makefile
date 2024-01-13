@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2023/12/18 21:50:48 by helauren         ###   ########.fr        #
+#    Updated: 2024/01/13 14:54:41 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,16 +39,36 @@ NC			=	\033[0m
 BOLD		=	\033[1m
 TICK		=	✓
 
-TEST_SRC	=	./src/ray_tracing/render_scene.c \
-				./src/ray_tracing/test_main.c \
-				./src/free/free.c \
-				./src/algebra_utils/matrix_calculation.c
+SRC			=	0.0_utils/algebra_utils_0.c \
+				0.0_utils/algebra_utils_1.c \
+				0.0_utils/debugging_utils.c \
+				0.0_utils/mlx_utils.c \
+				\
+				0.1_debugging_outputs/others.c \
+				0.1_debugging_outputs/output_parse.c \
+				\
+				0.2_error_msg/wrong_arg.c \
+				\
+				1_parsing/get_file_fd.c \
+				1_parsing/parse_environment.c \
+				1_parsing/parse_objects.c \
+				1_parsing/parse_scene.c \
+				\
+				2_ray_tracing/cyl_norm_vec.c \
+				2_ray_tracing/hit_object.c \
+				2_ray_tracing/light.c \
+				2_ray_tracing/normal_vector.c \
+				2_ray_tracing/render_scene.c \
+				2_ray_tracing/test.c \
+				2_ray_tracing/viewport.c \
+				\
+				3_free/free.c \
+				\
+				keypress.c \
+				main.c
 
-TEST_OBJS	=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${TEST_SRC:.c=.o}}
-
-SRCS		=	$(wildcard src/*.c) \
-				$(wildcard src/*/*.c)
-#SRC_NR		=	${words ${SRCS}}
+SRCS		=	$(addprefix ${SRCS_DIR}, ${SRC})		
+SRC_NR		=	${words ${SRCS}}
 
 OBJS		=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${SRCS:.c=.o}}
 
@@ -56,21 +76,6 @@ all:			project_logo ${OBJ_DIR}
 				@make -s ${LIBFT}
 				@make -s ${LIBMLX}
 				@make -s ${NAME}
-
-ttest:			${TEST_OBJS}
-				@${CC} ${CFLAGS} ${LDFLAGS} ${TEST_OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} -o ttest
-				@echo "${YELLOW}\nCompilation complete, test_theo executable at the root of the directory${NC}\n"
-
-tclean:
-				@if [ -d "${OBJ_DIR}" ]; \
-				then \
-					rm -r ${OBJ_DIR}; \
-				fi
-
-tfclean:		tclean
-				rm ttest
-
-tre:			tfclean ttest
 
 ${LIBFT}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBFT} | tr '[:lower:]' '[:upper:]')${NC}"
@@ -110,14 +115,13 @@ ${OBJ_DIR}/%.o:	${SRCS_DIR}%.c
 clean:
 				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
 				@make -sC ${LIBMLX_DIR} clean >/dev/null 2>&1
-#				@if [ ! -d "${OBJ_DIR}" ]; \
+				@if [ ! -d "${OBJ_DIR}" ]; \
 				then \
 					echo "Repo already clean"; \
 				else \
 					echo "Removing all .o files"; \
 					rm -r ${OBJ_DIR}; \
 				fi
-				@rm src/*.o src/*/*.o
 
 fclean:			clean
 				@make -sC ${LIBFT_DIR} fclean >/dev/null 2>&1
@@ -138,6 +142,6 @@ project_logo:
 				@echo "\n              Henri Lauren, Théo Zanchi"
 				
 entry_message:
-				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}Compiling necessary .o files${NC}"
+				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}Compiling necessary .o files out of $(SRC_NR) files${NC}"
 
 .PHONY:			all clean fclean re project_logo entry_message

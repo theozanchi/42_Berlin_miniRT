@@ -6,12 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:37:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:34:57 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-#include "../../inc/algebra.h"
+#include "minirt.h"
+#include "algebra.h"
 
 /**
  * @brief Returns the point located at distance t from ray origin

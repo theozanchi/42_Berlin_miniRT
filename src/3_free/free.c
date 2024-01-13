@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/12 18:06:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:37:24 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 /**
  * @brief Frees the list of objects

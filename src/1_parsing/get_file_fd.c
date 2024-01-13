@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:50:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/03 19:50:43 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:26 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 int	get_file_fd(char *s)
 {

@@ -6,31 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/05 14:10:54 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-
-// void	output_ray_vectors(t_data *data)
-// {
-// 	unsigned int	i;
-// 	unsigned int	y;
-
-// 	i = 0;
-// 	while (i < data->window.width)
-// 	{
-// 		y = 0;
-// 		while (y < data->window.height)
-// 		{
-// 			printf("ray[%d][%d][0] = %f\n", i, y, data->rays[i][y][0]);
-// 			printf("ray[%d][%d][1] = %f\n", i, y, data->rays[i][y][1]);
-// 			printf("ray[%d][%d][2] = %f\n", i, y, data->rays[i][y][2]);
-// 			y++;
-// 		}
-// 		i++;
-// 	}
-// }
+#include "minirt.h"
 
 void	output_viewport(double ***arr)
 {
