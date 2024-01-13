@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/13 15:29:54 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:49:05 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,6 @@ void		free_objects(t_data *data);
 // debugging
 void		output_parse(t_data *data);
 void		render_loading_bar(void);
-void		output_ray_vectors(t_data *data);
 void		output_viewport(double ***arr);
 
 // error message
@@ -228,7 +227,6 @@ t_object	*parse_objects(char **red);
 int			parse_scene(t_data *data, int fd);
 
 // RT
-void		ray_after_ray(t_data *data);
 void		viewport(t_data *data);
 
 //keypress
@@ -240,9 +238,8 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 t_colour	rgb_to_colour(t_rgb rgb);
 
 //hit_object.c
-int			is_on_line(t_point3 center, t_vec3 vector, double len, t_point3 hit_point);
 t_point3	point_on_ray(t_ray *ray, double t);
-double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
+double		hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
 
 //normal_vector.c
 // t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);

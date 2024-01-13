@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/13 15:37:07 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:51:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ t_vec3	normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t)
 	if (hitted->id == SPHERE)
 		return (sph_nor_vec3(hit_point, (t_o_sp *)hitted));
 	else if (hitted->id == CYLINDER)
-	{
-		// return (cyl_nor_vec3(hit_point, (t_o_cy *)hitted));
 		return (cyl_nor_vec3(hit_point, (t_o_cy *)hitted, ray, t));
-	}
 	else if (hitted->id == PLANE)
 		return (pla_nor_vec3((t_o_pl *)hitted, ray));
 	else

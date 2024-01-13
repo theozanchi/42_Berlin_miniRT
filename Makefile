@@ -6,14 +6,14 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/13 14:54:41 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/13 15:45:51 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 # -fsanitize=address
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror -g -O3
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a
@@ -59,7 +59,6 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/light.c \
 				2_ray_tracing/normal_vector.c \
 				2_ray_tracing/render_scene.c \
-				2_ray_tracing/test.c \
 				2_ray_tracing/viewport.c \
 				\
 				3_free/free.c \
