@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/10 17:41:42 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:37:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "minirt.h"
 
 // error testing later
 // if camera position is inside and object
@@ -41,10 +41,7 @@ int	main(int ac, char **av)
 		printf("Could not parse, check the content of the .rt file\n");
 		return (EXIT_FAILURE);
 	}
-	// output_parse(data);
 	viewport(data);
-	// output_viewport(data->vp->points);
-	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);

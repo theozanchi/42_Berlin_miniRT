@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:22:52 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 16:11:33 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:35:52 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 /**
  * @brief Outputs a pixel to an mlx image

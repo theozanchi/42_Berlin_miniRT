@@ -6,12 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:23:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:59 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-#include "../../inc/algebra.h"
+#include "minirt.h"
+#include "algebra.h"
 
 t_rgb	compute_colour(t_object *hitted_object, t_data *data)
 {

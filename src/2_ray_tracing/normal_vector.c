@@ -6,12 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:58:05 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:37:07 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-#include "../../inc/algebra.h"
+#include "minirt.h"
+#include "algebra.h"
 
 /**
  * @brief Calculate a normal vector from origin `hit_point` and with direction

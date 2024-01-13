@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 19:56:56 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:21 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 int	wrong_arg(int fd)
 {

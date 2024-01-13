@@ -6,12 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:56:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/12 19:58:36 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:47 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/algebra.h"
-#include "../../inc/minirt.h"
+#include "algebra.h"
+#include "minirt.h"
 
 // double	distance_between_two_points(t_point3 p1, t_point3 p2)
 // {

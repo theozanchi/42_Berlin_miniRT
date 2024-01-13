@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/11 20:50:45 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:35:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-#include "../../inc/algebra.h"
+#include "minirt.h"
+#include "algebra.h"
 
 void	viewport_trigo(t_data *data)
 {
@@ -41,12 +41,6 @@ t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
 	center_vp->x = start_pos.x + data->camera->vector.x / magnitude;
 	center_vp->y = start_pos.y + data->camera->vector.y / magnitude;
 	center_vp->z = start_pos.z + data->camera->vector.z / magnitude;
-	printf("center x = %f, start pos x = %f, cam vector x = %f, magnitude = %f\
-		\n", center_vp->x, start_pos.x, data->camera->vector.x, magnitude);
-	printf("center y = %f, start pos y = %f, cam vector y = %f, magnitude = %f\
-		\n", center_vp->y, start_pos.y, data->camera->vector.y, magnitude);
-	printf("center z = %f, start pos z = %f, cam vector z = %f, magnitude = %f\
-		\n", center_vp->z, start_pos.z, data->camera->vector.z, magnitude);
 	return (center_vp);
 }
 
@@ -57,11 +51,8 @@ double	longueur_hypothenuse(t_data *data)
 	double	degrees;
 
 	degrees = (double)(data->camera->fov / 2.0);
-	// printf("FOV = %f, degrees = %f\n", (double)data->camera->FOV, degrees);
 	rad = degrees * (M_PI / 180.0);
-	// printf("rad = %f\n", rad);
 	hypothenuse = 1.0 / cos(rad);
-	// printf("hypothenuse = %f\n", hypothenuse);
 	return (hypothenuse);
 }
 
@@ -82,7 +73,6 @@ void	viewport_width(t_data *data, t_vec3 *center)
 	hypothenuse = longueur_hypothenuse(data);
 	aigu = longueur_aigu(hypothenuse);
 	win_ratio = (((double)HEIGTH / (double)WIDTH) * aigu);
-	printf("hypothenuse = %f, aigu = %f\n", hypothenuse, aigu);
 	data->vp->min_x = center->x - aigu;
 	data->vp->max_x = center->x + aigu;
 	data->vp->min_y = center->y - win_ratio;
@@ -108,13 +98,9 @@ double	***parse_dem_points(t_data *data)
 	double			pos_x;
 	double			pos_y;
 
-	printf("min x = %f\n", data->vp->min_x);
-	printf("min y = %f\n", data->vp->min_y);
 	ret = malloc(sizeof(double **) * WIDTH);
 	pos_x_incr = ((double)data->vp->width) / ((double)WIDTH - 1.0);
 	pos_y_incr = ((double)data->vp->height) / ((double)HEIGTH - 1.0);
-	printf("pos x incr = %f\n", pos_x_incr);
-	printf("pos y incr = %f\n", pos_y_incr);
 	x = 0;
 	pos_x = 0;
 	while(x < WIDTH)
@@ -147,57 +133,5 @@ void	viewport(t_data *data)
 	viewport_trigo(data);
 	viewport_width(data, center);
 	data->vp->points = parse_dem_points(data);
-	printf("min x = %f, max x = %f\n", data->vp->min_x, data->vp->max_x);
-	printf("min y = %f, max y = %f\n", data->vp->min_y, data->vp->max_y);
 	free(center);
-	// output_viewport(data->vp->points);
 }
-
-// void	viewport_left(t_data *data, t_vec3 *P)
-// {
-// 	// double	CE;
-// 	// double	PE;
-// 	double	rad;
-// 	t_vec3	vec_pc;
-// 	t_vec3	unit_vector_pc;
-// 	double	magnitude_pc;
-// 	// t_vec3	vec_pe;
-
-// 	// CE = 1 * sin(rad); // length of CE
-// 	// PE = sqrt(1 + (CE * CE) - (2 * (CE) * cos(180 - 90 - data->camera->FOV / 2))); // length of PE
-// 	vec_pc.x = -data->camera->vector.x;
-// 	vec_pc.y = -data->camera->vector.y;
-// 	vec_pc.z = -data->camera->vector.z;
-// 	rad = 55 * ((double)M_PI * 180);
-// 	magnitude_pc = sqrt(((data->camera->pos.x - P->x) * (data->camera->pos.x - P->x)) +
-// 		((data->camera->pos.y - P->y) * (data->camera->pos.y - P->y)) +
-// 		((data->camera->pos.z - P->z) * (data->camera->pos.z - P->z)));
-// 	unit_vector_pc.x = (data->camera->pos.x - P->x) / magnitude_pc;
-// 	unit_vector_pc.y = (data->camera->pos.x - P->x) / magnitude_pc;
-// 	unit_vector_pc.z = (data->camera->pos.x - P->x) / magnitude_pc;
-// }
-
-// void	ray_after_ray(t_data *data)
-// {
-// 	unsigned int	x;
-// 	unsigned int	y;
-// 	double			rayon;
-// 	double			z;
-
-// 	z = data->camera->vector.z;
-// 	rayon = (double)data->camera->FOV / 2;
-// 	x = 0;
-// 	while (x < data->window.width)
-// 	{
-// 		y = 0;
-// 		while (y < data->window.height)
-// 		{
-// 			data->rays[x][y][0] = (double)x - (double)data->window.width / 2;
-// 			data->rays[x][y][1] = (double)y - (double)data->window.height / 2;
-// 			data->rays[x][y][2] = (double)z;
-// 			y++;
-// 		}
-// 		x++;
-// 	}
-// 	output_ray_vectors(data);
-// }

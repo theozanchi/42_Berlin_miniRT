@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:09:48 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:17:01 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:35:32 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/algebra.h"
+#include "algebra.h"
 
 /**
  * @brief Vector addition (A + B)

@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:19:45 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/03 19:56:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:36:07 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 
 void	output_a(t_o_a *ambient)
 {
