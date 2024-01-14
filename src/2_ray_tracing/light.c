@@ -6,12 +6,37 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 19:38:48 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/12 19:23:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
+
+t_rgb	compute_colour(t_object *hitted_object, t_data *data)
+{
+	t_rgb	rgb;
+	int		temp_r;
+	int		temp_g;
+	int		temp_b;
+
+	temp_r = hitted_object->rgb.r * data->ambient_lighting->rgb.r / 255;
+	temp_g = hitted_object->rgb.g * data->ambient_lighting->rgb.g / 255;
+	temp_b = hitted_object->rgb.b * data->ambient_lighting->rgb.b / 255;
+	if (temp_r <= 255)
+		rgb.r = temp_r;
+	else
+		rgb.r = 255;
+	if (temp_g <= 255)
+		rgb.g = temp_g;
+	else
+		rgb.g = 255;
+	if (temp_b <= 255)
+		rgb.b = temp_b;
+	else
+		rgb.b = 255;
+	return (rgb);
+}
 
 double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
 {
@@ -19,40 +44,31 @@ double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
 	double	intensity;
 
 	ray = vec_normalize(vec_sub(data->light->pos, hitted_point));
-	intensity = dot_product(n, ray);
+	intensity = dot(n, ray);
 	if (intensity > 0)
 		return (intensity);
 	else
 		return (0.0);
 }
 
-void	add_ambient_light(t_rgb *rgb, t_data *data)
+double	get_local_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
 {
-	int	temp_r;
-	int	temp_g;
-	int	temp_b;
+	double	intensity;
 
-	temp_r = rgb->r + data->ambient_lighting->ratio * data->ambient_lighting->rgb.r;
-	temp_g = rgb->g + data->ambient_lighting->ratio * data->ambient_lighting->rgb.g;
-	temp_b = rgb->b + data->ambient_lighting->ratio * data->ambient_lighting->rgb.b;
-	if (temp_r <= 255)
-		rgb->r = temp_r;
+	intensity = data->ambient_lighting->ratio;
+	intensity += spotlight_intensity(n, hitted_point, data);
+	if (intensity > 1.0)
+		return (1.0);
 	else
-		rgb->r = 255;
-	if (temp_g <= 255)
-		rgb->g = temp_r;
-	else
-		rgb->g = 255;
-	if (temp_b <= 255)
-		rgb->b = temp_r;
-	else
-		rgb->b = 255;
+		return (intensity);
 }
 
-void	add_light(t_rgb *rgb, double intensity)
+void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data)
 {
+	double	intensity;
+
+	intensity = get_local_intensity(n, hitted_point, data);
 	rgb->r *= intensity;
 	rgb->g *= intensity;
 	rgb->b *= intensity;
 }
-
