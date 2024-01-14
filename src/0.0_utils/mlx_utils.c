@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:22:52 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/08 19:03:51 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:11:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
  * @param rgb custom format
  * @return t_colour (int)
  */
-t_colour	compute_colour(t_rgb rgb)
+t_colour	rgb_to_colour(t_rgb rgb)
 {
 	return (*(int *)(unsigned char [4]){rgb.b, rgb.g, rgb.r, 255});
 }

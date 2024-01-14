@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 15:32:33 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:00:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define KEY_ESC 65307
 
 # ifndef BACKGROUND_COLOUR
-#  define BACKGROUND_COLOUR 0x00FFFFFF
+#  define BACKGROUND_COLOUR 0x00000000
 # endif
 
 # ifndef WIDTH
@@ -237,20 +237,20 @@ int			handle_keypress(int keycode, t_data *data);
 //rendering
 void		render_scene(t_data *data);
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
-t_colour	compute_colour(t_rgb rgb);
+t_colour	rgb_to_colour(t_rgb rgb);
 
 //hit_object.c
 int			is_on_line(t_point3 center, t_vec3 vector, double len, t_point3 hit_point);
 t_point3	point_on_ray(t_ray *ray, double t);
-double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted, t_data *data);
+double		hit_object(t_object *hittables, t_ray *ray, t_object **hitted);
 
 //normal_vector.c
-t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
-t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted);
+// t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
+t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t);
 
 //light.c
-double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
-void	add_ambient_light(t_rgb *rgb, t_data *data);
-void	add_light(t_rgb *rgb, double intensity);
+double		spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
+t_rgb		compute_colour(t_object *hitted_object, t_data *data);
+void		modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
 
 #endif
