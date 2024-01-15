@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 17:23:22 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:35:10 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 		intensity = dot(n, *shadow_ray->direction);
 	free_and_set_to_null(1, shadow_ray);
 	return (intensity);
+	// return (intensity > 0.0 ? intensity : 0.0);
 }
 
 double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
