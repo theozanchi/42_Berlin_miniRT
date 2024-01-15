@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/13 15:51:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 15:51:20 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_vec3	cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl, t_ray *ray, double t)
 
 t_vec3	pla_nor_vec3(t_o_pl *pla, t_ray *ray)
 {
-	if (dot(*ray->direction, pla->vector) < 0)
-		return (vec_mul_scalar(pla->vector, -1.0));
+	if (dot(*ray->direction, pla->vector) > 0)
+		return (vec_normalize(vec_mul_scalar(pla->vector, -1.0)));
 	else
-		return (pla->vector);
+		return (vec_normalize(pla->vector));
 }
 
 /**

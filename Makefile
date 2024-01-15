@@ -6,14 +6,14 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/13 15:45:51 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/15 12:02:06 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 # -fsanitize=address
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -O3
+CFLAGS		=	-Wall -Wextra -Werror -g
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a

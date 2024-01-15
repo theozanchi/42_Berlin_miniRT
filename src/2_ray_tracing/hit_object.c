@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/13 15:50:42 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 17:01:36 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hit_obj)
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 	{
-		**hit_obj = NULL;
+		if (hit_obj)
+			**hit_obj = NULL;
 		return (-1.0);
 	}
 	else
 	{
-		**hit_obj = (t_object *)sphere;
+		if (hit_obj)
+			**hit_obj = (t_object *)sphere;
 		return ((-half_b - sqrt(discriminant)) / a);
 	}
 }
@@ -74,12 +76,14 @@ double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 	{
-		**hit_obj = NULL;
+		if (hit_obj)
+			**hit_obj = NULL;
 		return (-1.0);
 	}
 	else
 	{
-		**hit_obj = (t_object *)cyl;
+		if (hit_obj)
+			**hit_obj = (t_object *)cyl;
 		return ((-half_b - sqrt(discriminant)) / a);
 	}
 }
@@ -108,7 +112,8 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj)
 	numerator = -1 * dot(oc, plane->vector);
 	if (!same_sign_double(numerator, denominator))
 		return (-1.0);
-	**hit_obj = (t_object *)plane;
+	if (hit_obj)
+		**hit_obj = (t_object *)plane;
 	return (numerator / denominator);
 }
 
@@ -118,8 +123,8 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj)
  *
  * @param object Pointer to the object
  * @param ray Pointer to the object
- * @param temp_hit_obj Pointer to update with the address of `object` if `object`
- * is hit by `ray`
+ * @param temp_hit_obj Pointer to update with the address of `object` if
+ * `object` is hit by `ray`
  * @return `t` (double) or -1.0 if `object` is not hit by `ray`
  */
 double	get_t(t_object *object, t_ray *ray, t_object **temp_hit_obj)
@@ -159,7 +164,8 @@ double	hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj)
 		if ((t < 0 && temp_t > 0) || (temp_t > 0 && temp_t < t))
 		{
 			t = temp_t;
-			*hit_obj = temp_hit_obj;
+			if (hit_obj)
+				*hit_obj = temp_hit_obj;
 		}
 		hittables = hittables->next;
 	}
