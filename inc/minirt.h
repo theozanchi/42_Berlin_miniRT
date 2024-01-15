@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 16:51:24 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 18:07:01 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # endif
 
 # ifndef WIDTH
-#  define WIDTH 1080
+#  define WIDTH 800
 # endif
 
 # ifndef HEIGTH
-#  define HEIGTH 720
+#  define HEIGTH 600
 # endif
 
 # ifndef EPSILON
