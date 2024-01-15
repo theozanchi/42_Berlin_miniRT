@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 16:30:01 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 16:51:24 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@
 
 # ifndef HEIGTH
 #  define HEIGTH 720
+# endif
+
+# ifndef EPSILON
+#  define EPSILON 1e-6
 # endif
 
 # define LOADING_HEADER "         0%              25%              50%         \

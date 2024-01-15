@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 15:44:51 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 16:57:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,24 @@ t_rgb	compute_colour(t_object *hitted_object, t_data *data)
 
 double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 {
-	t_ray	*ray;
-	t_vec3	direction;
-	double	intensity;
+	t_ray		*shadow_ray;
+	t_point3	origin;
+	t_vec3		direction;
+	double		intensity;
 
-	ray = malloc(sizeof(t_ray));
-	ft_memset(ray, 0, sizeof(t_ray));
-	ray->origin = &hit_point;
+	shadow_ray = malloc(sizeof(t_ray));
+	ft_memset(shadow_ray, 0, sizeof(t_ray));
+	origin = vec_add(hit_point, vec_mul_scalar(n, EPSILON));
+	shadow_ray->origin = &origin;
 	direction = vec_normalize(vec_sub(data->light->pos, hit_point));
-	ray->direction = &direction;
-	// if (hit_object(data->first, ray, NULL) > 0.0)
+	shadow_ray->direction = &direction;
+	// if (hit_object(data->first, shadow_ray, NULL) > 0.0)
 	// {
-	// 	free_and_set_to_null(1, ray);
+	// 	free_and_set_to_null(1, shadow_ray);
 	// 	return (0.0);
 	// }
-	intensity = dot(n, *ray->direction);
-	free_and_set_to_null(1, ray);
+	intensity = dot(n, *shadow_ray->direction);
+	free_and_set_to_null(1, shadow_ray);
 	if (intensity > 0)
 		return (intensity);
 	else
