@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/13 15:37:39 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 19:04:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_data	*init_data(void)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	ft_memset(data, 0, sizeof(t_data));
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "miniRT");
 	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
@@ -41,7 +42,7 @@ int	main(int ac, char **av)
 		printf("Could not parse, check the content of the .rt file\n");
 		return (EXIT_FAILURE);
 	}
-	viewport(data);
+	// viewport(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
