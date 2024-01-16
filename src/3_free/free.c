@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/12 18:06:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/14 18:24:02 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	free_resources_and_quit(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	free_objects(data);
-	// free_triple_double(data->vp->points, (int)WIDTH, (int)HEIGTH);
+	free_triple_double(data->vp->points, (int)WIDTH, (int)HEIGTH);
 	free(data->vp);
 	free_and_set_to_null(4, data->ambient_lighting, data->camera,
 		data->light, data);
