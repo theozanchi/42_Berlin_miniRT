@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 12:49:47 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:45:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,11 @@ void	render_scene(t_data *data)
 			// get_ray(ray, data, x, y);
 			ray = create_ray(data, x, y);
 			colour = ray_colour(data, ray);
+			free_and_set_to_null(2, ray->direction, ray);
 			my_mlx_pixel_put(&data->img, x, y, colour);
 			y++;
 		}
 		x++;
 	}
-	// free_and_set_to_null(3, ray->direction, ray->origin, ray);
 	// free_and_set_to_null(2, ray->direction, ray);
 }
