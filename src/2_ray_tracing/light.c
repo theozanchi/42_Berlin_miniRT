@@ -6,12 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:23:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/15 15:44:51 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
-#include "../../inc/algebra.h"
+#include "minirt.h"
+#include "algebra.h"
 
 t_rgb	compute_colour(t_object *hitted_object, t_data *data)
 {
@@ -38,36 +38,47 @@ t_rgb	compute_colour(t_object *hitted_object, t_data *data)
 	return (rgb);
 }
 
-double	spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
+double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 {
-	t_vec3	ray;
+	t_ray	*ray;
+	t_vec3	direction;
 	double	intensity;
 
-	ray = vec_normalize(vec_sub(data->light->pos, hitted_point));
-	intensity = dot(n, ray);
+	ray = malloc(sizeof(t_ray));
+	ft_memset(ray, 0, sizeof(t_ray));
+	ray->origin = &hit_point;
+	direction = vec_normalize(vec_sub(data->light->pos, hit_point));
+	ray->direction = &direction;
+	// if (hit_object(data->first, ray, NULL) > 0.0)
+	// {
+	// 	free_and_set_to_null(1, ray);
+	// 	return (0.0);
+	// }
+	intensity = dot(n, *ray->direction);
+	free_and_set_to_null(1, ray);
 	if (intensity > 0)
 		return (intensity);
 	else
 		return (0.0);
 }
 
-double	get_local_intensity(t_vec3 n, t_point3 hitted_point, t_data *data)
+double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 {
 	double	intensity;
 
 	intensity = data->ambient_lighting->ratio;
-	intensity += spotlight_intensity(n, hitted_point, data);
+	intensity += spotlight_intensity(n, hit_point, data);
 	if (intensity > 1.0)
 		return (1.0);
 	else
 		return (intensity);
 }
 
-void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data)
+void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)
 {
 	double	intensity;
 
-	intensity = get_local_intensity(n, hitted_point, data);
+	intensity = get_local_intensity(n, hit_point, data);
 	rgb->r *= intensity;
 	rgb->g *= intensity;
 	rgb->b *= intensity;

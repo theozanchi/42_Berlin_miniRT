@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 20:52:25 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:56:48 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,8 +244,7 @@ int					is_between_one(double num);
 int					move_up_three(char *red, int i);
 
 // RT
-void				ray_after_ray(t_data *data);
-void				viewport(t_data *data);
+void		viewport(t_data *data);
 
 // keypress
 int					handle_keypress(int keycode, t_data *data);
