@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 18:05:53 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:52:53 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 
 	shadow_ray = malloc(sizeof(t_ray));
 	ft_memset(shadow_ray, 0, sizeof(t_ray));
-	origin = vec_add(hit_point, vec_mul_scalar(n, EPSILON));
+	origin = vec_add(hit_point, mul_scalar(n, EPSILON));
 	shadow_ray->origin = &origin;
-	direction = vec_normalize(vec_sub(data->light->pos, hit_point));
+	direction = normalize(vec_sub(data->light->pos, hit_point));
 	shadow_ray->direction = &direction;
 	if (hit_object(data->first, shadow_ray, NULL) > 0.0)
 		intensity = 0.0;

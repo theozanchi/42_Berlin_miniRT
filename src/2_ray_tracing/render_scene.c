@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 16:49:59 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:49:47 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	get_ray(t_ray *ray, t_data *data, int x, int y)
 	}
 }
 
+t_ray	*create_ray(t_data *data, int x, int y);
+
 /**
  * @brief Renders the main scene by processing ray per ray, using the array
  * located at data->vp->points
@@ -107,7 +109,7 @@ void	render_scene(t_data *data)
 
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
-	ray = init_ray();
+	// ray = init_ray();
 	x = 0;
 	while (x < WIDTH)
 	{
@@ -115,12 +117,14 @@ void	render_scene(t_data *data)
 		while (y < HEIGTH)
 		{
 			render_loading_bar();
-			get_ray(ray, data, x, y);
+			// get_ray(ray, data, x, y);
+			ray = create_ray(data, x, y);
 			colour = ray_colour(data, ray);
 			my_mlx_pixel_put(&data->img, x, y, colour);
 			y++;
 		}
 		x++;
 	}
-	free_and_set_to_null(3, ray->direction, ray->origin, ray);
+	// free_and_set_to_null(3, ray->direction, ray->origin, ray);
+	// free_and_set_to_null(2, ray->direction, ray);
 }
