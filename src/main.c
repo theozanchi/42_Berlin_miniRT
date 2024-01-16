@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 20:06:12 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:00:13 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minirt.h"
+#include "minirt.h"
 
 // error testing later
 // if camera position is inside and object
@@ -46,7 +46,6 @@ int	main(int ac, char **av)
 		// free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
-	// output_parse(data);
 	viewport(data);
 	// output_viewport(data->vp->points);
 	render_scene(data);

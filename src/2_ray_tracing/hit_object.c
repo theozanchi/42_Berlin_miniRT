@@ -6,25 +6,25 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/14 16:08:44 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:57:52 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/algebra.h"
-#include "../../inc/minirt.h"
+#include "algebra.h"
+#include "minirt.h"
 
 /**
- * @brief Checks if `ray` hits the `sphere`. If it is, `hitted` is updated with
+ * @brief Checks if `ray` hits the `sphere`. If it is, `hit_obj` is updated with
  * the address of `sphere`
  *
  * @param sphere Pointer to the object
  * @param ray Pointer to the object
- * @param hitted Pointer to update
+ * @param hit_obj Pointer to update
  * @return `t` (double), the distance from the ray origin if `sphere` is hit,
 	-1.0
  * if `sphere` is not hit
  */
-double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
+double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hit_obj)
 {
 	t_vec3	oc;
 	double	a;
@@ -39,27 +39,29 @@ double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hitted)
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 	{
-		**hitted = NULL;
+		if (hit_obj)
+			**hit_obj = NULL;
 		return (-1.0);
 	}
 	else
 	{
-		**hitted = (t_object *)sphere;
+		if (hit_obj)
+			**hit_obj = (t_object *)sphere;
 		return ((-half_b - sqrt(discriminant)) / a);
 	}
 }
 
 /**
- * @brief Checks if `ray` hits the `cylinder`. If it is, `hitted` is updated
+ * @brief Checks if `ray` hits the `cylinder`. If it is, `hit_obj` is updated
  * with the address of `cylinder`
  *
  * @param cylinder Pointer to the object
  * @param ray Pointer to the object
- * @param hitted Pointer to update
+ * @param hit_obj Pointer to update
  * @return `t` (double), the distance from the ray origin if `cylinder` is hit,
  * -1.0 if `cylinder` is not hit
  */
-double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hitted)
+double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
 {
 	t_vec3	oc;
 	double	a;
@@ -74,28 +76,30 @@ double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hitted)
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
 	{
-		**hitted = NULL;
+		if (hit_obj)
+			**hit_obj = NULL;
 		return (-1.0);
 	}
 	else
 	{
-		**hitted = (t_object *)cyl;
+		if (hit_obj)
+			**hit_obj = (t_object *)cyl;
 		return ((-half_b - sqrt(discriminant)) / a);
 	}
 }
 
 /**
- * @brief Checks if `ray` hits the `plane`. If it is, `hitted` is updated with
+ * @brief Checks if `ray` hits the `plane`. If it is, `hit_obj` is updated with
  * the address of `plane`
  *
  * @param plane Pointer to the object
  * @param ray Pointer to the object
- * @param hitted Pointer to update
+ * @param hit_obj Pointer to update
  * @return `t` (double), the distance from the ray origin if `plane` is hit,
 	-1.0
  * if `plane` is not hit
  */
-double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
+double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj)
 {
 	t_vec3	oc;
 	double	numerator;
@@ -108,7 +112,8 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
 	numerator = -1 * dot(oc, plane->vector);
 	if (!same_sign_double(numerator, denominator))
 		return (-1.0);
-	**hitted = (t_object *)plane;
+	if (hit_obj)
+		**hit_obj = (t_object *)plane;
 	return (numerator / denominator);
 }
 
@@ -118,48 +123,49 @@ double	hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hitted)
  *
  * @param object Pointer to the object
  * @param ray Pointer to the object
- * @param temp_hitted Pointer to update with the address of `object` if `object`
- * is hit by `ray`
+ * @param temp_hit_obj Pointer to update with the address of `object` if
+ * `object` is hit by `ray`
  * @return `t` (double) or -1.0 if `object` is not hit by `ray`
  */
-double	get_t(t_object *object, t_ray *ray, t_object **temp_hitted)
+double	get_t(t_object *object, t_ray *ray, t_object **temp_hit_obj)
 {
 	double	t;
 
 	if (object->id == SPHERE)
-		t = hit_sphere((t_o_sp *)object, ray, &temp_hitted);
+		t = hit_sphere((t_o_sp *)object, ray, &temp_hit_obj);
 	else if (object->id == CYLINDER)
-		t = hit_cylinder((t_o_cy *)object, ray, &temp_hitted);
+		t = hit_cylinder((t_o_cy *)object, ray, &temp_hit_obj);
 	else
-		t = hit_plane((t_o_pl *)object, ray, &temp_hitted);
+		t = hit_plane((t_o_pl *)object, ray, &temp_hit_obj);
 	return (t);
 }
 
 /**
- * @brief Updates the pointer `hitted` with the closest obejct from
- * `ray->origin` hitted by the ray and returns the distance from origin
+ * @brief Updates the pointer `hit_obj` with the closest obejct from
+ * `ray->origin` hit by the ray and returns the distance from origin
  *
  * @param hittables List of all objects of the scene
  * @param ray Pointer to the current ray
- * @param hitted Pointer to update with the address of the closest hitted object
+ * @param hit_obj Pointer to update with the address of the closest hit object
  * @return `t` (double), the distance from the ray origin where the object is
  * hit
  */
-double	hit_object(t_object *hittables, t_ray *ray, t_object **hitted)
+double	hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj)
 {
 	double		t;
 	double		temp_t;
-	t_object	*temp_hitted;
+	t_object	*temp_hit_obj;
 
 	t = -1.0;
-	temp_hitted = NULL;
+	temp_hit_obj = NULL;
 	while (hittables)
 	{
-		temp_t = get_t(hittables, ray, &temp_hitted);
+		temp_t = get_t(hittables, ray, &temp_hit_obj);
 		if ((t < 0 && temp_t > 0) || (temp_t > 0 && temp_t < t))
 		{
 			t = temp_t;
-			*hitted = temp_hitted;
+			if (hit_obj)
+				*hit_obj = temp_hit_obj;
 		}
 		hittables = hittables->next;
 	}

@@ -6,11 +6,11 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:06:29 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/12 19:24:59 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/13 15:35:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/algebra.h"
+#include "algebra.h"
 
 /**
  * @brief Normalizes a vector
