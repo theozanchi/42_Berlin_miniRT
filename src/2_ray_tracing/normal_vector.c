@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 13:08:25 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 17:20:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 11:10:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  */
 t_vec3	sph_nor_vec3(t_point3 hit_point, t_o_sp *sph)
 {
-	return (vec_normalize(vec_sub(hit_point, sph->pos)));
+	return (normalize(vec_sub(hit_point, sph->pos)));
 }
 
 t_vec3	cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl, t_ray *ray, double t)
@@ -30,19 +30,19 @@ t_vec3	cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl, t_ray *ray, double t)
 	t_vec3	n;
 
 	oc = vec_sub(*ray->origin, cyl->pos);
-	m = dot(*ray->direction, vec_mul_scalar(cyl->vector, t))
+	m = dot(*ray->direction, mul_scalar(cyl->vector, t))
 		+ dot(oc, *ray->direction);
 	n = vec_sub(hit_point, cyl->pos);
-	n = vec_sub(n, vec_mul_scalar(cyl->vector, m));
-	return (vec_normalize(n));
+	n = vec_sub(n, mul_scalar(cyl->vector, m));
+	return (normalize(n));
 }
 
 t_vec3	pla_nor_vec3(t_o_pl *pla, t_ray *ray)
 {
 	if (dot(*ray->direction, pla->vector) > 0)
-		return (vec_normalize(vec_mul_scalar(pla->vector, -1.0)));
+		return (normalize(mul_scalar(pla->vector, -1.0)));
 	else
-		return (vec_normalize(pla->vector));
+		return (normalize(pla->vector));
 }
 
 /**
@@ -59,5 +59,5 @@ t_vec3	normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t)
 	else if (hitted->id == PLANE)
 		return (pla_nor_vec3((t_o_pl *)hitted, ray));
 	else
-		return (unit_vec3(-1.0, -1.0, -1.0));
+		return (unit_vec(-1.0, -1.0, -1.0));
 }

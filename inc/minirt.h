@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 18:07:01 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:24:41 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # endif
 
 # ifndef WIDTH
-#  define WIDTH 800
+#  define WIDTH 1080
 # endif
 
 # ifndef HEIGTH
-#  define HEIGTH 600
+#  define HEIGTH 720
 # endif
 
 # ifndef EPSILON
@@ -86,6 +86,13 @@ typedef struct s_vec3
 }	t_vec3;
 
 typedef t_vec3	t_point3;
+
+typedef struct s_mtx33
+{
+	t_vec3	c0;
+	t_vec3	c1;
+	t_vec3	c2;
+}	t_mtx33;
 
 typedef struct s_rgb
 {
