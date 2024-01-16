@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/10 17:41:42 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:06:12 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ t_data	*init_data(void)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "miniRT");
 	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
+	data->ambient_lighting = NULL;
+	data->camera = NULL;
+	data->light = NULL;
+	data->first = NULL;
 	return (data);
 }
 
@@ -39,15 +43,16 @@ int	main(int ac, char **av)
 	if (parse_scene(data, fd))
 	{
 		printf("Could not parse, check the content of the .rt file\n");
+		// free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
 	// output_parse(data);
 	viewport(data);
 	// output_viewport(data->vp->points);
-	// ray_after_ray(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
 	mlx_loop(data->mlx_ptr);
+	return (0);
 }
