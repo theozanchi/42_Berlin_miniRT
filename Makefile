@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/15 12:02:06 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/16 22:20:59 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,13 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				0.2_error_msg/wrong_arg.c \
 				\
 				1_parsing/get_file_fd.c \
+				1_parsing/parse_env2.c \
 				1_parsing/parse_environment.c \
 				1_parsing/parse_objects.c \
 				1_parsing/parse_scene.c \
+				1_parsing/right_amount.c \
+				1_parsing/right_amount_utils2.c \
+				1_parsing/right_amount_utils.c \
 				\
 				2_ray_tracing/cyl_norm_vec.c \
 				2_ray_tracing/hit_object.c \
