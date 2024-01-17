@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   others.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/13 15:36:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 21:55:46 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	output_viewport(double ***arr)
 	while (x < WIDTH)
 	{
 		y = 0;
-		while (y < WIDTH)
+		while (y < HEIGTH)
 		{
-			if (x == 1079)
+			if (x == 0 || x == 1079)
 			{
 				printf("arr[%d][%d][0] / POS X = %f\n", x, y, arr[x][y][0]);
 				printf("arr[%d][%d][1] / POS Y = %f\n", x, y, arr[x][y][1]);
