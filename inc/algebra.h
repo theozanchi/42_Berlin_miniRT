@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:05:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 11:24:56 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:59:44 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		equal(t_vec3 u, t_vec3 v);
 t_vec3	neg(t_vec3 u);
 t_vec3	prod(t_vec3 u, t_vec3 v);
 t_vec3	mtx_vec_prod(t_mtx33 mtx, t_vec3 u);
+double	vec_len(t_vec3 u);
 
 #endif
