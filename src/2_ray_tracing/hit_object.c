@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/15 16:30:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:55:45 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,12 +156,12 @@ double	hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj)
 	double		temp_t;
 	t_object	*temp_hit_obj;
 
-	t = -1.0;
+	t = INFINITY;
 	temp_hit_obj = NULL;
 	while (hittables)
 	{
 		temp_t = get_t(hittables, ray, &temp_hit_obj);
-		if ((t < 0 && temp_t > 0) || (temp_t > 0 && temp_t < t))
+		if ((t == INFINITY && temp_t > 0) || (temp_t > 0 && temp_t < t))
 		{
 			t = temp_t;
 			if (hit_obj)
@@ -169,5 +169,7 @@ double	hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj)
 		}
 		hittables = hittables->next;
 	}
+	if (t == INFINITY)
+		return (0.0);
 	return (t);
 }

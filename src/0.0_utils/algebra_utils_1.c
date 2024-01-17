@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:06:29 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 11:09:13 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:00:26 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vec3	normalize(t_vec3 v)
 {
 	double	length;
 
-	length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	length = vec_len(v);
 	if (length)
 	{
 		v.x /= length;

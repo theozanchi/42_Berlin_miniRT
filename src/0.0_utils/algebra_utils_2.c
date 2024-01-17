@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:02:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 11:23:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:00:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ t_vec3	mtx_vec_prod(t_mtx33 mtx, t_vec3 u)
 	v.y = mtx.c0.y * u.x + mtx.c1.y * u.y + mtx.c2.y * u.z;
 	v.z = mtx.c0.z * u.x + mtx.c1.z * u.y + mtx.c2.z * u.z;
 	return (v);
+}
+
+/**
+ * @brief Returns the length of vector v
+ * 
+ * @param v t_vec3 (x, y, z)
+ * @return double 
+ */
+double	vec_len(t_vec3 v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }

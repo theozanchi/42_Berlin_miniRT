@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:44:22 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 12:50:06 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 20:31:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_mtx33	transf_mtx(t_data *data)
 	t_mtx33	mtx;
 
 	wld_up = vec(0, 1, 0);
-	if (equal(wld_up, data->camera->vector) || equal(neg(wld_up), data->camera->vector))
+	if (equal(wld_up, data->camera->vector)
+		|| equal(neg(wld_up), data->camera->vector))
 		wld_up = vec(0, 0, 1);
 	cam_right = normalize(prod(wld_up, data->camera->vector));
 	cam_up = normalize(prod(data->camera->vector, cam_right));
@@ -45,19 +46,15 @@ t_point3	pixel_to_coor(t_data *data, int x, int y)
 	return (point);
 }
 
-t_ray	*create_ray(t_data *data, int x, int y)
+void	create_ray(t_ray *ray, t_data *data, int x, int y)
 {
-	t_ray		*ray;
 	t_point3	point;
-	
-	ray = malloc(sizeof(t_ray));
+
 	ray->origin = &data->camera->pos;
 	point = pixel_to_coor(data, x, y);
 	point = mtx_vec_prod(transf_mtx(data), point);
 	point = vec_add(point, data->camera->pos);
-	ray->direction = malloc(sizeof(t_vec3));
 	ray->direction->x = point.x - data->camera->pos.x;
 	ray->direction->y = point.y - data->camera->pos.y;
 	ray->direction->z = point.z - data->camera->pos.z;
-	return (ray);
 }
