@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/17 12:23:43 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/18 09:47:54 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@
 # ifndef EPSILON
 #  define EPSILON 1e-6
 # endif
+
+/* ************************************************************************** */
+
+// These constants can be set to 0 or 1 to activate certain functionalities
+
+# ifndef SHADOW
+#  define SHADOW 0
+# endif
+
+/* ************************************************************************** */
 
 # define LOADING_HEADER "         0%              25%              50%         \
      75%              100%\n"

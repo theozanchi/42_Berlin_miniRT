@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/17 14:55:27 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/18 09:46:30 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	direction = normalize(vec_sub(data->light->pos, hit_point));
 	shadow_ray->direction = &direction;
 	t = hit_object(data->first, shadow_ray, NULL);
-	if (t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
+	if (SHADOW && t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
 		intensity = 0.0;
 	else
 		intensity = dot(n, *shadow_ray->direction);
