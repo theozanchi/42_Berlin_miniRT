@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/16 11:18:37 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/19 08:54:23 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				1_parsing/parse_scene.c \
 				\
 				2_ray_tracing/cyl_norm_vec.c \
+				2_ray_tracing/hit_cylinder.c \
 				2_ray_tracing/hit_object.c \
 				2_ray_tracing/light.c \
 				2_ray_tracing/normal_vector.c \

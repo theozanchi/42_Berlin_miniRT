@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/18 11:26:21 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/19 08:37:57 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,61 +48,6 @@ double	hit_sphere(t_o_sp *sphere, t_ray *ray, t_object ***hit_obj)
 		if (hit_obj)
 			**hit_obj = (t_object *)sphere;
 		return ((-half_b - sqrt(discriminant)) / a);
-	}
-}
-
-double	solve_cyl_quadratic(t_o_cy *cyl, t_ray *ray)
-{
-	t_vec3	oc;
-	double	a;
-	double	half_b;
-	double	c;
-	double	discriminant;
-
-	oc = vec_sub(*ray->origin, cyl->pos);
-	a = dot2(*ray->direction) - square(dot(*ray->direction, cyl->vector));
-	half_b = dot(*ray->direction, oc) - dot(*ray->direction, cyl->vector) 
-		* dot(oc, cyl->vector);
-	c = dot2(oc) - square(dot(oc, cyl->vector)) - cyl->diameter * cyl->diameter / 4;
-	discriminant = half_b * half_b - a * c;
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((-half_b - sqrt(discriminant)) / a);
-}
-
-/**
- * @brief Checks if `ray` hits the `cylinder`. If it is, `hit_obj` is updated
- * with the address of `cylinder`
- *
- * @param cylinder Pointer to the object
- * @param ray Pointer to the object
- * @param hit_obj Pointer to update
- * @return `t` (double), the distance from the ray origin if `cylinder` is hit,
- * -1.0 if `cylinder` is not hit
- */
-double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
-{
-	double	t;
-	t_vec3	oc;
-	double	m;
-
-	t = solve_cyl_quadratic(cyl, ray);
-	if (t < 0.0)
-	{
-		if (hit_obj)
-			**hit_obj = NULL;	
-		return (t);
-	}
-	oc = vec_sub(*ray->origin, cyl->pos);
-	m = dot(*ray->direction, cyl->vector) * t + dot(oc, cyl->vector);
-	if (m < 0.0 || m > cyl->height)
-		return (-1.0);
-	else
-	{
-		if (hit_obj)
-			**hit_obj = (t_object *)cyl;
-		return (t);
 	}
 }
 

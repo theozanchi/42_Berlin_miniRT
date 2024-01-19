@@ -6,11 +6,12 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/13 15:36:34 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/19 10:35:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "algebra.h"
 
 t_object	*parse_sphere(char *s)
 {
@@ -68,14 +69,25 @@ t_object	*parse_plane(char *s)
 
 void	set_top_bottom(t_o_cy *cy)
 {
-	cy->top = cy->pos;
-	cy->top.y = cy->top.y + cy->diameter;
-	cy->top.x = cy->vector.x;
-	cy->top.y = cy->vector.y;
-	cy->bottom = cy->pos;
-	cy->bottom.y = cy->bottom.y - cy->diameter;
-	cy->bottom.x = cy->vector.x;
-	cy->bottom.y = cy->vector.y;
+	t_vec3	normalized_axis;
+	t_vec3	up;
+	t_vec3	down;
+
+	normalized_axis = normalize(cy->vector);
+	up = mul_scalar(normalized_axis, cy->height / 2);
+	down = neg(up);
+	{
+		cy->top_plane = malloc(sizeof(t_o_pl));
+		cy->top_plane->rgb = cy->rgb;
+		cy->top_plane->pos = vec_add(cy->pos, up);
+		cy->top_plane->vector = cy->vector;
+	}
+	{
+		cy->bottom_plane = malloc(sizeof(t_o_pl));
+		cy->bottom_plane->rgb = cy->rgb;
+		cy->bottom_plane->pos = vec_add(cy->pos, down);
+		cy->bottom_plane->vector = neg(cy->vector);
+	}
 }
 
 t_object	*parse_cylinder(char *s)
@@ -108,10 +120,6 @@ t_object	*parse_cylinder(char *s)
 	cy->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
 	cy->rgb.b = ft_atoi(&s[i]);
-	cy->vec_largeur = cy->vector;
-	cy->vec_hauteur.x = 0 + cy->vector.x;
-	cy->vec_hauteur.y = 1 + cy->vector.y;
-	cy->vec_hauteur.z = cy->vector.z;
 	set_top_bottom(cy);
 	return ((t_object *)cy);
 }
