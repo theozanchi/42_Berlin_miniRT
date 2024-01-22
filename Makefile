@@ -6,7 +6,7 @@
 #    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/16 22:20:59 by helauren         ###   ########.fr        #
+#    Updated: 2024/01/22 18:37:09 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				1_parsing/parse_environment.c \
 				1_parsing/parse_objects.c \
 				1_parsing/parse_scene.c \
-				1_parsing/right_amount.c \
+				1_parsing/right_amount_env.c \
+				1_parsing/right_amount_obj.c \
 				1_parsing/right_amount_utils2.c \
 				1_parsing/right_amount_utils.c \
 				\
