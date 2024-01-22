@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 21:26:40 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:06:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	valid_type(char *red)
 {
 	if (ft_strlen(red) < 2)
 		return (-1);
-	if(red[0] != 'A' && red[0] != 'C' && red[0] != 'L' 
+	if(red[0] != 'A' && red[0] != 'C' && red[0] != 'L'
 		&& (red[0] != 's' && red[1] != 'p') && (red[0] != 'p' && red[1] != 'l'
 		&& (red[0] != 'c' && red[1] != 'y')))
 		return (-1);
@@ -116,7 +116,7 @@ int	parse_environment(char **red, t_data *data)
 				return (acl_return(red[i]));
 		}
 		if(valid_type(red[i]))
-			return (-1);
+			return (acl_return(red[i]));
 		indiv_acl(data, red, i);
 		i++;
 	}
