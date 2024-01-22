@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 21:57:22 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:10:45 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,24 +121,32 @@ t_object	*parse_cylinder(char *s)
 	return ((t_object *)cy);
 }
 
-t_object	*parse_objects(char **red)
+t_object	*parse_objects(char **red, t_data *data)
 {
 	int			i;
 	t_object	*objects;
 	t_object	*next;
 	t_object	*first;
+	int			rm;
+	int			ve;
 
 	i = 0;
 	first = NULL;
 	while (red[i])
 	{
-		if (red[i][0] == 's')
+		if (ft_strlen (red[i]) < 3)
+		{
+			i++;
+			continue ;
+		}
+		if (red[i][0] == 's' && red[i][1] == 'p')
 			next = parse_sphere(red[i]);
-		if (red[i][0] == 'p')
+		if (red[i][0] == 'p' && red[i][1] == 'l')
 			next = parse_plane(red[i]);
-		if (red[i][0] == 'c')
+		if (red[i][0] == 'c' && red[i][1] == 'y')
 			next = parse_cylinder(red[i]);
-		if (red[i][0] == 's' || red[i][0] == 'p' || red[i][0] == 'c')
+		if ((red[i][0] == 's' && red[i][1] == 'p') || (red[i][0] == 'p' && red[i][1] == 'l')
+			|| (red[i][0] == 'c' && red[i][1] == 'y'))
 		{
 			if (first == NULL)
 			{
@@ -151,6 +159,14 @@ t_object	*parse_objects(char **red)
 				objects->next = next;
 				objects = next;
 				objects->next = NULL;
+			}
+			rm = right_amount_obj(red[i]);
+			ve = valid_env(red[i]);
+			if(ve || rm)
+			{
+				printf("object error ve = %d\n, rm = %d\n", ve, rm);
+				free_objects(data);
+				return (NULL);
 			}
 		}
 		i++;

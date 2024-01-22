@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 21:55:22 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:08:21 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ int	parse_scene(t_data *data, int fd)
 	close(fd);
 	if(parse_environment(red, data))
 		return (1);
-	data->first = parse_objects(red);
+	data->first = parse_objects(red, data);
+	if(data->first == NULL)
+		return (2);
 	free_double_str(red);
 	return (0);
 }
