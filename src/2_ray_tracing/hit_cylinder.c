@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/19 10:40:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:14:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,31 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 		return ((-half_b - sqrt(discriminant)) / a);
 }
 
-// double	hit_cyl_caps(t_o_cy *cyl, t_ray *ray)
-// {
-// 	t_o_pl	top_plane;
-// 	t_o_pl	bottom_plane;
-// 	double	t;
-// 	double	dis_to_center;
+double	hit_cyl_caps(t_o_cy *cyl, t_ray *ray, t_object ****hit_obj)
+{
+	double	t;
+	double	dis_to_center;
 
-// 	{
-// 		top_plane.rgb = cyl->rgb;
-// 		top_plane.pos = cyl->top;
-// 		top_plane.vector = cyl->vector;
-// 		t = hit_plane(&top_plane, ray, NULL);
-// 		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->top));
-// 		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
-// 			return (t);
-// 	}
-// 	{
-// 		bottom_plane.rgb = cyl->rgb;
-// 		bottom_plane.pos = cyl->bottom;
-// 		bottom_plane.vector = neg(cyl->vector);
-// 		t = hit_plane(&bottom_plane, ray, NULL);
-// 		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom));
-// 		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
-// 			return (t);
-// 	}
-// 	return (-1.0);
-// }
+	t = hit_plane(cyl->top_plane, ray, NULL);
+	dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->top_plane->pos));
+	if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+	{
+		if (hit_obj)
+			***hit_obj = (t_object *)cyl->top_plane;
+		return (t);
+	}
+	t = hit_plane(cyl->bottom_plane, ray, NULL);
+	dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
+	if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+	{
+		if (hit_obj)
+			***hit_obj = (t_object *)cyl->bottom_plane;
+		return (t);
+	}
+	if (hit_obj)
+		***hit_obj = NULL;
+	return (-1.0);
+}
 
 /**
  * @brief Checks if `ray` hits the `cylinder`. If it is, `hit_obj` is updated
@@ -75,28 +73,23 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
 {
 	double	t;
-	t_vec3	oc;
-	double	m;
+	// t_vec3	oc;
+	// double	m;
 
-	t = hit_cyl_tube(cyl, ray);
-	if (t < 0.0)
-	{
-		// t = hit_cyl_caps(cyl, ray);
-		// if (t > 0.0 && hit_obj)
-		// 	**hit_obj = (t_object *)cyl;
-		// else if (hit_obj)
-		if (hit_obj)
-			**hit_obj = NULL;
+	// t = hit_cyl_tube(cyl, ray);
+	// if (t < 0.0)
+	// {
+		t = hit_cyl_caps(cyl, ray, &hit_obj);
 		return (t);
-	}
-	oc = vec_sub(*ray->origin, cyl->pos);
-	m = dot(*ray->direction, cyl->vector) * t + dot(oc, cyl->vector);
-	if (m < 0.0 || m > cyl->height)
-		return (-1.0);
-	else
-	{
-		if (hit_obj)
-			**hit_obj = (t_object *)cyl;
-		return (t);
-	}
+	// }
+	// oc = vec_sub(*ray->origin, cyl->pos);
+	// m = dot(*ray->direction, cyl->vector) * t + dot(oc, cyl->vector);
+	// if (m < 0.0 || m > cyl->height)
+	// 	return (-1.0);
+	// else
+	// {
+	// 	if (hit_obj)
+	// 		**hit_obj = (t_object *)cyl;
+	// 	return (t);
+	// }
 }

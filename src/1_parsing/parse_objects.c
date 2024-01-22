@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/19 10:35:34 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:12:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	set_top_bottom(t_o_cy *cy)
 		cy->bottom_plane = malloc(sizeof(t_o_pl));
 		cy->bottom_plane->rgb = cy->rgb;
 		cy->bottom_plane->pos = vec_add(cy->pos, down);
-		cy->bottom_plane->vector = neg(cy->vector);
+		cy->bottom_plane->vector = cy->vector;
 	}
 }
 

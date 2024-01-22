@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:19:45 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/19 10:39:49 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:13:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	output_cy(t_o_cy *cylinder)
 	printf("b = %d\n", cylinder->rgb.b);
 	printf("top plane\n");
 	output_pl(cylinder->top_plane);
-	printf("top plane\n");
+	printf("bottom plane\n");
 	output_pl(cylinder->bottom_plane);
 }
 
