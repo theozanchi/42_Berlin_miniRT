@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 12:12:42 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:50:31 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ enum {
 	CYLINDER,
 	PLANE,
 	NONE
+};
+
+enum e_side {
+	TOP,
+	BOTTOM
 };
 
 enum {
