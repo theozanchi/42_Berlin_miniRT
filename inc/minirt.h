@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 21:16:41 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 23:33:24 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ typedef struct s_data
 	t_o_l			*light;
 	t_img			img;
 	t_vp			*vp;
+	int				rm_obj;
 }					t_data;
 
 /* free.c ******************************************************************* */
@@ -222,6 +223,7 @@ void				output_viewport(double ***arr);
 
 // error message
 int					wrong_arg(int fd);
+void	error_parsing(int ps, t_data *data);
 
 // parsing
 int					get_file_fd(char *s);

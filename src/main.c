@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 21:28:21 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:07:33 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_data	*init_data(void)
 	data->camera = NULL;
 	data->light = NULL;
 	data->first = NULL;
+	data->rm_obj = 0;
 	return (data);
 }
 
@@ -42,12 +43,9 @@ int	main(int ac, char **av)
 		return (wrong_arg(fd));
 	data = init_data();
 	ps = parse_scene(data, fd);
-	if (ps)
+	if (ps || data->rm_obj)
 	{
-		if(ps == 1)
-			printf("Error parsing lighting and camera\n");
-		else
-			printf("Error parsing environment\n");
+		error_parsing(ps, data);
 		// free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
