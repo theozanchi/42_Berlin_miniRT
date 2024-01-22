@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 22:00:13 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:28:21 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,19 @@ int	main(int ac, char **av)
 {
 	int		fd;
 	t_data	*data;
+	int		ps;
 
 	fd = get_file_fd(av[1]);
 	if (ac != 2 || fd < 0)
 		return (wrong_arg(fd));
 	data = init_data();
-	if (parse_scene(data, fd))
+	ps = parse_scene(data, fd);
+	if (ps)
 	{
-		printf("Could not parse, check the content of the .rt file\n");
+		if(ps == 1)
+			printf("Error parsing lighting and camera\n");
+		else
+			printf("Error parsing environment\n");
 		// free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
