@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 22:18:05 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:13:36 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int	is_valid_char(char *red)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
+	if(ft_strlen(red) < 5)
+		return (1);
 	while(red[i])
 	{
 		if(ft_isspace(red[i]) != 1 && ft_isdigit(red[i]) != 1 && red[i] != ',' && red[i] != '-' && red[i] != '.')
@@ -57,7 +59,7 @@ int	valid_env(char *red)
 	int	i;
 
 	i = 1;
-	if(ft_isspace(red[i]) != 1 || is_valid_char(&red[i]))
+	if(is_valid_char(&red[i]))
 		return (1);
 	return (0);
 }
@@ -98,7 +100,7 @@ int	parse_environment(char **red, t_data *data)
 	{
 		if(red[i][0] == 'A' || red[i][0] == 'C' || red[i][0] == 'L')
 		{
-			rm = right_amount(red[i]);
+			rm = right_amount_env(red[i]);
 			printf("Env = %c, rm = %d\n", red[i][0], rm);
 			if(valid_env(red[i]) || rm)
 				return (1);

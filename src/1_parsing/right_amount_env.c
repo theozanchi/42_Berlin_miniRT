@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   right_amount.c                                     :+:      :+:    :+:   */
+/*   right_amount_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:49:49 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 20:52:37 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:38:45 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	right_amount_a(char *red)
 	if(count != 3)
 		return (1);
 	i = move_up_three(red, i);
+	if(i < 0)
+		return (1);
 	if(empty_end(red, i))
 		return (1);
 	return (0);
@@ -37,23 +39,16 @@ int	right_amount_c(char *red)
 {
 	int		count;
 	int		i;
-	double	num;
 	int		FOV;
 
 	count = count_floats(red);
 	if(count != 3)
 		return (1);
 	i = move_up_three(red, 0);
-	count = 0;
-	while(count < 3)
-	{
-		i = next_float_index(red, i);
-		num = get_double(&red[i]);
-		if(is_between_one(num))
-			return (1);
-		count++;
-	}
+	i = iterate_three_one_floats(red, i);
 	i = next_float_index(red, i);
+	if(i < 0)
+		return (-1);
 	FOV = ft_atoi(&red[i]);
 	if(FOV < 0 || FOV > 180)
 		return (1);
@@ -80,13 +75,15 @@ int	right_amount_l(char *red)
 	if(count != 3)
 		return (1);
 	i = move_up_three(red, i);
+	if(i < 0)
+		return (-1);
 	if(empty_end(red, i))
 		return (1);
 	return (0);
 }
 
 
-int	right_amount(char *red)
+int	right_amount_env(char *red)
 {
 	int	ret;
 

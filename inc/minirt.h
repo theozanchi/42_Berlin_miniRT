@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 22:17:40 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:36:11 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ char				**read_file(int fd);
 double				get_double(char *s);
 int					next_float_index(char *s, int i);
 int					parse_environment(char **red, t_data *data);
-t_object			*parse_objects(char **red);
+t_object			*parse_objects(char **red, t_data *data);
 int					parse_scene(t_data *data, int fd);
 t_o_a				*parse_ambient_lighting(char *s);
 t_o_l				*parse_light(char *s);
@@ -238,7 +238,7 @@ int					count_ints(char *red, int i);
 int					next_neighbouring_int(char *s, int i);
 int					count_floats(char *red);
 int					next_neighbouring_float(char *s, int i);
-int					right_amount(char *red);
+int					right_amount_env(char *red);
 int					empty_end(char *red, int i);
 int					is_between_one(double num);
 int					move_up_three(char *red, int i);
@@ -246,6 +246,10 @@ t_o_c				*parse_camera(char *s);
 t_o_l				*parse_light(char *s);
 t_o_a				*parse_ambient_lighting(char *s);
 int					right_amount_c(char *red);
+int					right_amount_obj(char *red);
+int					iterate_three_one_floats(char *red, int i);
+int					iterate_rgb_ints(char *red, int i);
+int					valid_env(char *red);
 
 // RT
 void				viewport(t_data *data);
