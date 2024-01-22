@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 18:54:57 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/22 19:46:35 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_object	*parse_cylinder(char *s)
 	i = next_float_index(s, i);
 	cy->rgb.b = ft_atoi(&s[i]);
 	set_top_bottom(cy);
+	normalize(cy->vector);
 	return ((t_object *)cy);
 }
 
