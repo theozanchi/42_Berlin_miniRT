@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:31:07 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 20:52:20 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:21:44 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ int	count_floats(char *red)
 	int	i;
 	int	count;
 
-	printf("cf start = %s\n", red);
 	count = 0;
 	i = next_float_index(red, 0);
-	printf("i = %d\n", i);
 	if(i != -1)
 		count = 1;
 	while(i >= 0)
