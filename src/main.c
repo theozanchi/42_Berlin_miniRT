@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 10:16:47 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:52:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 	if (ps || data->rm_obj)
 	{
 		error_parsing(ps, data);
-		// free_resources_and_quit(data);
+		free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
 	viewport(data);
