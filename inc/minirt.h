@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 23:33:24 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:11:23 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,18 +134,20 @@ typedef struct s_o_pl // plane
 
 typedef struct s_o_cy // cylinder
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	t_vec3 pos;
-	t_vec3 vector;
-	double diameter;
-	double height;
-	t_vec3 vec_hauteur;
-	t_vec3 vec_largeur;
-	t_point3 top;
-	t_point3 bottom;
-}					t_o_cy;
+	int			id;
+	t_rgb		rgb;
+	struct		s_object *next;
+	t_vec3		pos;
+	t_vec3		vector;
+	double		diameter;
+	double		height;
+	t_vec3		vec_hauteur;
+	t_vec3		vec_largeur;
+	t_point3	top;
+	t_point3	bottom;
+	t_o_pl		*top_plane;
+	t_o_pl		*bottom_plane;
+}						t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
@@ -223,7 +225,7 @@ void				output_viewport(double ***arr);
 
 // error message
 int					wrong_arg(int fd);
-void	error_parsing(int ps, t_data *data);
+void				error_parsing(int ps, t_data *data);
 
 // parsing
 int					get_file_fd(char *s);
