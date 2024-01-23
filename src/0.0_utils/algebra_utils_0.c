@@ -6,73 +6,73 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:09:48 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/13 15:35:32 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/16 11:09:19 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
 
 /**
- * @brief Vector addition (A + B)
+ * @brief Vector addition (u + v)
  * 
- * @param A t_vec3
- * @param B t_vec3
+ * @param u t_vec3
+ * @param v t_vec3
  * @return t_vec3 
  */
-t_vec3	vec_add(t_vec3 A, t_vec3 B)
+t_vec3	vec_add(t_vec3 u, t_vec3 v)
 {
 	t_vec3	output;
 
-	output.x = A.x + B.x;
-	output.y = A.y + B.y;
-	output.z = A.z + B.z;
+	output.x = u.x + v.x;
+	output.y = u.y + v.y;
+	output.z = u.z + v.z;
 	return (output);
 }
 
 /**
- * @brief Vector substraction (A - B)
+ * @brief Vector substraction (u - v)
  * 
- * @param A t_vec3
- * @param B t_vec3
+ * @param u t_vec3
+ * @param v t_vec3
  * @return t_vec3 
  */
-t_vec3	vec_sub(t_vec3 A, t_vec3 B)
+t_vec3	vec_sub(t_vec3 u, t_vec3 v)
 {
 	t_vec3	output;
 
-	output.x = A.x - B.x;
-	output.y = A.y - B.y;
-	output.z = A.z - B.z;
+	output.x = u.x - v.x;
+	output.y = u.y - v.y;
+	output.z = u.z - v.z;
 	return (output);
 }
 
 /**
- * @brief Vector multiplication (A * B)
+ * @brief Vector multiplication (u * v)
  * 
- * @param A t_vec3
- * @param B t_vec3
+ * @param u t_vec3
+ * @param v t_vec3
  * @return t_vec3 
  */
-t_vec3	vec_mul(t_vec3 A, t_vec3 B)
+t_vec3	vec_mul(t_vec3 u, t_vec3 v)
 {
 	t_vec3	output;
 
-	output.x = A.x * B.x;
-	output.y = A.y * B.y;
-	output.z = A.z * B.z;
+	output.x = u.x * v.x;
+	output.y = u.y * v.y;
+	output.z = u.z * v.z;
 	return (output);
 }
 
 /**
- * @brief Vector dot product (A · B)
+ * @brief Vector dot product (u · v)
  * 
- * @param A t_vec3
- * @param B t_vec3
+ * @param u t_vec3
+ * @param v t_vec3
  * @return double 
  */
-double	dot(t_vec3 A, t_vec3 B)
+double	dot(t_vec3 u, t_vec3 v)
 {
-	return (A.x * B.x + A.y * B.y + A.z * B.z);
+	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }
 
 /**
@@ -82,7 +82,7 @@ double	dot(t_vec3 A, t_vec3 B)
  * @param t double
  * @return t_vec3 
  */
-t_vec3	vec_mul_scalar(t_vec3 v, double t)
+t_vec3	mul_scalar(t_vec3 v, double t)
 {
 	v.x *= t;
 	v.y *= t;
