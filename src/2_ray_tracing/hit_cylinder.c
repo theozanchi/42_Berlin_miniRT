@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 20:52:52 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 12:45:25 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 #include "algebra.h"
 
 typedef struct s_roots {
-	double	root1;
-	double	root2;
+	double	r1;
+	double	r2;
 }	t_roots;
 
-double	solve_cyl_quadratic(t_o_cy *cyl, t_ray *ray, t_vec3 oc)
+t_roots	solve_cyl_quadratic(t_o_cy *cyl, t_ray *ray, t_vec3 oc)
 {
 	double	a;
 	double	half_b;
 	double	c;
 	double	discriminant;
+	t_roots	r;
 
 	a = dot2(*ray->direction) - square(dot(*ray->direction, cyl->vector));
 	half_b = dot(*ray->direction, oc) - dot(*ray->direction, cyl->vector) 
@@ -32,26 +33,38 @@ double	solve_cyl_quadratic(t_o_cy *cyl, t_ray *ray, t_vec3 oc)
 		- cyl->diameter * cyl->diameter / 4;
 	discriminant = half_b * half_b - a * c;
 	if (discriminant < 0)
-		return (-1.0);
+	{
+		r.r1 = -1.0;
+		r.r2 = -1.0;
+		return (r);
+	}
 	else
-		return ((-half_b - sqrt(discriminant)) / a);
+	{
+		r.r1 = (-half_b - sqrt(discriminant)) / a;
+		r.r2 = (-half_b + sqrt(discriminant)) / a;
+		return (r);
+	}
 }
 
 double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 {
 	t_vec3	oc;
-	double	t;
-	double	m;
+	t_roots	r;
+	double	m1;
+	double	m2;
 
 	oc = vec_sub(*ray->origin, cyl->pos);
-	t = solve_cyl_quadratic(cyl, ray, oc);
-	if (t < 0.0)
-		return (t);
-	m = dot(*ray->direction, cyl->vector) * t + dot(oc, cyl->vector);
-	if (m < 0 || m > cyl->height)
+	r = solve_cyl_quadratic(cyl, ray, oc);
+	if (r.r1 < 0.0 && r.r2 < 0.0)
 		return (-1.0);
+	m1 = dot(*ray->direction, cyl->vector) * r.r1 + dot(oc, cyl->vector);
+	m2 = dot(*ray->direction, cyl->vector) * r.r2 + dot(oc, cyl->vector);
+	if (m1 >= cyl->height / -2 && m1 <= cyl->height / 2)
+		return (r.r1);
+	else if (m2 >= cyl->height / -2 && m2 <= cyl->height / 2)
+		return (r.r2);
 	else
-		return (t);
+		return (-1.0);
 }
 
 double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
