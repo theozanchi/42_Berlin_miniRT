@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 10:15:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:19:23 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_ray	*init_ray(void)
 	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
+	ray->origin = malloc(sizeof(t_vec3));
 	ray->direction = malloc(sizeof(t_vec3));
 	return (ray);
 }
@@ -124,5 +125,5 @@ void	render_scene(t_data *data)
 		}
 		x++;
 	}
-	free_and_set_to_null(2, ray->direction, ray);
+	free_and_set_to_null(3, ray->origin, ray->direction, ray);
 }
