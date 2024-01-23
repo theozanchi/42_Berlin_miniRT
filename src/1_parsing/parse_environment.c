@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 17:13:36 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:06:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,24 @@ void	indiv_acl(t_data *data, char **red, int i)
 
 int	valid_type(char *red)
 {
-	if (ft_strlen(red) < 10)
-		return (1);
-	if(red[0] != 'A' && red[0] != 'C' && red[0] != 'L' 
+	if (ft_strlen(red) < 2)
+		return (-1);
+	if(red[0] != 'A' && red[0] != 'C' && red[0] != 'L'
 		&& (red[0] != 's' && red[1] != 'p') && (red[0] != 'p' && red[1] != 'l'
 		&& (red[0] != 'c' && red[1] != 'y')))
-		return (1);
+		return (-1);
 	return (0);
+}
+
+int	acl_return(char *red)
+{
+	if(red[0] == 'A')
+		return (1);
+	if(red[0] == 'C')
+		return (2);
+	if(red[0] == 'L')
+		return (3);
+	return (-1);
 }
 
 int	parse_environment(char **red, t_data *data)
@@ -101,12 +112,11 @@ int	parse_environment(char **red, t_data *data)
 		if(red[i][0] == 'A' || red[i][0] == 'C' || red[i][0] == 'L')
 		{
 			rm = right_amount_env(red[i]);
-			printf("Env = %c, rm = %d\n", red[i][0], rm);
 			if(valid_env(red[i]) || rm)
-				return (1);
+				return (acl_return(red[i]));
 		}
 		if(valid_type(red[i]))
-			return (1);
+			return (acl_return(red[i]));
 		indiv_acl(data, red, i);
 		i++;
 	}

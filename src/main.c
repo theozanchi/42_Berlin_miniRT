@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 22:00:13 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 00:07:33 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_data	*init_data(void)
 	data->camera = NULL;
 	data->light = NULL;
 	data->first = NULL;
+	data->rm_obj = 0;
 	return (data);
 }
 
@@ -35,14 +36,16 @@ int	main(int ac, char **av)
 {
 	int		fd;
 	t_data	*data;
+	int		ps;
 
 	fd = get_file_fd(av[1]);
 	if (ac != 2 || fd < 0)
 		return (wrong_arg(fd));
 	data = init_data();
-	if (parse_scene(data, fd))
+	ps = parse_scene(data, fd);
+	if (ps || data->rm_obj)
 	{
-		printf("Could not parse, check the content of the .rt file\n");
+		error_parsing(ps, data);
 		// free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
