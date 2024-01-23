@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 09:53:58 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:15:58 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,26 @@ t_ray	*init_ray(void)
 void	create_ray(t_ray *ray, t_data *data, int x, int y);
 
 /**
+ * @brief Get the ray object located at coordinates [x][y] in data->vp->points
+ * 
+ * @param ray The ray object to populate
+ * @param data Main data structure
+ * @param x Abscissa coordinate
+ * @param y Ordinate coordinate
+ */
+void	get_ray(t_ray *ray, t_data *data, int x, int y)
+{
+	{
+		*ray->origin = data->camera->pos;
+	}
+	{
+		ray->direction->x = data->vp->points[x][y][3];
+		ray->direction->y = data->vp->points[x][y][4];
+		ray->direction->z = data->vp->points[x][y][5];
+	}
+}
+
+/**
  * @brief Renders the main scene by processing ray per ray, using the array
  * located at data->vp->points
  * 
@@ -96,7 +116,8 @@ void	render_scene(t_data *data)
 		while (y < HEIGTH)
 		{
 			render_loading_bar();
-			create_ray(ray, data, x, y);
+			// create_ray(ray, data, x, y);
+			get_ray(ray, data, x, y);
 			colour = ray_colour(data, ray);
 			my_mlx_pixel_put(&data->img, x, y, colour);
 			y++;
