@@ -1,0 +1,15 @@
+# brightness | color
+A 0.2 255,255,255
+
+# pos | dir | FOV
+C 0,5,1.0 0,-1,0 120
+
+# pos | brightness | color
+L 0,0.1,1.0 0.8
+
+# point | normal | color
+pl 0,0,10 0,0,1 0,255,255 
+pl 0,-1,0 0,1,0 255,0,255 
+
+# center | axis | diam | height | color
+cy -5,2,2 0,-1,0 2 4 255,228,196

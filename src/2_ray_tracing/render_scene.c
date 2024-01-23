@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 21:06:36 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:52:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ t_point3	point_on_ray(t_ray *ray, double t)
 t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	double		t;
-	t_object	*hitted_object;
-	t_point3	hitted_point;
+	t_object	*hit_obj;
+	t_point3	hit_point;
 	t_vec3		n;
 	t_rgb		rgb;
 
-	t = hit_object(data->first, ray, &hitted_object);
+	t = hit_object(data->first, ray, &hit_obj);
 	if (t > 0.0)
 	{
-		hitted_point = point_on_ray(ray, t);
-		n = normal_vec3(hitted_point, hitted_object, ray, t);
-		rgb = compute_colour(hitted_object, data);
-		modify_intensity(&rgb, n, hitted_point, data);
+		hit_point = point_on_ray(ray, t);
+		n = normal_vec3(hit_point, hit_obj, ray, t);
+		rgb = compute_colour(hit_obj, data);
+		modify_intensity(&rgb, n, hit_point, data);
 		return (rgb_to_colour(rgb));
 	}
 	return (BACKGROUND_COLOUR);
@@ -122,5 +122,5 @@ void	render_scene(t_data *data)
 		}
 		x++;
 	}
-	free_and_set_to_null(3, ray->direction, ray->origin, ray);
+	free_and_set_to_null(3, ray->origin, ray->direction, ray);
 }

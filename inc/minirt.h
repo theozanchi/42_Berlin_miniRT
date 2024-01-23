@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 00:11:23 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:05:53 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,25 @@
 #  define HEIGTH 600
 # endif
 
-# define LOADING_HEADER \
-	"         0%              25%              50%         \
+# ifndef EPSILON
+#  define EPSILON 1e-6
+# endif
+
+/* ************************************************************************** */
+
+// These constants can be set to 0 or 1 to activate certain functionalities
+
+# ifndef SHADOW
+#  define SHADOW 1
+# endif
+
+# ifndef DEBUG
+#  define DEBUG 1
+# endif
+
+/* ************************************************************************** */
+
+# define LOADING_HEADER "         0%              25%              50%         \
      75%              100%\n"
 # define LOADING_BAR \
 	"-----------------|----------------|----------------|-----\
@@ -59,6 +76,11 @@ enum
 	CYLINDER,
 	PLANE,
 	NONE
+};
+
+enum e_side {
+	TOP,
+	BOTTOM
 };
 
 enum
@@ -88,6 +110,13 @@ typedef struct s_vec3
 
 typedef t_vec3		t_point3;
 
+typedef struct s_mtx33
+{
+	t_vec3	c0;
+	t_vec3	c1;
+	t_vec3	c2;
+}	t_mtx33;
+
 typedef struct s_rgb
 {
 	unsigned char	r;
@@ -103,51 +132,47 @@ typedef struct s_o_a // ambient lighting
 
 typedef struct s_o_c // camera
 {
-	t_vec3 pos;
-	t_vec3 vector;
-	int fov;
-}					t_o_c;
+	t_point3	pos;
+	t_vec3		vector;
+	int			fov;
+}	t_o_c;
 
 typedef struct s_o_l // light
 {
-	t_vec3 pos;
-	double brightness_ratio;
-}					t_o_l;
+	t_point3	pos;
+	double		brightness_ratio;
+}	t_o_l;
 
 typedef struct s_o_sp // sphere
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	t_vec3 pos;
-	double diameter;
-}					t_o_sp;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	t_point3		pos;
+	double			diameter;
+}	t_o_sp;
 
 typedef struct s_o_pl // plane
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	t_vec3 pos;
-	t_vec3 vector;
-}					t_o_pl;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	t_point3		pos;
+	t_vec3			vector;
+}	t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
-	int			id;
-	t_rgb		rgb;
-	struct		s_object *next;
-	t_vec3		pos;
-	t_vec3		vector;
-	double		diameter;
-	double		height;
-	t_vec3		vec_hauteur;
-	t_vec3		vec_largeur;
-	t_point3	top;
-	t_point3	bottom;
-	t_o_pl		*top_plane;
-	t_o_pl		*bottom_plane;
-}						t_o_cy;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	t_point3		pos;
+	t_vec3			vector;
+	double			diameter;
+	double			height;
+	t_o_pl			*top_plane;
+	t_o_pl			*bottom_plane;
+}	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
@@ -266,17 +291,14 @@ void				render_scene(t_data *data);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
 t_colour			rgb_to_colour(t_rgb rgb);
 
-// hit_object.c
-int					is_on_line(t_point3 center, t_vec3 vector, double len,
-						t_point3 hit_point);
-t_point3			point_on_ray(t_ray *ray, double t);
-double				hit_object(t_object *hittables, t_ray *ray,
-						t_object **hitted);
+//hit_object.c
+double		hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj);
+double		hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj);
+t_point3	point_on_ray(t_ray *ray, double t);
+double		hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
 
-// normal_vector.c
-// t_vec3		cyl_nor_vec3(t_point3 hit_point, t_o_cy *cyl);
-t_vec3				normal_vec3(t_point3 hit_point, t_object *hitted,
-						t_ray *ray, double t);
+//normal_vector.c
+t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t);
 
 // light.c
 double				spotlight_intensity(t_vec3 n, t_point3 hitted_point,

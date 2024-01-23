@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 00:14:35 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:03:46 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_data	*init_data(void)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	ft_memset(data, 0, sizeof(t_data));
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "miniRT");
 	data->img.img = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
@@ -46,11 +47,12 @@ int	main(int ac, char **av)
 	if (ps || data->rm_obj)
 	{
 		error_parsing(ps, data);
-		// free_resources_and_quit(data);
+		free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
 	viewport(data);
-	// output_viewport(data->vp->points);
+	if (DEBUG)
+		output_parse(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);

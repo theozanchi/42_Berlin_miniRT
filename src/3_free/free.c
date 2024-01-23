@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 23:36:32 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:09:53 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_objects(t_data *data)
 {
 	t_object	*current;
 	t_object	*temp;
+	t_o_cy		*ptr;
 
 	current = data->first;
 	while (current)
@@ -28,7 +29,14 @@ void	free_objects(t_data *data)
 		temp = current;
 		current = current->next;
 		if (temp)
+		{
+			if (temp->id == CYLINDER)
+			{
+				ptr = (t_o_cy *)temp;
+				free_and_set_to_null(2, ptr->top_plane, ptr->bottom_plane);
+			}
 			free_and_set_to_null(1, temp);
+		}
 	}
 	data->first = NULL;
 }
