@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 21:09:33 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:53:37 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,25 @@ t_rgb	compute_colour(t_object *hitted_object, t_data *data)
 
 double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 {
-	t_ray	*ray;
-	t_vec3	direction;
-	double	intensity;
+	t_ray		*shadow_ray;
+	t_point3	origin;
+	t_vec3		direction;
+	double		intensity;
+	double		t;
 
-	ray = malloc(sizeof(t_ray));
-	ft_memset(ray, 0, sizeof(t_ray));
-	ray->origin = &hit_point;
-	direction = vec_normalize(vec_sub(data->light->pos, hit_point));
-	ray->direction = &direction;
-	// if (hit_object(data->first, ray, NULL) > 0.0)
-	// {
-	// 	free_and_set_to_null(1, ray);
-	// 	return (0.0);
-	// }
-	intensity = dot(n, *ray->direction);
-	free_and_set_to_null(1, ray);
-	if (intensity > 0)
-		return (intensity);
+	shadow_ray = malloc(sizeof(t_ray));
+	ft_memset(shadow_ray, 0, sizeof(t_ray));
+	origin = vec_add(hit_point, mul_scalar(n, EPSILON));
+	shadow_ray->origin = &origin;
+	direction = normalize(vec_sub(data->light->pos, hit_point));
+	shadow_ray->direction = &direction;
+	t = hit_object(data->first, shadow_ray, NULL);
+	if (t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
+		intensity = 0.0;
 	else
-		return (0.0);
+		intensity = dot(n, *shadow_ray->direction);
+	free_and_set_to_null(1, shadow_ray);
+	return (intensity);
 }
 
 double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)

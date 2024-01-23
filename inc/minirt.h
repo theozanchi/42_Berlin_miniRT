@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 23:33:24 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:52:02 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@
 #  define HEIGTH 600
 # endif
 
-# define LOADING_HEADER \
-	"         0%              25%              50%         \
+# ifndef EPSILON
+#  define EPSILON 1e-6
+# endif
+
+# define LOADING_HEADER "         0%              25%              50%         \
      75%              100%\n"
 # define LOADING_BAR \
 	"-----------------|----------------|----------------|-----\
@@ -87,6 +90,13 @@ typedef struct s_vec3
 }					t_vec3;
 
 typedef t_vec3		t_point3;
+
+typedef struct s_mtx33
+{
+	t_vec3	c0;
+	t_vec3	c1;
+	t_vec3	c2;
+}	t_mtx33;
 
 typedef struct s_rgb
 {
