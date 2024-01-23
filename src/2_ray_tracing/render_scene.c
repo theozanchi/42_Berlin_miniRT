@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 10:19:23 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 10:52:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ t_ray	*init_ray(void)
 	return (ray);
 }
 
-void	create_ray(t_ray *ray, t_data *data, int x, int y);
-
 /**
  * @brief Get the ray object located at coordinates [x][y] in data->vp->points
  * 
@@ -117,7 +115,6 @@ void	render_scene(t_data *data)
 		while (y < HEIGTH)
 		{
 			render_loading_bar();
-			// create_ray(ray, data, x, y);
 			get_ray(ray, data, x, y);
 			colour = ray_colour(data, ray);
 			my_mlx_pixel_put(&data->img, x, y, colour);
