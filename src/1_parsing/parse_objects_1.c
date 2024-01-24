@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_objects2.c                                   :+:      :+:    :+:   */
+/*   parse_objects_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 01:49:40 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 19:35:01 by helauren         ###   ########.fr       */
+/*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
+/*   Updated: 2024/01/24 18:07:26 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,25 @@ t_object	*parse_plane(char *s)
 	pl->rgb.g = ft_atoi(&s[i]);
 	i = next_float_index(s, i);
 	pl->rgb.b = ft_atoi(&s[i]);
+	pl->vector = normalize(pl->vector);
 	return ((t_object *)pl);
 }
 
 void	set_top_bottom(t_o_cy *cy)
 {
-	t_vec3	normalized_axis;
-	t_vec3	up;
-	t_vec3	down;
+	t_vec3	half_height;
 
-	normalized_axis = normalize(cy->vector);
-	up = mul_scalar(normalized_axis, cy->height / 2);
-	down = neg(up);
+	half_height = mul_scalar(cy->vector, cy->height / 2);
 	{
 		cy->top_plane = malloc(sizeof(t_o_pl));
 		cy->top_plane->rgb = cy->rgb;
-		cy->top_plane->pos = vec_add(cy->pos, up);
+		cy->top_plane->pos = vec_add(cy->pos, half_height);
 		cy->top_plane->vector = cy->vector;
 	}
 	{
 		cy->bottom_plane = malloc(sizeof(t_o_pl));
 		cy->bottom_plane->rgb = cy->rgb;
-		cy->bottom_plane->pos = vec_add(cy->pos, down);
+		cy->bottom_plane->pos = vec_sub(cy->pos, half_height);
 		cy->bottom_plane->vector = cy->vector;
 	}
 }
@@ -125,7 +122,7 @@ t_object	*parse_cylinder(char *s)
 	cy = malloc(sizeof(t_o_cy));
 	cy->id = CYLINDER;
 	cylinder_2(cy, s, i);
+	cy->vector = normalize(cy->vector);
 	set_top_bottom(cy);
-	normalize(cy->vector);
 	return ((t_object *)cy);
 }

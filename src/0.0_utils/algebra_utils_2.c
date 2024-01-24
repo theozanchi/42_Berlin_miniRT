@@ -6,28 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:02:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 03:22:11 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:34:16 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-
-/**
- * @brief returns the vector from the starting point to the end point in 3D space
- * 
- * @param start t_vec3 (x, y, z)
- * @param end t_vec3 (x, y, z)
- * @return `result` (x, y, z)
- */
-t_vec3 findVector_3d(t_vec3 start, t_vec3 end)
-{
-	t_vec3	vector;
-
-	vector.x = end.x - start.x;
-	vector.y = end.y - start.y;
-	vector.z = end.z - start.z;
-	return (vector);
-}
 
 /**
  * @brief Inverts the vector u

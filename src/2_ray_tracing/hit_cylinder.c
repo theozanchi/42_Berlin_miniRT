@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 12:45:25 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 19:35:57 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 		return (-1.0);
 	m1 = dot(*ray->direction, cyl->vector) * r.r1 + dot(oc, cyl->vector);
 	m2 = dot(*ray->direction, cyl->vector) * r.r2 + dot(oc, cyl->vector);
-	if (m1 >= cyl->height / -2 && m1 <= cyl->height / 2)
-		return (r.r1);
+	if ((m1 >= cyl->height / -2 && m1 <= cyl->height / 2))
+		return (ft_min_double(r.r1, r.r2));
 	else if (m2 >= cyl->height / -2 && m2 <= cyl->height / 2)
 		return (r.r2);
 	else
@@ -70,13 +70,13 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 {
 	double	t;
-	double	dis_to_center;
+	double	pc_len;
 
 	if (side == TOP)
 	{
 		t = hit_plane(cyl->top_plane, ray, NULL);
-		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->top_plane->pos));
-		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+		pc_len = vec_len(vec_sub(point_on_ray(ray, t), cyl->top_plane->pos));
+		if (t > 0.0 && pc_len <= cyl->diameter / 2)
 			return (t);
 		else
 			return (-1.0);
@@ -84,8 +84,8 @@ double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 	else
 	{
 		t = hit_plane(cyl->bottom_plane, ray, NULL);
-		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
-		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+		pc_len = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
+		if (t > 0.0 && pc_len <= cyl->diameter / 2)
 			return (t);
 		else
 			return (-1.0);
