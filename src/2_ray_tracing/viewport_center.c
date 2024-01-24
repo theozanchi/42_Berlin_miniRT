@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:27:59 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 03:26:58 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:46:09 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ t_vec3	set_x_axis(t_vec3 start, double vec_x)
 {
 	t_vec3	x_axis;
 
+	(void) vec_x;
 	x_axis.z = start.z;
 	x_axis.y = start.y;
-	if(vec_x > 0)
-		x_axis.x = start.x + 1;
-	else
-		x_axis.x = start.x - 1;
+	// if(vec_x > 0)
+	// else
+	// 	x_axis.x = start.x - 1;
+	x_axis.x = start.x + 1;
 	return (x_axis);
 }
 
@@ -43,12 +44,13 @@ t_vec3	set_y_axis(t_vec3 start, double vec_y)
 {
 	t_vec3	y_axis;
 
+	(void) vec_y;
 	y_axis.z = start.z;
 	y_axis.x = start.x;
-	if(vec_y > 0)
-		y_axis.y = start.y + 1;
-	else
-		y_axis.y = start.y - 1;
+	// if(vec_y > 0)
+	// else
+	// 	y_axis.y = start.y - 1;
+	y_axis.y = start.y + 1;
 	return (y_axis);
 }
 

@@ -6,49 +6,12 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 01:50:22 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:54:38 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "algebra.h"
-
-void	viewport_trigo(t_data *data)
-{
-	data->vp->trigo.angle_a = 90;
-	data->vp->trigo.angle_b = data->camera->fov / 2;
-	data->vp->trigo.angle_c = 180 - data->vp->trigo.angle_a
-		- data->vp->trigo.angle_b;
-	data->vp->trigo.rad_a = data->vp->trigo.angle_a * (PI / 180);
-	data->vp->trigo.rad_b = data->vp->trigo.angle_b * (PI / 180);
-	data->vp->trigo.rad_c = data->vp->trigo.angle_c * (PI / 180);
-	data->vp->trigo.cote_ab = 1;
-	data->vp->trigo.cote_bc = ((data->vp->trigo.cote_ab
-				* sin(data->vp->trigo.rad_a)) / sin(data->vp->trigo.rad_c));
-	data->vp->trigo.cote_ca = ((data->vp->trigo.cote_ab
-				* sin(data->vp->trigo.rad_b)) / sin(data->vp->trigo.rad_c));
-}
-
-// t_vec3	*viewport_center(t_data *data, t_vec3 start_pos)
-// {
-// 	double	magnitude;
-// 	t_vec3	*center_vp;
-
-// 	center_vp = malloc(sizeof(t_vec3));
-// 	magnitude = sqrt(((data->camera->vector.x) * (data->camera->vector.x))
-// 			+ ((data->camera->vector.y) * (data->camera->vector.y))
-// 			+ ((data->camera->vector.z) * (data->camera->vector.z)));
-// 	center_vp->x = start_pos.x + data->camera->vector.x / magnitude;
-// 	center_vp->y = start_pos.y + data->camera->vector.y / magnitude;
-// 	center_vp->z = start_pos.z + data->camera->vector.z / magnitude;
-// 	// printf("center x = %f, start pos x = %f, cam vector x = %f, magnitude = %f\
-// 	// 	\n", center_vp->x, start_pos.x, data->camera->vector.x, magnitude);
-// 	// printf("center y = %f, start pos y = %f, cam vector y = %f, magnitude = %f\
-// 	// 	\n", center_vp->y, start_pos.y, data->camera->vector.y, magnitude);
-// 	// printf("center z = %f, start pos z = %f, cam vector z = %f, magnitude = %f\
-// 	// 	\n", center_vp->z, start_pos.z, data->camera->vector.z, magnitude);
-// 	return (center_vp);
-// }
 
 double	longueur_hypothenuse(t_data *data)
 {
@@ -70,20 +33,31 @@ double	longueur_aigu(double hypothenuse)
 	return (aigu);
 }
 
+void	viewport_trigo(t_data *data)
+{
+	data->vp->trigo.angle_a = 90;
+	data->vp->trigo.angle_b = data->camera->fov / 2;
+	data->vp->trigo.angle_c = 180 - data->vp->trigo.angle_a
+		- data->vp->trigo.angle_b;
+	data->vp->trigo.rad_a = data->vp->trigo.angle_a * (PI / 180);
+	data->vp->trigo.rad_b = data->vp->trigo.angle_b * (PI / 180);
+	data->vp->trigo.rad_c = data->vp->trigo.angle_c * (PI / 180);
+	data->vp->trigo.cote_ab = 1;
+	data->vp->trigo.cote_bc = ((data->vp->trigo.cote_ab
+				* sin(data->vp->trigo.rad_a)) / sin(data->vp->trigo.rad_c));
+	data->vp->trigo.cote_ca = ((data->vp->trigo.cote_ab
+				* sin(data->vp->trigo.rad_b)) / sin(data->vp->trigo.rad_c));
+	data->vp->hypothenuse = longueur_hypothenuse(data);
+	data->vp->aigu = longueur_aigu(data->vp->hypothenuse);
+	data->vp->win_ratio = (((double)HEIGTH / (double)WIDTH) * data->vp->aigu);
+}
+
 void	viewport_width(t_data *data, t_vec3 *center)
 {
-	double	hypothenuse;
-	double	aigu;
-	double	win_ratio;
-
-	hypothenuse = longueur_hypothenuse(data);
-	aigu = longueur_aigu(hypothenuse);
-	win_ratio = (((double)HEIGTH / (double)WIDTH) * aigu);
-	// printf("hypothenuse = %f, aigu = %f\n", hypothenuse, aigu);
-	data->vp->min_x = center->x - aigu;
-	data->vp->max_x = center->x + aigu;
-	data->vp->min_y = center->y - win_ratio;
-	data->vp->max_y = center->y + win_ratio;
+	data->vp->min_x = center->x - data->vp->aigu;
+	data->vp->max_x = center->x + data->vp->aigu;
+	data->vp->min_y = center->y - data->vp->win_ratio;
+	data->vp->max_y = center->y + data->vp->win_ratio;
 	data->vp->width = data->vp->max_x - data->vp->min_x;
 	data->vp->height = data->vp->max_y - data->vp->min_y;
 }
@@ -105,15 +79,9 @@ double	***parse_dem_points(t_data *data)
 	double			pos_x;
 	double			pos_y;
 
-	// printf("min x = %f\n", data->vp->min_x);
-	// printf("min y = %f\n", data->vp->min_y);
-	// printf("max x = %f\n", data->vp->max_x);
-	// printf("max y = %f\n", data->vp->max_y);
 	ret = malloc(sizeof(double **) * WIDTH);
 	pos_x_incr = ((double)data->vp->width) / ((double)WIDTH - 1.0);
 	pos_y_incr = ((double)data->vp->height) / ((double)HEIGTH - 1.0);
-	// printf("vp width = %f, WIDTH = %f, pos x incr = %f\n", data->vp->width, (double)WIDTH, pos_x_incr);
-	// printf("vp height = %f, HEIGHT = %f, pos y incr = %f\n", data->vp->height, (double)HEIGTH, pos_y_incr);
 	x = 0;
 	pos_x = 0;
 	while(x < WIDTH)

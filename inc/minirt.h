@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 02:57:30 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:50:37 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,9 @@ typedef struct s_vp
 	double			width;
 	double			height;
 	double			***points;
+	double			hypothenuse;
+	double			aigu;
+	double			win_ratio;
 }					t_vp;
 
 typedef struct s_data
