@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 18:03:46 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 03:21:31 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // error testing later
 // if camera position is inside and object
 // if vector is 0 vector
+// if FOV is 0
 
 t_data	*init_data(void)
 {
@@ -47,12 +48,13 @@ int	main(int ac, char **av)
 	if (ps || data->rm_obj)
 	{
 		error_parsing(ps, data);
-		free_resources_and_quit(data);
+		if(ps >= 0)
+			free_resources_and_quit(data);
 		return (EXIT_FAILURE);
 	}
 	viewport(data);
-	if (DEBUG)
-		output_parse(data);
+	// if (0)
+		// output_parse(data);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);

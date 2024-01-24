@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/23 10:53:24 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/24 02:17:23 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ TICK		=	✓
 SRC			=	0.0_utils/algebra_utils_0.c \
 				0.0_utils/algebra_utils_1.c \
 				0.0_utils/algebra_utils_2.c \
+				0.0_utils/algebra_utils_3.c \
 				0.0_utils/debugging_utils.c \
 				0.0_utils/mlx_utils.c \
 				\
@@ -54,6 +55,7 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				1_parsing/parse_env2.c \
 				1_parsing/parse_environment.c \
 				1_parsing/parse_objects.c \
+				1_parsing/parse_objects2.c \
 				1_parsing/parse_scene.c \
 				1_parsing/right_amount_env.c \
 				1_parsing/right_amount_obj.c \
@@ -67,9 +69,16 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/temp_viewport.c \
 				2_ray_tracing/render_scene.c \
 				2_ray_tracing/viewport.c \
+				2_ray_tracing/viewport_center.c \
 				\
 				3_free/free.c \
 				\
+				4_rotation/rotation.c\
+				4_rotation/ro_environment.c\
+				4_rotation/ro_objects.c\
+				5_translation/translation.c\
+				5_translation/tr_environment.c\
+				5_translation/tr_objects.c\
 				keypress.c \
 				main.c
 

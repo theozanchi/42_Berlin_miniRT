@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:31:07 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/17 14:25:06 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:09:04 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ int	iterate_rgb_ints(char *red, int i)
 		num = ft_atoi(&red[i]);
 		if(num < (double)0 || num > (double)255)
 			return (-1);
+		count++;
+	}
+	return (i);
+}
+
+int	iterate_three_floats(char *red, int i)
+{
+	int 	count;
+	double	num;
+
+	count = 0;
+	while(count < 3)
+	{
+		i = next_float_index(red, i);
+		if(i < 0)
+			return (-1);
+		num = get_double(&red[i]);
 		count++;
 	}
 	return (i);

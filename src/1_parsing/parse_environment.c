@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 00:06:14 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 00:45:53 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,27 @@
 int	check_amount(char **red)
 {
 	int	i;
-	int	a;
-	int	c;
-	int	l;
+	t_acl	acl;
 
-	a = 0;
-	c = 0;
-	l = 0;
+	acl.a = 0;
+	acl.c = 0;
+	acl.l = 0;
 	i = 0;
 	while(red[i])
 	{
 		if (red[i][0] == 'A')
-			a++;
+			acl.a++;
 		if (red[i][0] == 'C')
-			c++;
-		if (red[i][0] == 'L' || red[i][0] == 'l')
-			l++;
+			acl.c++;
+		if (red[i][0] == 'L')
+			acl.l++;
+		if (ft_strlen(red[i]) < 3)
+			return (2);
+		if (valid_type(red[i]))
+			return (unvalid_type(red[i]));
 		i++;
 	}
-	if(a != 1 || c != 1 || l != 1)
+	if(acl.a != 1 || acl.c != 1 || acl.l != 1)
 		return (1);
 	return (0);
 }
@@ -77,7 +79,7 @@ void	indiv_acl(t_data *data, char **red, int i)
 int	valid_type(char *red)
 {
 	if (ft_strlen(red) < 2)
-		return (-1);
+		return (-2);
 	if(red[0] != 'A' && red[0] != 'C' && red[0] != 'L'
 		&& (red[0] != 's' && red[1] != 'p') && (red[0] != 'p' && red[1] != 'l'
 		&& (red[0] != 'c' && red[1] != 'y')))
@@ -100,12 +102,11 @@ int	parse_environment(char **red, t_data *data)
 {
 	int	i;
 	int	rm;
+	int	ca;
 
-	if(check_amount(red))
-	{
-		printf("You must have one of each, A, C and L, not more, not less\n");
-		return (1);
-	}
+	ca = check_amount(red);
+	if(ca)
+		return (failed_first_check(ca));
 	i = 0;
 	while (red[i])
 	{
@@ -115,8 +116,6 @@ int	parse_environment(char **red, t_data *data)
 			if(valid_env(red[i]) || rm)
 				return (acl_return(red[i]));
 		}
-		if(valid_type(red[i]))
-			return (acl_return(red[i]));
 		indiv_acl(data, red, i);
 		i++;
 	}

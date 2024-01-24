@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:49:49 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 16:38:45 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:27:15 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	right_amount_l(char *red)
 		return (1);
 	return (0);
 }
-
 
 int	right_amount_env(char *red)
 {

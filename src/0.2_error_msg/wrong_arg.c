@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 00:06:00 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 00:46:00 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	error_parsing(int ps, t_data *data)
 {
-	if ((ps < 0 && data->rm_obj == 0) || data->rm_obj < 0)
+	if(ps == -2)
+		return ;
+	if (data->rm_obj < 0 || ps < 0)
 	{
 		printf("Invalid content has been detected in file\n");
 		return ;
@@ -33,6 +35,21 @@ void	error_parsing(int ps, t_data *data)
 	if (data->rm_obj == 6)
 		printf("Cylinder ");
 	printf("\n");
+}
+
+int	failed_first_check(int ca)
+{
+	if(ca == 1)
+		printf("You must have one of each, A, C and L, not more, not less\n");
+	else if(ca == 2)
+		printf("One of the lines is way to short come on make an effort !\n");
+	return (-2);
+}
+
+int	unvalid_type(char *red)
+{
+	printf("This line is not recognized as valid %s\n", red);
+	return (3);
 }
 
 int	wrong_arg(int fd)

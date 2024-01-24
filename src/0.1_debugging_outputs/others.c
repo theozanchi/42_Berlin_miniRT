@@ -6,11 +6,18 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 21:55:46 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 02:56:38 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	output_vec3(t_vec3 vec)
+{
+	printf("x = %lf\n", vec.x);
+	printf("y = %lf\n", vec.y);
+	printf("z = %lf\n", vec.z);
+}
 
 void	output_viewport(double ***arr)
 {
