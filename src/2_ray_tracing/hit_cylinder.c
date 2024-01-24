@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 19:02:08 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 11:45:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 {
 	double	t;
-	double	dis_to_center;
+	double	pc_len;
 
 	if (side == TOP)
 	{
 		t = hit_plane(cyl->top_plane, ray, NULL);
-		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->top_plane->pos));
-		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+		pc_len = vec_len(vec_sub(point_on_ray(ray, t), cyl->top_plane->pos));
+		if (t > 0.0 && pc_len <= cyl->diameter / 2)
 			return (t);
 		else
 			return (-1.0);
@@ -84,8 +84,8 @@ double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 	else
 	{
 		t = hit_plane(cyl->bottom_plane, ray, NULL);
-		dis_to_center = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
-		if (t > 0.0 && dis_to_center <= cyl->diameter / 2)
+		pc_len = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
+		if (t > 0.0 && pc_len <= cyl->diameter / 2)
 			return (t);
 		else
 			return (-1.0);
