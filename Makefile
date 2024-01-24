@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/24 02:17:23 by helauren         ###   ########.fr        #
+#    Updated: 2024/01/24 11:39:28 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				1_parsing/get_file_fd.c \
 				1_parsing/parse_env2.c \
 				1_parsing/parse_environment.c \
-				1_parsing/parse_objects.c \
+				1_parsing/parse_objects_1.c \
 				1_parsing/parse_objects2.c \
 				1_parsing/parse_scene.c \
 				1_parsing/right_amount_env.c \
@@ -66,19 +66,20 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/hit_object.c \
 				2_ray_tracing/light.c \
 				2_ray_tracing/normal_vector.c \
-				2_ray_tracing/temp_viewport.c \
 				2_ray_tracing/render_scene.c \
 				2_ray_tracing/viewport.c \
 				2_ray_tracing/viewport_center.c \
 				\
 				3_free/free.c \
 				\
-				4_rotation/rotation.c\
-				4_rotation/ro_environment.c\
-				4_rotation/ro_objects.c\
-				5_translation/translation.c\
-				5_translation/tr_environment.c\
-				5_translation/tr_objects.c\
+				4_rotation/rotation.c \
+				4_rotation/ro_environment.c \
+				4_rotation/ro_objects.c \
+				\
+				5_translation/translation.c \
+				5_translation/tr_environment.c \
+				5_translation/tr_objects.c \
+				\
 				keypress.c \
 				main.c
 
