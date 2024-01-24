@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 10:39:29 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 18:36:29 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 		n = normal_vec3(hit_point, hit_obj, ray);
 		rgb = compute_colour(hit_obj, data);
 		modify_intensity(&rgb, n, hit_point, data);
+		if (DEBUG_COLOR)
+			printf("Normal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
 		return (rgb_to_colour(rgb));
 	}
 	return (BACKGROUND_COLOUR);
@@ -92,6 +94,8 @@ void	get_ray(t_ray *ray, t_data *data, int x, int y)
 	}
 }
 
+void	create_ray(t_ray *ray, t_data *data, int x, int y);
+
 /**
  * @brief Renders the main scene by processing ray per ray, using the array
  * located at data->vp->points
@@ -116,7 +120,16 @@ void	render_scene(t_data *data)
 		{
 			render_loading_bar();
 			get_ray(ray, data, x, y);
+			// create_ray(ray, data, x, y);
+			if (DEBUG_COLOR)
+			{
+				printf("\nPixel (%i, %i)\n", x, y);
+				printf("Ray origin: (%.2f, %.2f, %.2f)\n", ray->origin->x, ray->origin->y, ray->origin->z);
+				printf("Ray direction: (%.2f, %.2f, %.2f)\n", ray->direction->x, ray->direction->y, ray->direction->z);
+			}
 			colour = ray_colour(data, ray);
+			if (DEBUG_COLOR)
+				printf("Colour: 0x%X\n", colour);;
 			my_mlx_pixel_put(&data->img, x, y, colour);
 			y++;
 		}

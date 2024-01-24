@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 10:43:06 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 19:01:31 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,39 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	direction = normalize(vec_sub(data->light->pos, hit_point));
 	shadow_ray->direction = &direction;
 	t = hit_object(data->first, shadow_ray, NULL);
-	if (SHADOW && t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
+	if (SHADOW
+		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
 		intensity = 0.0;
-	else 
-		intensity = dot(n, *shadow_ray->direction);
+	else
+		intensity = dot(n, *shadow_ray->direction)
+			* data->light->brightness_ratio;
 	free_and_set_to_null(1, shadow_ray);
+	if (DEBUG_SPOTLIGHT && intensity > 0.0)
+		printf("\nNormal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
 	return (intensity);
 }
 
 double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 {
-	double	intensity;
+	double	ambient;
+	double	spotlight;
+	double	final;
 
-	intensity = data->ambient_lighting->ratio;
-	intensity += spotlight_intensity(n, hit_point, data);
-	if (intensity > 1.0)
+	ambient = data->ambient_lighting->ratio;
+	spotlight = spotlight_intensity(n, hit_point, data);
+	// spotlight = 0;
+	if (spotlight < 0.0)
+		spotlight = 0.0;
+	final = ambient + spotlight;
+	// if (DEBUG_SPOTLIGHT && final > ambient)
+	// {
+	// 	printf("\nNormal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
+	// 	printf("Hit point: (%.2f, %.2f, %.2f)\n", hit_point.x, hit_point.y, hit_point.z);
+	// }
+	if (final > 1.0)
 		return (1.0);
-	else if (intensity < 0.0)
-		return (0.0);
 	else
-		return (intensity);
+		return (final);
 }
 
 void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 11:28:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 19:08:08 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 # endif
 
 # ifndef HEIGTH
-#  define HEIGTH 600
+#  define HEIGTH 720
 # endif
 
 # ifndef EPSILON
-#  define EPSILON 1e-6
+#  define EPSILON 1e-8
 # endif
 
 /* ************************************************************************** */
@@ -51,8 +51,16 @@
 #  define SHADOW 1
 # endif
 
-# ifndef DEBUG
-#  define DEBUG 1
+# ifndef DEBUG_PARSE
+#  define DEBUG_PARSE 0
+# endif
+
+# ifndef DEBUG_COLOR
+#  define DEBUG_COLOR 0
+# endif
+
+# ifndef DEBUG_SPOTLIGHT
+#  define DEBUG_SPOTLIGHT 0
 # endif
 
 /* ************************************************************************** */
