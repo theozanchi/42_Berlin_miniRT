@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 10:05:50 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 10:42:43 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 // These constants can be set to 0 or 1 to activate certain functionalities
 
 # ifndef SHADOW
-#  define SHADOW 1
+#  define SHADOW 0
 # endif
 
 # ifndef DEBUG
@@ -239,57 +239,57 @@ typedef struct s_data
 
 /* free.c ******************************************************************* */
 
-int					free_resources_and_quit(t_data *data);
-void				free_objects(t_data *data);
+int			free_resources_and_quit(t_data *data);
+void		free_objects(t_data *data);
 
 // debugging
-void				output_parse(t_data *data);
-void				render_loading_bar(void);
-void				output_ray_vectors(t_data *data);
-void				output_viewport(double ***arr);
+void		output_parse(t_data *data);
+void		render_loading_bar(void);
+void		output_ray_vectors(t_data *data);
+void		output_viewport(double ***arr);
 
 // error message
-int					wrong_arg(int fd);
-void	error_parsing(int ps, t_data *data);
+int			wrong_arg(int fd);
+void		error_parsing(int ps, t_data *data);
 
 // parsing
-int					get_file_fd(char *s);
-char				**read_file(int fd);
-double				get_double(char *s);
-int					next_float_index(char *s, int i);
-int					parse_environment(char **red, t_data *data);
-t_object			*parse_objects(char **red, t_data *data);
-int					parse_scene(t_data *data, int fd);
-t_o_a				*parse_ambient_lighting(char *s);
-t_o_l				*parse_light(char *s);
-t_o_c				*parse_camera(char *s);
-int					count_ints(char *red, int i);
-int					next_neighbouring_int(char *s, int i);
-int					count_floats(char *red);
-int					next_neighbouring_float(char *s, int i);
-int					right_amount_env(char *red);
-int					empty_end(char *red, int i);
-int					is_between_one(double num);
-int					move_up_three(char *red, int i);
-t_o_c				*parse_camera(char *s);
-t_o_l				*parse_light(char *s);
-t_o_a				*parse_ambient_lighting(char *s);
-int					right_amount_c(char *red);
-int					right_amount_obj(char *red);
-int					iterate_three_one_floats(char *red, int i);
-int					iterate_rgb_ints(char *red, int i);
-int					valid_env(char *red);
+int			get_file_fd(char *s);
+char		**read_file(int fd);
+double		get_double(char *s);
+int			next_float_index(char *s, int i);
+int			parse_environment(char **red, t_data *data);
+t_object	*parse_objects(char **red, t_data *data);
+int			parse_scene(t_data *data, int fd);
+t_o_a		*parse_ambient_lighting(char *s);
+t_o_l		*parse_light(char *s);
+t_o_c		*parse_camera(char *s);
+int			count_ints(char *red, int i);
+int			next_neighbouring_int(char *s, int i);
+int			count_floats(char *red);
+int			next_neighbouring_float(char *s, int i);
+int			right_amount_env(char *red);
+int			empty_end(char *red, int i);
+int			is_between_one(double num);
+int			move_up_three(char *red, int i);
+t_o_c		*parse_camera(char *s);
+t_o_l		*parse_light(char *s);
+t_o_a		*parse_ambient_lighting(char *s);
+int			right_amount_c(char *red);
+int			right_amount_obj(char *red);
+int			iterate_three_one_floats(char *red, int i);
+int			iterate_rgb_ints(char *red, int i);
+int			valid_env(char *red);
 
 // RT
-void				viewport(t_data *data);
+void		viewport(t_data *data);
 
 // keypress
-int					handle_keypress(int keycode, t_data *data);
+int			handle_keypress(int keycode, t_data *data);
 
 // rendering
-void				render_scene(t_data *data);
-void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
-t_colour			rgb_to_colour(t_rgb rgb);
+void		render_scene(t_data *data);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+t_colour	rgb_to_colour(t_rgb rgb);
 
 //hit_object.c
 double		hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj);
@@ -298,13 +298,11 @@ t_point3	point_on_ray(t_ray *ray, double t);
 double		hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
 
 //normal_vector.c
-t_vec3		normal_vec3(t_point3 hit_point, t_object *hitted, t_ray *ray, double t);
+t_vec3		normal_vec3(t_point3 hit_point, t_object *hit_obj, t_ray *ray);
 
 // light.c
-double				spotlight_intensity(t_vec3 n, t_point3 hitted_point,
-						t_data *data);
-t_rgb				compute_colour(t_object *hitted_object, t_data *data);
-void				modify_intensity(t_rgb *rgb, t_vec3 n,
-						t_point3 hitted_point, t_data *data);
+double		spotlight_intensity(t_vec3 n, t_point3 hitted_point, t_data *data);
+t_rgb		compute_colour(t_object *hitted_object, t_data *data);
+void		modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
 
 #endif

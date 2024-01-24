@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 10:09:39 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 10:43:06 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	t = hit_object(data->first, shadow_ray, NULL);
 	if (SHADOW && t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
 		intensity = 0.0;
-	else
+	else 
 		intensity = dot(n, *shadow_ray->direction);
 	free_and_set_to_null(1, shadow_ray);
 	return (intensity);
@@ -69,6 +69,8 @@ double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	intensity += spotlight_intensity(n, hit_point, data);
 	if (intensity > 1.0)
 		return (1.0);
+	else if (intensity < 0.0)
+		return (0.0);
 	else
 		return (intensity);
 }
