@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 10:42:43 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 10:45:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 // These constants can be set to 0 or 1 to activate certain functionalities
 
 # ifndef SHADOW
-#  define SHADOW 0
+#  define SHADOW 1
 # endif
 
 # ifndef DEBUG
