@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/23 12:45:25 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/23 19:02:08 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 		return (-1.0);
 	m1 = dot(*ray->direction, cyl->vector) * r.r1 + dot(oc, cyl->vector);
 	m2 = dot(*ray->direction, cyl->vector) * r.r2 + dot(oc, cyl->vector);
-	if (m1 >= cyl->height / -2 && m1 <= cyl->height / 2)
-		return (r.r1);
+	if ((m1 >= cyl->height / -2 && m1 <= cyl->height / 2))
+		return (ft_min_double(r.r1, r.r2));
 	else if (m2 >= cyl->height / -2 && m2 <= cyl->height / 2)
 		return (r.r2);
 	else
