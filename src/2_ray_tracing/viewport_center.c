@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:27:59 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 11:50:29 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 11:52:19 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vec3	set_straight(t_vec3 start, double vec_z)
 
 	straight.x = start.x;
 	straight.y = start.y;
-	if(vec_z > 0)
+	if (vec_z > 0)
 		straight.z = start.z + 1;
 	else
 		straight.z = start.z - 1;
@@ -32,7 +32,7 @@ t_vec3	set_x_axis(t_vec3 start, double vec_x)
 
 	x_axis.z = start.z;
 	x_axis.y = start.y;
-	if(vec_x > 0)
+	if (vec_x > 0)
 		x_axis.x = start.x + 1;
 	else
 		x_axis.x = start.x - 1;
@@ -45,7 +45,7 @@ t_vec3	set_y_axis(t_vec3 start, double vec_y)
 
 	y_axis.z = start.z;
 	y_axis.x = start.x;
-	if(vec_y > 0)
+	if (vec_y > 0)
 		y_axis.y = start.y + 1;
 	else
 		y_axis.y = start.y - 1;
