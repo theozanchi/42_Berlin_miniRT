@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/24 11:39:28 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/24 11:50:55 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ TICK		=	✓
 SRC			=	0.0_utils/algebra_utils_0.c \
 				0.0_utils/algebra_utils_1.c \
 				0.0_utils/algebra_utils_2.c \
-				0.0_utils/algebra_utils_3.c \
 				0.0_utils/debugging_utils.c \
 				0.0_utils/mlx_utils.c \
 				\

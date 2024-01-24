@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:27:59 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 11:47:48 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/24 11:50:29 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	point_on_line(t_vec3 start, t_vec3 *end, t_vec3 len)
 	double	distance;
 
 	vector = vec_sub(start, *end);
-	distance = calculate_distance(start, *end);
+	distance = vec_len(vector);
 	end->x = start.x + (len.x * distance * vector.x);
 	end->y = start.y + (len.y * distance * vector.y);
 	end->z = start.z + (len.z * distance * vector.z);
