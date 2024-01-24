@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport_center.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:27:59 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 03:26:58 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:47:48 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	point_on_line(t_vec3 start, t_vec3 *end, t_vec3 len)
 	t_vec3	vector;
 	double	distance;
 
-	vector = findVector_3d(start, *end);
+	vector = vec_sub(start, *end);
 	distance = calculate_distance(start, *end);
 	end->x = start.x + (len.x * distance * vector.x);
 	end->y = start.y + (len.y * distance * vector.y);

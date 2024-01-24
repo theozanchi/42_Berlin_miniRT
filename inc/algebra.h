@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algebra.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 19:05:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 02:24:11 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:48:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_vec3	neg(t_vec3 u);
 t_vec3	prod(t_vec3 u, t_vec3 v);
 t_vec3	mtx_vec_prod(t_mtx33 mtx, t_vec3 u);
 double	vec_len(t_vec3 u);
-t_vec3 findVector_3d(t_vec3 start, t_vec3 end);
 double calculate_distance(t_vec3 point1, t_vec3 point2);
 
 #endif
