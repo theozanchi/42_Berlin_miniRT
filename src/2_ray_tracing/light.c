@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 19:01:31 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 12:10:46 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,9 @@ double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 
 	ambient = data->ambient_lighting->ratio;
 	spotlight = spotlight_intensity(n, hit_point, data);
-	// spotlight = 0;
 	if (spotlight < 0.0)
 		spotlight = 0.0;
 	final = ambient + spotlight;
-	// if (DEBUG_SPOTLIGHT && final > ambient)
-	// {
-	// 	printf("\nNormal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
-	// 	printf("Hit point: (%.2f, %.2f, %.2f)\n", hit_point.x, hit_point.y, hit_point.z);
-	// }
 	if (final > 1.0)
 		return (1.0);
 	else
