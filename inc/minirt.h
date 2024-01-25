@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 16:54:26 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 16:58:00 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct s_o_l // light
 {
 	t_point3	pos;
 	double		brightness_ratio;
+	t_rgb		rgb;
 }	t_o_l;
 
 typedef struct s_o_sp // sphere

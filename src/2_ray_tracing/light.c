@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 16:54:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 16:59:50 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,16 @@ double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 
 void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)
 {
-	double	intensity;
+	double	spotlight;
+	double	final;
 
-	intensity = get_local_intensity(n, hit_point, data);
-	rgb->r *= intensity;
-	rgb->g *= intensity;
-	rgb->b *= intensity;
+	spotlight = spotlight_intensity(n, hit_point, data);
+	if (spotlight)
+		*rgb = alter_colour(rgb, &data->light->rgb);
+	final = spotlight + data->ambient_lighting->ratio;
+	if (final > 1.0)
+		final = 1.0;
+	rgb->r *= final;
+	rgb->g *= final;
+	rgb->b *= final;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:22 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/16 22:18:16 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:01:45 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ t_o_l	*parse_light(char *s)
 	light->pos.z = get_double(&s[i]);
 	i = next_float_index(s, i);
 	light->brightness_ratio = get_double(&s[i]);
+	i = next_float_index(s, i);
+	light->rgb.r = ft_atoi(&s[i]);
+	i = next_float_index(s, i);
+	light->rgb.g = ft_atoi(&s[i]);
+	i = next_float_index(s, i);
+	light->rgb.b = ft_atoi(&s[i]);
 	return (light);
 }
 
