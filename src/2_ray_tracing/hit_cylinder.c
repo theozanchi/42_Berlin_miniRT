@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 08:37:36 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 18:07:43 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 11:34:44 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ double	hit_cyl_tube(t_o_cy *cyl, t_ray *ray)
 		return (-1.0);
 }
 
-double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
+double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_hit_part side)
 {
 	double	t;
 	double	pc_len;
@@ -81,7 +81,7 @@ double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 		else
 			return (-1.0);
 	}
-	else
+	else if (side == BOTTOM)
 	{
 		t = hit_plane(cyl->bottom_plane, ray, NULL);
 		pc_len = vec_len(vec_sub(point_on_ray(ray, t), cyl->bottom_plane->pos));
@@ -90,6 +90,8 @@ double	hit_cyl_cap(t_o_cy *cyl, t_ray *ray, enum e_side side)
 		else
 			return (-1.0);
 	}
+	else
+		return (-1.0);
 }
 
 double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
@@ -108,14 +110,15 @@ double	hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj)
 	if (t > 0.0)
 	{
 		if (hit_obj)
-		{
-			if (t == t_tube)
-				**hit_obj = (t_object *)cyl;
-			else if (t == t_top)
-				**hit_obj = (t_object *)cyl->top_plane;
-			else
-				**hit_obj = (t_object *)cyl->bottom_plane;
-		}
+			**hit_obj = (t_object *)cyl;
+		if (t == t_tube)
+			cyl->hit_part = TUBE;
+		else if (t == t_top)
+			cyl->hit_part = TOP;
+		else
+			cyl->hit_part = BOTTOM;
 	}
+	else
+		cyl->hit_part = NONE;
 	return (t);
 }

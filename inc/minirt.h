@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 19:08:08 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 12:03:46 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ enum
 	NONE
 };
 
-enum e_side {
-	TOP,
-	BOTTOM
-};
-
 enum
 {
 	Vx,
@@ -99,8 +94,14 @@ enum
 	Vz,
 };
 
-enum
-{
+enum e_hit_part {
+	NOT_HIT,
+	TUBE,
+	TOP,
+	BOTTOM
+};
+
+enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -192,6 +193,7 @@ typedef struct s_o_cy // cylinder
 	double			height;
 	t_o_pl			*top_plane;
 	t_o_pl			*bottom_plane;
+	enum e_hit_part	hit_part;
 }	t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
