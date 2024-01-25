@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 12:12:12 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 16:54:39 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 	{
 		hit_point = point_on_ray(ray, t);
 		n = normal_vec3(hit_point, hit_obj, ray);
-		rgb = compute_colour(hit_obj, data);
+		rgb = alter_colour(&hit_obj->rgb, &data->ambient_lighting->rgb);
 		modify_intensity(&rgb, n, hit_point, data);
-		if (DEBUG_COLOR)
-			printf("Normal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
 		return (rgb_to_colour(rgb));
 	}
 	return (BACKGROUND_COLOUR);

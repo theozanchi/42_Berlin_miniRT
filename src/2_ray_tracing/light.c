@@ -6,36 +6,36 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 12:10:46 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 16:54:11 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "algebra.h"
 
-t_rgb	compute_colour(t_object *hitted_object, t_data *data)
+t_rgb	alter_colour(t_rgb *ref, t_rgb *source)
 {
-	t_rgb	rgb;
+	t_rgb	new;
 	int		temp_r;
 	int		temp_g;
 	int		temp_b;
 
-	temp_r = hitted_object->rgb.r * data->ambient_lighting->rgb.r / 255;
-	temp_g = hitted_object->rgb.g * data->ambient_lighting->rgb.g / 255;
-	temp_b = hitted_object->rgb.b * data->ambient_lighting->rgb.b / 255;
+	temp_r = ref->r * source->r / 255;
+	temp_g = ref->g * source->g / 255;
+	temp_b = ref->b * source->b / 255;
 	if (temp_r <= 255)
-		rgb.r = temp_r;
+		new.r = temp_r;
 	else
-		rgb.r = 255;
+		new.r = 255;
 	if (temp_g <= 255)
-		rgb.g = temp_g;
+		new.g = temp_g;
 	else
-		rgb.g = 255;
+		new.g = 255;
 	if (temp_b <= 255)
-		rgb.b = temp_b;
+		new.b = temp_b;
 	else
-		rgb.b = 255;
-	return (rgb);
+		new.b = 255;
+	return (new);
 }
 
 double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
@@ -60,8 +60,8 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 		intensity = dot(n, *shadow_ray->direction)
 			* data->light->brightness_ratio;
 	free_and_set_to_null(1, shadow_ray);
-	if (DEBUG_SPOTLIGHT && intensity > 0.0)
-		printf("\nNormal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
+	if (intensity < 0.0)
+		return (0.0);
 	return (intensity);
 }
 
@@ -73,8 +73,6 @@ double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 
 	ambient = data->ambient_lighting->ratio;
 	spotlight = spotlight_intensity(n, hit_point, data);
-	if (spotlight < 0.0)
-		spotlight = 0.0;
 	final = ambient + spotlight;
 	if (final > 1.0)
 		return (1.0);
