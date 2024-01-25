@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 17:42:52 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:40:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,53 +38,75 @@ t_rgb	alter_colour(t_rgb *ref, t_rgb *source)
 	return (new);
 }
 
-t_ray	*create_shadow_ray(t_vec3 n, t_point3 hit_point, t_data *data)
+t_ray	*create_shadow_ray(t_hp_data hp_data, t_data *data)
 {
 	t_ray		*shadow_ray;
 	t_point3	origin;
 	t_vec3		direction;
 
 	shadow_ray = malloc(sizeof(t_ray));
-	ft_memset(shadow_ray, 0, sizeof(t_ray));
-	origin = vec_add(hit_point, mul_scalar(n, EPSILON));
-	shadow_ray->origin = &origin;
-	direction = normalize(vec_sub(data->light->pos, hit_point));
-	shadow_ray->direction = &direction;
+	shadow_ray->origin = malloc(sizeof(t_vec3));
+	shadow_ray->direction = malloc(sizeof(t_vec3));
+	origin = vec_add(hp_data.hit_point, mul_scalar(hp_data.n, EPSILON));
+	*shadow_ray->origin = origin;
+	direction = normalize(vec_sub(data->light->pos, hp_data.hit_point));
+	*shadow_ray->direction = direction;
 	return (shadow_ray);
 }
 
-double	spotlight_intensity(t_vec3 n, t_ray *shadow_ray, t_point3 hit_point, t_data *data)
+double	spotlight_intensity(t_hp_data hp_data, t_ray *shadow_ray, t_data *data)
 {
 	double		intensity;
 	double		t;
 
 	t = hit_object(data->first, shadow_ray, NULL);
 	if (SHADOW
-		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
+		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hp_data.hit_point)))
 		intensity = 0.0;
 	else
-		intensity = dot(n, *shadow_ray->direction)
-			* data->light->brightness_ratio;
+		intensity = dot(hp_data.n, *shadow_ray->direction);
 	if (intensity < 0.0)
 		return (0.0);
 	return (intensity);
 }
 
-void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)
+double	specular_intensity(t_hp_data hp_data, t_ray *shadow_ray)
 {
-	t_ray	*shadow_ray;
+	t_vec3	r;
+	double	intensity;
+
+	r = vec_sub(mul_scalar(hp_data.n, 2 * 
+				dot(hp_data.n, *shadow_ray->direction)),
+			*shadow_ray->direction);
+	r = normalize(r);
+	intensity = pow(dot(r, normalize(*hp_data.ray->direction)), 500);
+	if (intensity < 0.0)
+		return (0.0);
+	return (intensity);
+}
+
+void	modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data)
+{
+	t_ray	*shdw_ray;
 	double	spotlight;
+	double	specular;
 	double	final;
 
-	shadow_ray = create_shadow_ray(n, hit_point, data);
-	spotlight = spotlight_intensity(n, shadow_ray, hit_point, data);
+	shdw_ray = create_shadow_ray(hp_data, data);
+	spotlight = spotlight_intensity(hp_data, shdw_ray, data);
+	specular = 0.0;
 	if (spotlight)
+	{
 		*rgb = alter_colour(rgb, &data->light->rgb);
-	final = spotlight + data->ambient_lighting->ratio;
+		if (SPECULAR)
+			specular = specular_intensity(hp_data, shdw_ray);
+	}
+	final = (spotlight + specular) * data->light->brightness_ratio
+		+ data->ambient_lighting->ratio;
 	if (final > 1.0)
 		final = 1.0;
 	rgb->r *= final;
 	rgb->g *= final;
 	rgb->b *= final;
-	free_and_set_to_null(1, shadow_ray);
+	free_and_set_to_null(3, shdw_ray->origin, shdw_ray->direction, shdw_ray);
 }

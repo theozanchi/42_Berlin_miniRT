@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 17:42:07 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:38:40 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@
 
 # ifndef SHADOW
 #  define SHADOW 1
+# endif
+
+# ifndef SPECULAR
+#  define SPECULAR 1
 # endif
 
 # ifndef DEBUG_PARSE
@@ -248,6 +252,13 @@ typedef struct s_vp
 	double			***points;
 }					t_vp;
 
+typedef struct s_hp_data
+{
+	t_point3	hit_point;
+	t_ray		*ray;
+	t_vec3		n;
+}	t_hp_data;
+
 typedef struct s_data
 {
 	void			*mlx_ptr;
@@ -387,8 +398,7 @@ double				hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
 t_vec3		normal_vec3(t_point3 hit_point, t_object *hit_obj, t_ray *ray);
 
 // light.c
-double	spotlight_intensity(t_vec3 n, t_ray *shadow_ray, t_point3 hit_point, t_data *data);
 t_rgb	alter_colour(t_rgb *ref, t_rgb *source);
-void		modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hitted_point, t_data *data);
+void	modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data);
 
 #endif
