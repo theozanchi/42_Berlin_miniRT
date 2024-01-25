@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/25 16:59:50 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 17:42:52 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ t_rgb	alter_colour(t_rgb *ref, t_rgb *source)
 	return (new);
 }
 
-double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
+t_ray	*create_shadow_ray(t_vec3 n, t_point3 hit_point, t_data *data)
 {
 	t_ray		*shadow_ray;
 	t_point3	origin;
 	t_vec3		direction;
-	double		intensity;
-	double		t;
 
 	shadow_ray = malloc(sizeof(t_ray));
 	ft_memset(shadow_ray, 0, sizeof(t_ray));
@@ -52,6 +50,14 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	shadow_ray->origin = &origin;
 	direction = normalize(vec_sub(data->light->pos, hit_point));
 	shadow_ray->direction = &direction;
+	return (shadow_ray);
+}
+
+double	spotlight_intensity(t_vec3 n, t_ray *shadow_ray, t_point3 hit_point, t_data *data)
+{
+	double		intensity;
+	double		t;
+
 	t = hit_object(data->first, shadow_ray, NULL);
 	if (SHADOW
 		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hit_point)))
@@ -59,33 +65,19 @@ double	spotlight_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
 	else
 		intensity = dot(n, *shadow_ray->direction)
 			* data->light->brightness_ratio;
-	free_and_set_to_null(1, shadow_ray);
 	if (intensity < 0.0)
 		return (0.0);
 	return (intensity);
 }
 
-double	get_local_intensity(t_vec3 n, t_point3 hit_point, t_data *data)
-{
-	double	ambient;
-	double	spotlight;
-	double	final;
-
-	ambient = data->ambient_lighting->ratio;
-	spotlight = spotlight_intensity(n, hit_point, data);
-	final = ambient + spotlight;
-	if (final > 1.0)
-		return (1.0);
-	else
-		return (final);
-}
-
 void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)
 {
+	t_ray	*shadow_ray;
 	double	spotlight;
 	double	final;
 
-	spotlight = spotlight_intensity(n, hit_point, data);
+	shadow_ray = create_shadow_ray(n, hit_point, data);
+	spotlight = spotlight_intensity(n, shadow_ray, hit_point, data);
 	if (spotlight)
 		*rgb = alter_colour(rgb, &data->light->rgb);
 	final = spotlight + data->ambient_lighting->ratio;
@@ -94,4 +86,5 @@ void	modify_intensity(t_rgb *rgb, t_vec3 n, t_point3 hit_point, t_data *data)
 	rgb->r *= final;
 	rgb->g *= final;
 	rgb->b *= final;
+	free_and_set_to_null(1, shadow_ray);
 }
