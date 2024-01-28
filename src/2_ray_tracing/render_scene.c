@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:05:37 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 23:26:02 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:17:07 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,17 @@ t_colour	ray_colour(t_data *data, t_ray *ray)
 {
 	double		t;
 	t_object	*hit_obj;
-	t_point3	hit_point;
-	t_vec3		n;
+	t_hp_data	hp_data;
 	t_rgb		rgb;
 
 	t = hit_object(data->first, ray, &hit_obj);
 	if (t > 0.0)
 	{
-		hit_point = point_on_ray(ray, t);
-		n = normal_vec3(hit_point, hit_obj, ray);
-		rgb = compute_colour(hit_obj, data);
-		modify_intensity(&rgb, n, hit_point, data);
-		if (DEBUG_COLOR)
-			printf("Normal: (%.2f, %.2f, %.2f)\n", n.x, n.y, n.z);
+		hp_data.hit_point = point_on_ray(ray, t);
+		hp_data.n = normal_vec3(hp_data.hit_point, hit_obj, ray);
+		hp_data.ray = ray;
+		rgb = alter_colour(&hit_obj->rgb, &data->ambient_lighting->rgb);
+		modify_intensity(&rgb, hp_data, data);
 		return (rgb_to_colour(rgb));
 	}
 	return (BACKGROUND_COLOUR);
@@ -94,8 +92,6 @@ void	get_ray(t_ray *ray, t_data *data, int x, int y)
 	}
 }
 
-void	create_ray(t_ray *ray, t_data *data, int x, int y);
-
 /**
  * @brief Renders the main scene by processing ray per ray, using the array
  * located at data->vp->points
@@ -120,16 +116,7 @@ void	render_scene(t_data *data)
 		{
 			render_loading_bar();
 			get_ray(ray, data, x, y);
-			// create_ray(ray, data, x, y);
-			if (DEBUG_COLOR)
-			{
-				printf("\nPixel (%i, %i)\n", x, y);
-				printf("Ray origin: (%.2f, %.2f, %.2f)\n", ray->origin->x, ray->origin->y, ray->origin->z);
-				printf("Ray direction: (%.2f, %.2f, %.2f)\n", ray->direction->x, ray->direction->y, ray->direction->z);
-			}
 			colour = ray_colour(data, ray);
-			if (DEBUG_COLOR)
-				printf("Colour: 0x%X\n", colour);;
 			my_mlx_pixel_put(&data->img, x, y, colour);
 			y++;
 		}

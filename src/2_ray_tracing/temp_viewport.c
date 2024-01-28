@@ -69,6 +69,17 @@
 // /*   Updated: 2024/01/24 18:15:23 by tzanchi          ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   temp_viewport.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/24 18:15:20 by tzanchi           #+#    #+#             */
+/*   Updated: 2024/01/25 12:11:46 by tzanchi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 // #include "minirt.h"
 // #include "algebra.h"
@@ -110,11 +121,11 @@
 // {
 // 	t_point3	point;
 
-// 	ray->origin = &data->camera->pos;
-// 	point = pixel_to_coor(data, x, y);
-// 	point = mtx_vec_prod(transf_mtx(data), point);
-// 	point = vec_add(point, data->camera->pos);
-// 	ray->direction->x = point.x - data->camera->pos.x;
-// 	ray->direction->y = point.y - data->camera->pos.y;
-// 	ray->direction->z = point.z - data->camera->pos.z;
-// }
+	ray->origin = &data->camera->pos;
+	point = pixel_to_coor(data, x, y);
+	point = mtx_vec_prod(transf_mtx(data), point);
+	point = vec_add(point, data->camera->pos);
+	ray->direction->x = point.x - data->camera->pos.x;
+	ray->direction->y = point.y - data->camera->pos.y;
+	ray->direction->z = point.z - data->camera->pos.z;
+}
