@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 17:46:34 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:29:36 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av)
 	{
 		error_parsing(ps, data);
 		if (ps >= 0)
-			free_resources_and_quit(data);
+			free_resources_and_quit(data, ps, data->rm_obj);
 		return (EXIT_FAILURE);
 	}
 	viewport(data);

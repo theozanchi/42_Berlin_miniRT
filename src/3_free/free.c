@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 10:09:53 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/28 18:00:38 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_objects(t_data *data)
 	t_o_cy		*ptr;
 
 	current = data->first;
+	printf("current %p\n", current);
 	while (current)
 	{
 		temp = current;
@@ -47,7 +48,7 @@ void	free_objects(t_data *data)
  * @param data Main data structure
  * @return 0 
  */
-int	free_resources_and_quit(t_data *data)
+int	free_resources_and_quit(t_data *data, int a, int b)
 {
 	mlx_loop_end(data->mlx_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
@@ -55,8 +56,11 @@ int	free_resources_and_quit(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	free_objects(data);
-	free_triple_double(data->vp->points, (int)WIDTH, (int)HEIGTH);
-	free(data->vp);
+	if(a == 0 && b == 0)
+	{
+		free_triple_double(data->vp->points, (int)WIDTH, (int)HEIGTH);
+		free(data->vp);
+	}
 	free_and_set_to_null(4, data->ambient_lighting, data->camera,
 		data->light, data);
 	exit(EXIT_SUCCESS);

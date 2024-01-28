@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/28 17:37:41 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:42:26 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,9 +210,9 @@ typedef struct s_o_cy // cylinder
 
 typedef struct s_object // can be type casted to any object using id
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
 	char			personal_id;
 }					t_object;
 
@@ -280,6 +280,12 @@ typedef struct s_pdp
 	double			distance_x;
 }					t_pdp;
 
+typedef struct s_parse_objects
+{
+	t_object	*objects;
+	t_object	*next;
+	t_object	*first;
+}				t_parse_objects;
 
 typedef struct s_data
 {
@@ -297,7 +303,7 @@ typedef struct s_data
 
 /* free.c ******************************************************************* */
 
-int					free_resources_and_quit(t_data *data);
+int					free_resources_and_quit(t_data *data, int a, int b);
 void				free_objects(t_data *data);
 
 // debugging
@@ -320,7 +326,7 @@ char				**read_file(int fd);
 double				get_double(char *s);
 int					next_float_index(char *s, int i);
 int					parse_environment(char **red, t_data *data);
-t_object			*parse_objects(char **red, t_data *data);
+void				parse_objects(char **red, t_data *data);
 int					parse_scene(t_data *data, int fd);
 t_o_a				*parse_ambient_lighting(char *s);
 t_o_l				*parse_light(char *s);

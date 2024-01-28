@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 23:28:33 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:42:53 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,45 +35,56 @@ int	is_object(char **red, int i)
 	return (0);
 }
 
-t_object	*parse_objects(char **red, t_data *data)
+void	link_these_objects(t_parse_objects *po, t_data *data)
+{
+	if (po->first == NULL)
+	{
+		po->first = po->next;
+		po->first->next = NULL;
+		po->objects = po->first;
+		data->first = po->first;
+	}
+	else
+	{
+		po->objects->next = po->next;
+		po->objects = po->next;
+		po->objects->next = NULL;
+	}
+}
+
+int	error_check(t_data *data, char **red, int i)
+{
+	data->rm_obj = right_amount_obj(red[i]);
+	if(valid_env(red[i]) || data->rm_obj)
+	{
+		free_objects(data);
+		return (1);
+	}
+	return (0);
+}
+
+void	parse_objects(char **red, t_data *data)
 {
 	int			i;
-	t_object	*objects;
-	t_object	*next;
-	t_object	*first;
-	int			ve;
+	t_parse_objects	*po;
 
 	i = 0;
-	first = NULL;
+	po = malloc(sizeof(po));
+	po->first = NULL;
+	po->objects = NULL;
 	while (red[i])
 	{
 		if (ft_strlen (red[i]) >= 2)
 		{
-			next = parse_objects_one_by_one(red, i);
 			if (is_object(red, i))
 			{
-				if (first == NULL)
-				{
-					first = next;
-					first->next = NULL;
-					objects = first;
-				}
-				else
-				{
-					objects->next = next;
-					objects = next;
-					objects->next = NULL;
-				}
-				data->rm_obj = right_amount_obj(red[i]);
-				ve = valid_env(red[i]);
-				if(ve || data->rm_obj)
-				{
-					free_objects(data);
-					return (NULL);
-				}
+				po->next = parse_objects_one_by_one(red, i);
+				link_these_objects(po, data);
+				if(error_check(data, red, i))
+					return ;
 			}
 		}
 		i++;
 	}
-	return (first);
+	free(po);
 }
