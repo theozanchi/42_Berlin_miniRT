@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 02:20:13 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:11:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 char	**read_file(int fd)
 {
@@ -88,8 +88,8 @@ double	get_double(char *s)
 
 int	parse_scene(t_data *data, int fd)
 {
-	char			**red;
-	int				pe;
+	char	**red;
+	int		pe;
 
 	red = read_file(fd);
 	close(fd);

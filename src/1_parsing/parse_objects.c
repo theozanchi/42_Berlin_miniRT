@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 02:45:09 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:28:33 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 #include "algebra.h"
 
 t_object	*parse_objects_one_by_one(char **red, int i)

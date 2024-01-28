@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:22:19 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 00:21:47 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:29:15 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 // C = camera
 // A = ambient light

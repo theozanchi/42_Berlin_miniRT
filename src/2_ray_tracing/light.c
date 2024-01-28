@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 19:37:51 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:25:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 #include "algebra.h"
 
 t_rgb	compute_colour(t_object *hitted_object, t_data *data)

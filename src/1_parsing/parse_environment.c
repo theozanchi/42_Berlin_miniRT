@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 00:45:53 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/26 00:51:50 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 int	check_amount(char **red)
 {

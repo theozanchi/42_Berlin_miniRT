@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 23:56:42 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 00:00:51 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:29:42 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 int	translate_camera(t_o_c *camera)
 {

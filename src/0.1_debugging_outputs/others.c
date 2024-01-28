@@ -6,11 +6,33 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 02:56:38 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:13:33 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
+#include "../../inc/algebra.h"
+
+void	output_local_vectors(double ***points)
+{
+	t_vec3	top_left;
+	t_vec3	bottom_left;
+	t_vec3	top_right;
+	t_vec3	vec_down;
+	t_vec3	vec_right;
+
+	top_left = vec(points[0][0][0], points[0][0][1], points[0][0][2]);
+	bottom_left = vec(points[0][HEIGTH -1][0], points[0][HEIGTH -1][1], points[0][HEIGTH -1][2]);
+	top_right = vec(points[WIDTH -1][0][0], points[WIDTH -1][0][1], points[WIDTH -1][0][2]);
+	vec_down = calculate_vector(top_left, bottom_left);
+	vec_right = calculate_vector(top_left, top_right);
+	printf("Vec Down\n");
+	output_vec3(vec_down);
+	printf("\n");
+	printf("Vec Right\n");
+	output_vec3(vec_right);
+	printf("\n");
+}
 
 void	output_vec3(t_vec3 vec)
 {
@@ -25,7 +47,6 @@ void	output_viewport(double ***arr)
 	unsigned int	y;
 
 	x = 0;
-	printf("window height = %u\n", HEIGTH);
 	while (x < WIDTH)
 	{
 		y = 0;

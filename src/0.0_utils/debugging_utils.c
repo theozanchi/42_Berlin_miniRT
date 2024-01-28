@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:23:46 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/16 22:00:30 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/25 02:22:48 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 /**
  * @brief Renders a loading bar for 0 to 100%. Needs to be called before

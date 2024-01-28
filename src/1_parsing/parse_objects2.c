@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:49:40 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 19:35:01 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/25 00:00:17 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 #include "algebra.h"
 
 t_object	*parse_sphere(char *s)

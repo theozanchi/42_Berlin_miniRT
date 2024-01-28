@@ -6,12 +6,12 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:56:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 19:20:28 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:27:00 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 // double	distance_between_two_points(t_point3 p1, t_point3 p2)
 // {

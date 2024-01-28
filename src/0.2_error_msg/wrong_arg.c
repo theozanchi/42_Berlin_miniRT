@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 19:35:34 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:11:28 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 void	error_parsing(int ps, t_data *data)
 {

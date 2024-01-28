@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/24 19:40:13 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 01:41:49 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 #include "algebra.h"
 
 double	longueur_hypothenuse(t_data *data)
@@ -52,68 +52,112 @@ void	viewport_trigo(t_data *data)
 	data->vp->win_ratio = (((double)HEIGTH / (double)WIDTH) * data->vp->aigu);
 }
 
-void	viewport_width(t_data *data, t_vec3 *center)
+void	viewport_local_vectors_and_height(t_data *data)
 {
-	data->vp->min_x = center->x - data->vp->aigu;
-	data->vp->max_x = center->x + data->vp->aigu;
-	data->vp->min_y = center->y - data->vp->win_ratio;
-	data->vp->max_y = center->y + data->vp->win_ratio;
-	data->vp->width = data->vp->max_x - data->vp->min_x;
-	data->vp->height = data->vp->max_y - data->vp->min_y;
+	t_vec3	up_vec;
+
+	up_vec.x = 0;
+	up_vec.y = 1;
+	up_vec.z = 0;
+	data->vp->local_right = prod(up_vec, data->camera->vector);
+	data->vp->local_up = prod(data->vp->local_right, data->camera->vector);
+	data->vp->local_down = data->vp->local_up;
+	data->vp->local_up = neg(data->vp->local_up);
+	data->vp->local_right = neg(data->vp->local_right);
+	data->vp->local_right = normalize(data->vp->local_right);
+	printf("right\n");
+	output_vec3(data->vp->local_right);
+	data->vp->local_up = normalize(data->vp->local_up);
+	data->vp->width = data->vp->aigu * 2;
+	data->vp->height = (((double)HEIGTH / (double)WIDTH) * data->vp->width);
 }
 
-void	set_vector(double *arr, t_data *data)
+t_vec3	find_top_left_ray(t_data *data, t_vec3 center)
 {
-	arr[3] = arr[0] - data->camera->pos.x;
-	arr[4] = arr[1] - data->camera->pos.y;
-	arr[5] = arr[2] - data->camera->pos.z;
+	t_vec3	top_left;
+	double	len_right;
+	double	len_bottom;
+
+	len_right = (data->vp->width / (double)2);
+	len_bottom = (data->vp->height / (double)2);
+	top_left = center;
+	printf("top left\n");
+	output_vec3(top_left);
+	top_left = vec_sub(top_left, \
+		vec_multiplier(data->vp->local_right, data->vp->width / 2));
+	// top_left = point_travel_by_vec_and_length(top_left, data->vp->local_right, -len_right);
+	printf("top left\n");
+	output_vec3(top_left);
+	top_left = point_travel_by_vec_and_length(top_left, data->vp->local_up, len_bottom);
+	printf("top left\n");
+	output_vec3(top_left);
+	return (top_left);
 }
 
-double	***parse_dem_points(t_data *data)
+void	set_vector(double *arr, t_pdp var, t_data *data, t_vec3 top_left)
 {
-	double			***ret;
-	unsigned int	x;
-	unsigned int	y;
-	double			pos_x_incr;
-	double			pos_y_incr;
-	double			pos_x;
-	double			pos_y;
+	t_vec3	right;
+	t_vec3	point;
+	t_vec3	vector;
+
+	right = normalize(data->vp->local_right);
+	point = point_travel_by_vec_and_length(top_left, right, var.distance_x);
+	point = point_travel_by_vec_and_length(point, data->vp->local_down, var.distance_y);
+	arr[0] = point.x;
+	arr[1] = point.y;
+	arr[2] = point.z;
+	vector = unit_vec(arr[0] - data->camera->pos.x, arr[1] - data->camera->pos.y, arr[2] - data->camera->pos.z);
+	arr[3] = vector.x;
+	arr[4] = vector.y;
+	arr[5] = vector.z;
+}
+
+double	***parse_dem_points(t_data *data, t_vec3 top_left)
+{
+	double	***ret;
+	t_pdp	var;
 
 	ret = malloc(sizeof(double **) * WIDTH);
-	pos_x_incr = ((double)data->vp->width) / ((double)WIDTH - 1.0);
-	pos_y_incr = ((double)data->vp->height) / ((double)HEIGTH - 1.0);
-	x = 0;
-	pos_x = 0;
-	while(x < WIDTH)
+	var.x = 0;
+	var.distance_x = 0;
+	while(var.x < WIDTH)
 	{
-		ret[x] = malloc(sizeof(double *) * HEIGTH);
-		y = 0;
-		pos_y = 0;
-		while(y < HEIGTH)
+		ret[var.x] = malloc(sizeof(double *) * HEIGTH);
+		var.y = 0;
+		var.distance_y = 0;
+		while(var.y < HEIGTH)
 		{
-			ret[x][y] = malloc(sizeof(double) * 6);
-			ret[x][y][0] = data->vp->min_x + pos_x;
-			ret[x][y][1] = data->vp->max_y - pos_y;
-			ret[x][y][2] = data->camera->vector.z + data->camera->pos.z;
-			set_vector(ret[x][y], data);
-			y++;
-			pos_y += pos_y_incr;
+			ret[var.x][var.y] = malloc(sizeof(double) * 6);
+			set_vector(ret[var.x][var.y], var, data, top_left);
+			var.y++;
+			var.distance_y = var.distance_y + data->vp->height / (double)HEIGTH;
 		}
-		pos_x += pos_x_incr;
-		x++;
+		var.distance_x = var.distance_x + data->vp->width / (double)WIDTH;
+		var.x++;
 	}
+	printf("final distanwce x = %lf\nfinal distance y = %lf\n", var.distance_x, var.distance_y);
+	printf("width = %lf, height = %lf\n", data->vp->width, data->vp->height);
 	return (ret);
 }
 
 void	viewport(t_data *data)
 {
-	t_vec3	*center;
+	t_vec3	center;
+	t_vec3	top_left;
 
 	data->vp = malloc(sizeof(t_vp));
 	center = viewport_center(data, data->camera->pos);
 	viewport_trigo(data);
-	viewport_width(data, center);
-	data->vp->points = parse_dem_points(data);
-	free(center);
-	// output_viewport(data->vp->points);
+	viewport_local_vectors_and_height(data);
+	top_left = find_top_left_ray(data, center);
+	printf("top left\n");
+	output_vec3(top_left);
+	printf("center\n");
+	output_vec3(center);
+	// viewport_width(data, center);
+	data->vp->points = parse_dem_points(data, top_left);
+	// printf("local up\n");
+	// output_vec3(data->vp->local_up);
+	output_local_vectors(data->vp->points);
+	output_viewport(data->vp->points);
 }

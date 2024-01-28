@@ -1,16 +1,16 @@
 // /* ************************************************************************** */
 // /*                                                                            */
 // /*                                                        :::      ::::::::   */
-// /*   viewport.c                                         :+:      :+:    :+:   */
+// /*   viewport_old.c                                     :+:      :+:    :+:   */
 // /*                                                    +:+ +:+         +:+     */
 // /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-// /*   Updated: 2024/01/24 17:28:16 by helauren         ###   ########.fr       */
+// /*   Updated: 2024/01/25 19:36:29 by helauren         ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
-// #include "minirt.h"
+// #include "../../inc/minirt.h"
 // #include "algebra.h"
 
 // void	viewport_trigo(t_data *data)
@@ -49,7 +49,7 @@
 // 	return (aigu);
 // }
 
-// void	viewport_width(t_data *data, t_vec3 *center)
+// void	viewport_width(t_data *data, t_vec3 center)
 // {
 // 	double	hypothenuse;
 // 	double	aigu;
@@ -59,19 +59,34 @@
 // 	aigu = longueur_aigu(hypothenuse);
 // 	win_ratio = (((double)HEIGTH / (double)WIDTH) * aigu);
 // 	// printf("hypothenuse = %f, aigu = %f\n", hypothenuse, aigu);
-// 	data->vp->min_x = center->x - aigu;
-// 	data->vp->max_x = center->x + aigu;
-// 	data->vp->min_y = center->y - win_ratio;
-// 	data->vp->max_y = center->y + win_ratio;
+// 	data->vp->min_x = center.x - aigu;
+// 	data->vp->max_x = center.x + aigu;
+// 	data->vp->min_y = center.y - win_ratio;
+// 	data->vp->max_y = center.y + win_ratio;
 // 	data->vp->width = data->vp->max_x - data->vp->min_x;
 // 	data->vp->height = data->vp->max_y - data->vp->min_y;
 // }
 
 // void	set_vector(double *arr, t_data *data)
 // {
-// 	arr[3] = arr[0] - data->camera->pos.x;
-// 	arr[4] = arr[1] - data->camera->pos.y;
-// 	arr[5] = arr[2] - data->camera->pos.z;
+// 	t_vec3	vector;
+// 	static int	i = 0;
+
+		
+// 	// vector = calculate_vector(data->camera->pos, vector);
+// 	// printf("vector x = %lf, vector y = %lf, vector z = %lf\n", vector.x, vector.y, vector.z);
+// 	vector = unit_vec(arr[0] - data->camera->pos.x, arr[1] - data->camera->pos.y, arr[2] - data->camera->pos.z);
+// 	arr[3] = vector.x;
+// 	arr[4] = vector.y;
+// 	arr[5] = vector.z;
+// 	if (i == 0)
+// 	{
+// 		printf("cam vec z = %lf, cam pos z = %lf\n",data->camera->vector.z, data->camera->pos.z);
+// 		printf("pos x = %lf, pos y = %lf, pos z = %lf\n", arr[0], arr[1], arr[2]);
+// 		printf("vec x = %lf, vec y = %lf, vec z = %lf\n", arr[3], arr[4], arr[5]);
+// 		i++;
+// 	}
+// 	vector = unit_vec(arr[3], arr[4], arr[5]);
 // }
 
 // double	***parse_dem_points(t_data *data)
@@ -118,13 +133,14 @@
 
 // void	viewport(t_data *data)
 // {
-// 	t_vec3	*center;
+// 	t_vec3	center;
 
 // 	data->vp = malloc(sizeof(t_vp));
 // 	center = viewport_center(data, data->camera->pos);
+// 	center = normalize(center);
 // 	viewport_trigo(data);
 // 	viewport_width(data, center);
 // 	data->vp->points = parse_dem_points(data);
-// 	free(center);
-// 	// output_viewport(data->vp->points);
+// 	output_local_vectors(data->vp->points);
+// 	output_viewport(data->vp->points);
 // }

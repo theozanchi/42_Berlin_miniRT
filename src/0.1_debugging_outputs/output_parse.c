@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   output_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:19:45 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 12:13:27 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/25 00:59:13 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 void	output_a(t_o_a *ambient)
 {

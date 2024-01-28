@@ -6,11 +6,11 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:50:34 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/22 16:38:59 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:28:54 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 int	get_file_fd(char *s)
 {

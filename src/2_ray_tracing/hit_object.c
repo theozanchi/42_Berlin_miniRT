@@ -6,12 +6,12 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:42:01 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/24 19:36:20 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:25:54 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "algebra.h"
-#include "minirt.h"
+#include "../../inc/minirt.h"
 
 /**
  * @brief Checks if `ray` hits the `sphere`. If it is, `hit_obj` is updated with
