@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:22:19 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 17:51:38 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:43:29 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,8 @@ int	rotation(int keycode, t_data *data)
 {
 	t_object	*scroll;
 
-	if(keycode == K_C)
+	if(is_cam_rot_key(keycode))
 		rotate_camera(data->camera);
-	else if(keycode == K_A)
-		rotate_ambient(data->ambient_lighting);
-	else if(keycode == K_L)
-		rotate_light(data->light);
 	else
 	{
 		scroll = data->first;
@@ -46,5 +42,11 @@ int	rotation(int keycode, t_data *data)
 			scroll = scroll->next;
 		}
 	}
+	launching_mlx(data);
 	return (0);
 }
+
+	// else if(keycode == K_A)
+	// 	rotate_ambient(data->ambient_lighting);
+	// else if(keycode == K_L)
+	// 	rotate_light(data->light);

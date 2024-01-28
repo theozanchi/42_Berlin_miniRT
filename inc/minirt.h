@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/28 18:42:26 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 00:08:19 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,10 +301,14 @@ typedef struct s_data
 	int				obj_count;
 }					t_data;
 
+// main
+void	launching_mlx(t_data *data);
+
 /* free.c ******************************************************************* */
 
 int					free_resources_and_quit(t_data *data, int a, int b);
 void				free_objects(t_data *data);
+int					crappy_norm(t_parse_objects *po);
 
 // debugging
 void				output_parse(t_data *data);
@@ -326,7 +330,7 @@ char				**read_file(int fd);
 double				get_double(char *s);
 int					next_float_index(char *s, int i);
 int					parse_environment(char **red, t_data *data);
-void				parse_objects(char **red, t_data *data);
+int					parse_objects(char **red, t_data *data);
 int					parse_scene(t_data *data, int fd);
 t_o_a				*parse_ambient_lighting(char *s);
 t_o_l				*parse_light(char *s);
@@ -351,6 +355,7 @@ int					iterate_rgb_ints(char *red, int i);
 int					iterate_three_floats(char *red, int i);
 int					valid_env(char *red);
 int					valid_type(char *red);
+int					is_valid_char(char *red);
 
 // Viewport
 void				viewport(t_data *data);
@@ -373,6 +378,7 @@ int	rotate_cylinder(t_o_cy *cylinder);
 int	rotate_camera(t_o_c *camera);
 int	rotate_ambient(t_o_a *ambient);
 int	rotate_light(t_o_l *light);
+int	is_cam_rot_key(int keycode);
 
 // translation
 int	translation(int keycode, t_data *data);

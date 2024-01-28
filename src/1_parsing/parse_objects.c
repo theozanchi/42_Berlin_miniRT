@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 18:42:53 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 00:08:33 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int	error_check(t_data *data, char **red, int i)
 	return (0);
 }
 
-void	parse_objects(char **red, t_data *data)
+int	parse_objects(char **red, t_data *data)
 {
 	int			i;
 	t_parse_objects	*po;
 
 	i = 0;
-	po = malloc(sizeof(po));
+	po = malloc(sizeof(t_parse_objects));
 	po->first = NULL;
 	po->objects = NULL;
 	while (red[i])
@@ -81,10 +81,11 @@ void	parse_objects(char **red, t_data *data)
 				po->next = parse_objects_one_by_one(red, i);
 				link_these_objects(po, data);
 				if(error_check(data, red, i))
-					return ;
+					return (crappy_norm(po));
 			}
 		}
 		i++;
 	}
 	free(po);
+	return (0);
 }

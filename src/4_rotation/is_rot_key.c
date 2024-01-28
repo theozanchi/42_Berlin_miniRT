@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tr_objects.c                                       :+:      :+:    :+:   */
+/*   is_rot_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 23:56:47 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 23:36:13 by helauren         ###   ########.fr       */
+/*   Created: 2024/01/28 20:32:09 by helauren          #+#    #+#             */
+/*   Updated: 2024/01/28 20:34:48 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
 
-int	translate_sphere(t_o_sp *sphere)
+int	is_cam_rot_key(int keycode)
 {
-	sphere->pos.x = sphere->pos.x - 0.5;
-	return (0);
-}
-
-int	translate_plane(t_o_pl *plane)
-{
-	plane->pos.x = plane->pos.x - 0.5;
-	return (0);
-}
-
-int	translate_cylinder(t_o_cy *cylinder)
-{
-	cylinder->pos.x = cylinder->pos.x - 0.5;
+	if(keycode == K_A || keycode == K_S
+		|| keycode == K_W || keycode == K_D
+		|| keycode == K_Q || keycode == K_E)
+		return (1);
 	return (0);
 }

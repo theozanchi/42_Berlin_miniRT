@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:22 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/25 17:01:45 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/28 23:50:11 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minirt.h"
+
+t_o_c	*null_cam_vectors_safety(t_o_c *cam)
+{
+	if(cam->vector.x == 0 && cam->vector.y == 0 && cam->vector.z == 0)
+		cam->vector.z = 1;
+	return (cam);
+}
 
 t_o_c	*parse_camera(char *s)
 {
@@ -33,6 +40,7 @@ t_o_c	*parse_camera(char *s)
 	camera->vector.z = get_double(&s[i]);
 	i = next_float_index(s, i);
 	camera->fov = ft_atoi(&s[i]);
+	camera = null_cam_vectors_safety(camera);
 	return (camera);
 }
 

@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 18:29:36 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 23:39:14 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ t_data	*init_data(void)
 	return (data);
 }
 
+void	launching_mlx(t_data *data)
+{
+	viewport(data);
+	if (DEBUG_PARSE)
+		output_parse(data);
+	render_scene(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
+	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
+	mlx_loop(data->mlx_ptr);
+}
+
 int	main(int ac, char **av)
 {
 	int		fd;
@@ -51,13 +63,6 @@ int	main(int ac, char **av)
 			free_resources_and_quit(data, ps, data->rm_obj);
 		return (EXIT_FAILURE);
 	}
-	viewport(data);
-	if (DEBUG_PARSE)
-		output_parse(data);
-	render_scene(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
-	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
-	mlx_loop(data->mlx_ptr);
+	launching_mlx(data);
 	return (0);
 }

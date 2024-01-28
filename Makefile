@@ -6,7 +6,7 @@
 #    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/27 21:54:44 by helauren         ###   ########.fr        #
+#    Updated: 2024/01/28 20:33:25 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,13 +75,14 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				\
 				3_free/free.c \
 				\
-				4_rotation/rotation.c\
-				4_rotation/ro_environment.c\
-				4_rotation/ro_objects.c\
+				4_rotation/rotation.c \
+				4_rotation/ro_environment.c \
+				4_rotation/ro_objects.c \
+				4_rotation/is_rot_key.c \
 				\
-				5_translation/translation.c\
-				5_translation/tr_environment.c\
-				5_translation/tr_objects.c\
+				5_translation/translation.c \
+				5_translation/tr_environment.c \
+				5_translation/tr_objects.c \
 				keypress.c \
 				main.c
 

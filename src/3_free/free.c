@@ -6,11 +6,17 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 18:00:38 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 00:08:25 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	crappy_norm(t_parse_objects *po)
+{
+	free(po);
+	return (1);
+}
 
 /**
  * @brief Frees the list of objects
@@ -24,7 +30,6 @@ void	free_objects(t_data *data)
 	t_o_cy		*ptr;
 
 	current = data->first;
-	printf("current %p\n", current);
 	while (current)
 	{
 		temp = current;
