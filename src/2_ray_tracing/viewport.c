@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 01:41:49 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:45:57 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	viewport_trigo(t_data *data)
 	data->vp->win_ratio = (((double)HEIGTH / (double)WIDTH) * data->vp->aigu);
 }
 
+// data->vp->local_right = neg(data->vp->local_right);
+
 void	viewport_local_vectors_and_height(t_data *data)
 {
 	t_vec3	up_vec;
@@ -63,10 +65,7 @@ void	viewport_local_vectors_and_height(t_data *data)
 	data->vp->local_up = prod(data->vp->local_right, data->camera->vector);
 	data->vp->local_down = data->vp->local_up;
 	data->vp->local_up = neg(data->vp->local_up);
-	data->vp->local_right = neg(data->vp->local_right);
 	data->vp->local_right = normalize(data->vp->local_right);
-	printf("right\n");
-	output_vec3(data->vp->local_right);
 	data->vp->local_up = normalize(data->vp->local_up);
 	data->vp->width = data->vp->aigu * 2;
 	data->vp->height = (((double)HEIGTH / (double)WIDTH) * data->vp->width);
@@ -81,16 +80,9 @@ t_vec3	find_top_left_ray(t_data *data, t_vec3 center)
 	len_right = (data->vp->width / (double)2);
 	len_bottom = (data->vp->height / (double)2);
 	top_left = center;
-	printf("top left\n");
-	output_vec3(top_left);
 	top_left = vec_sub(top_left, \
 		vec_multiplier(data->vp->local_right, data->vp->width / 2));
-	// top_left = point_travel_by_vec_and_length(top_left, data->vp->local_right, -len_right);
-	printf("top left\n");
-	output_vec3(top_left);
 	top_left = point_travel_by_vec_and_length(top_left, data->vp->local_up, len_bottom);
-	printf("top left\n");
-	output_vec3(top_left);
 	return (top_left);
 }
 
@@ -135,8 +127,6 @@ double	***parse_dem_points(t_data *data, t_vec3 top_left)
 		var.distance_x = var.distance_x + data->vp->width / (double)WIDTH;
 		var.x++;
 	}
-	printf("final distanwce x = %lf\nfinal distance y = %lf\n", var.distance_x, var.distance_y);
-	printf("width = %lf, height = %lf\n", data->vp->width, data->vp->height);
 	return (ret);
 }
 
@@ -150,14 +140,10 @@ void	viewport(t_data *data)
 	viewport_trigo(data);
 	viewport_local_vectors_and_height(data);
 	top_left = find_top_left_ray(data, center);
-	printf("top left\n");
-	output_vec3(top_left);
-	printf("center\n");
-	output_vec3(center);
-	// viewport_width(data, center);
 	data->vp->points = parse_dem_points(data, top_left);
-	// printf("local up\n");
-	// output_vec3(data->vp->local_up);
-	output_local_vectors(data->vp->points);
-	output_viewport(data->vp->points);
+	if (DEBUG_VIEWPORT)
+	{
+		output_local_vectors(data->vp->points);
+		output_viewport(data->vp->points);
+	}
 }

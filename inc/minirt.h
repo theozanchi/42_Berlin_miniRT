@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/28 17:15:29 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:37:41 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@
 #  define SPECULAR 1
 # endif
 
-# ifndef SPECULAR
-#  define SPECULAR 1
-# endif
-
 # ifndef DEBUG
 #  define DEBUG 1
 # endif
 
+# ifndef DEBUG_VIEWPORT
+#  define DEBUG_VIEWPORT 0
+# endif
 
 # ifndef DEBUG_SPOTLIGHT
 #  define DEBUG_SPOTLIGHT 0
@@ -388,12 +387,9 @@ double				hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
 t_vec3				normal_vec3(t_point3 hit_point, t_object *hit_obj, t_ray *ray);
 
 // light.c
-t_rgb	alter_colour(t_rgb *ref, t_rgb *source);
-void	modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data);
-double				spotlight_intensity(t_vec3 n, t_point3 hitted_point,
-						t_data *data);
+t_rgb				alter_colour(t_rgb *ref, t_rgb *source);
+void				modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data);
+double				spotlight_intensity(t_hp_data hp_data, t_ray *shadow_ray, t_data *data);
 t_rgb				compute_colour(t_object *hitted_object, t_data *data);
-void				modify_intensity(t_rgb *rgb, t_vec3 n,
-						t_point3 hitted_point, t_data *data);
 
 #endif

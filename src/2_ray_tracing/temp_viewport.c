@@ -121,11 +121,11 @@
 // {
 // 	t_point3	point;
 
-	ray->origin = &data->camera->pos;
-	point = pixel_to_coor(data, x, y);
-	point = mtx_vec_prod(transf_mtx(data), point);
-	point = vec_add(point, data->camera->pos);
-	ray->direction->x = point.x - data->camera->pos.x;
-	ray->direction->y = point.y - data->camera->pos.y;
-	ray->direction->z = point.z - data->camera->pos.z;
-}
+// 	ray->origin = &data->camera->pos;
+// 	point = pixel_to_coor(data, x, y);
+// 	point = mtx_vec_prod(transf_mtx(data), point);
+// 	point = vec_add(point, data->camera->pos);
+// 	ray->direction->x = point.x - data->camera->pos.x;
+// 	ray->direction->y = point.y - data->camera->pos.y;
+// 	ray->direction->z = point.z - data->camera->pos.z;
+// }

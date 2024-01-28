@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 17:19:23 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:46:34 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	main(int ac, char **av)
 	viewport(data);
 	if (DEBUG_PARSE)
 		output_parse(data);
-	// output_viewport(data->vp->points);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
