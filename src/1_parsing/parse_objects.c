@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:19:56 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:21:51 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,14 @@ void	link_these_objects(t_parse_objects *po, t_data *data)
 
 int	error_check(t_data *data, char **red, int i)
 {
+	int	ve;
+
+	ve = valid_env(red[i]);
 	data->rm_obj = right_amount_obj(red[i]);
-	if (valid_env(red[i]) || data->rm_obj)
+	if (ve || data->rm_obj)
 	{
+		if (ve == 1)
+			data->rm_obj = -1;
 		free_objects(data);
 		return (1);
 	}

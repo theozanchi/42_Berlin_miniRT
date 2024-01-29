@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 17:00:27 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 17:24:19 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_parsing(int ps, t_data *data)
 {
 	if (ps == -2)
 		return ;
-	if (data->rm_obj < 0 || ps < 0)
+	if (data->rm_obj < 0 || ps < 0 || data->rm_obj == 1)
 	{
 		printf("Invalid content has been detected in file\n");
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_environment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:21:36 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:13:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	parse_environment(char **red, t_data *data)
 	int	i;
 	int	rm;
 	int	ca;
+	int	ve;
 
 	ca = check_amount(red);
 	if (ca)
@@ -69,7 +70,8 @@ int	parse_environment(char **red, t_data *data)
 		if (red[i][0] == 'A' || red[i][0] == 'C' || red[i][0] == 'L')
 		{
 			rm = right_amount_env(red[i]);
-			if (valid_env(red[i]) || rm)
+			ve = valid_env(red[i]);
+			if (ve || rm)
 				return (acl_return(red[i]));
 		}
 		indiv_acl(data, red, i);

@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 16:56:55 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 17:18:37 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	parse_scene(t_data *data, int fd)
 	red = read_file(fd);
 	close(fd);
 	pe = parse_environment(red, data);
-	if (pe || parse_objects(red, data))
+	data->rm_obj = parse_objects(red, data);
+	if (pe || data->rm_obj)
 	{
 		free_double_str(red);
 		return (pe);
