@@ -6,15 +6,15 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/29 16:39:10 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/29 16:53:07 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
-# -fsanitize=address
+
 CC			=	cc
 HEAD_DIR	=	./inc/minirt.h
-CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR)
+CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) #-fsanitize=address
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a

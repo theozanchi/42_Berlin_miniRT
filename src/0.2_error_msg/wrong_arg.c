@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrong_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:27:39 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:00:27 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	failed_first_check(int ca)
 		printf("You must have one of each, A, C and L, not more, not less\n");
 	else if (ca == 2)
 		printf("One of the lines is way to short come on make an effort !\n");
+	if (ca == 3)
+		return (1);
 	return (-2);
 }
 
