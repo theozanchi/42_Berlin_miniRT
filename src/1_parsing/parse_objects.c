@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 17:21:51 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 19:18:00 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ t_object	*parse_objects_one_by_one(char **red, int i)
 	return (next);
 }
 
-int	is_object(char **red, int i)
+int	is_object(char **red, int i, t_data *data)
 {
 	if ((red[i][0] == 's' && red[i][1] == 'p') || (red[i][0] == 'p'
 			&& red[i][1] == 'l') || (red[i][0] == 'c' && red[i][1] == 'y'))
+	{
+		data->obj_count++;
 		return (1);
+	}
 	return (0);
 }
 
@@ -81,7 +84,7 @@ int	parse_objects(char **red, t_data *data)
 	{
 		if (ft_strlen(red[i]) >= 2)
 		{
-			if (is_object(red, i))
+			if (is_object(red, i, data))
 			{
 				po->next = parse_objects_one_by_one(red, i);
 				link_these_objects(po, data);

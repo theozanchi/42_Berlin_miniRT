@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
+#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/29 17:34:03 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/29 19:21:26 by helauren         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,8 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/light.c \
 				2_ray_tracing/normal_vector.c \
 				2_ray_tracing/render_scene.c \
+				2_ray_tracing/blind_scene.c \
+				2_ray_tracing/inside_scene.c \
 				2_ray_tracing/viewport_center.c \
 				2_ray_tracing/viewport_trigo.c \
 				2_ray_tracing/viewport.c \

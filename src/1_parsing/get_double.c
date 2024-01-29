@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:24:45 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 00:25:43 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:29:21 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	get_decimal(char *s, int i)
 
 	ret = 0;
 	div = 10;
-	while (s[i] && s[i] != ',' && s[i] != ' ')
+	while (s[i] && s[i] != ',' && ft_isspace(s[i]) != 1)
 	{
 		a = s[i] - '0';
 		a = a / div;
@@ -42,6 +42,7 @@ double	get_double(char *s)
 	double	ret;
 	int		i;
 	int		sign;
+	double	dec;
 
 	sign = 0;
 	i = 0;
@@ -56,7 +57,8 @@ double	get_double(char *s)
 	}
 	if (s[i] == '.')
 		i++;
-	ret = ret + get_decimal(s, i); 
+	dec = get_decimal(s, i);
+	ret = ret + dec; 
 	if (sign < 0)
 		ret = -ret;
 	return (ret);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wrong_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:34 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 17:24:19 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 18:52:24 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	failed_first_check(int ca)
 	else if (ca == 2)
 		printf("One of the lines is way to short come on make an effort !\n");
 	if (ca == 3)
-		return (1);
+		return (-2);
 	return (-2);
 }
 

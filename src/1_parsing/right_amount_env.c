@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:49:49 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:15:06 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 21:10:23 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	right_amount_a(char *red)
 	count = count_ints(red, i);
 	if (count != 3)
 		return (1);
-	i = move_up_three(red, i);
+	i = iterate_rgb_ints(red, i);
 	if (i < 0)
 		return (1);
 	if (empty_end(red, i))
@@ -74,7 +74,7 @@ int	right_amount_l(char *red)
 	count = count_ints(red, i);
 	if (count != 3)
 		return (1);
-	i = move_up_three(red, i);
+	i = iterate_rgb_ints(red, i);
 	if (i < 0)
 		return (-1);
 	if (empty_end(red, i))

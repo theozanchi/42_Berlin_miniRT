@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/29 16:36:15 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 21:09:02 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # endif
 
 # ifndef HEIGTH
-# define HEIGTH 768
+#  define HEIGTH 768
 # endif
 
 # ifndef EPSILON
@@ -77,7 +77,8 @@
 
 /* ************************************************************************** */
 
-# define LOADING_HEADER "         0%              25%              50%         \
+# define LOADING_HEADER \
+	"         0%              25%              50%         \
      75%              100%\n"
 # define LOADING_BAR \
 	"-----------------|----------------|----------------|-----\
@@ -106,14 +107,16 @@ enum
 	Vz,
 };
 
-enum e_hit_part {
+enum				e_hit_part
+{
 	NOT_HIT,
 	TUBE,
 	TOP,
 	BOTTOM
 };
 
-enum {
+enum
+{
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -125,10 +128,10 @@ enum {
 
 typedef struct s_acl
 {
-	int	a;
-	int	c;
-	int	l;
-}				t_acl;
+	int				a;
+	int				c;
+	int				l;
+}					t_acl;
 
 typedef struct s_vec3
 {
@@ -141,10 +144,10 @@ typedef t_vec3		t_point3;
 
 typedef struct s_mtx33
 {
-	t_vec3	c0;
-	t_vec3	c1;
-	t_vec3	c2;
-}	t_mtx33;
+	t_vec3			c0;
+	t_vec3			c1;
+	t_vec3			c2;
+}					t_mtx33;
 
 typedef struct s_rgb
 {
@@ -161,59 +164,59 @@ typedef struct s_o_a // ambient lighting
 
 typedef struct s_o_c // camera
 {
-	t_point3	pos;
-	t_vec3		vector;
-	int			fov;
-}	t_o_c;
+	t_point3 pos;
+	t_vec3 vector;
+	int fov;
+}					t_o_c;
 
 typedef struct s_o_l // light
 {
-	t_point3	pos;
-	double		brightness_ratio;
-	t_rgb		rgb;
-}	t_o_l;
+	t_point3 pos;
+	double brightness_ratio;
+	t_rgb rgb;
+}					t_o_l;
 
 typedef struct s_o_sp // sphere
 {
-	int				id;
-	t_rgb			rgb;
-	struct s_object	*next;
-	char			personal_id;
-	t_point3		pos;
-	double			diameter;
-}	t_o_sp;
+	int id;
+	t_rgb rgb;
+	struct s_object *next;
+	char personal_id;
+	t_point3 pos;
+	double diameter;
+}					t_o_sp;
 
 typedef struct s_o_pl // plane
 {
-	int				id;
-	t_rgb			rgb;
-	struct s_object	*next;
-	char			personal_id;
-	t_point3		pos;
-	t_vec3			vector;
-}	t_o_pl;
+	int id;
+	t_rgb rgb;
+	struct s_object *next;
+	char personal_id;
+	t_point3 pos;
+	t_vec3 vector;
+}					t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
-	int				id;
-	t_rgb			rgb;
-	struct s_object	*next;
-	char			personal_id;
-	t_point3		pos;
-	t_vec3			vector;
-	double			diameter;
-	double			height;
-	t_o_pl			*top_plane;
-	t_o_pl			*bottom_plane;
-	enum e_hit_part	hit_part;
-}	t_o_cy;
+	int id;
+	t_rgb rgb;
+	struct s_object *next;
+	char personal_id;
+	t_point3 pos;
+	t_vec3 vector;
+	double diameter;
+	double height;
+	t_o_pl *top_plane;
+	t_o_pl *bottom_plane;
+	enum e_hit_part hit_part;
+}					t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
-	int				id;
-	t_rgb			rgb;
-	struct s_object	*next;
-	char			personal_id;
+	int id;
+	t_rgb rgb;
+	struct s_object *next;
+	char personal_id;
 }					t_object;
 
 typedef struct s_img
@@ -267,10 +270,10 @@ typedef struct s_vp
 
 typedef struct s_hp_data
 {
-	t_point3	hit_point;
-	t_ray		*ray;
-	t_vec3		n;
-}	t_hp_data;
+	t_point3		hit_point;
+	t_ray			*ray;
+	t_vec3			n;
+}					t_hp_data;
 
 typedef struct s_pdp
 {
@@ -282,10 +285,10 @@ typedef struct s_pdp
 
 typedef struct s_parse_objects
 {
-	t_object	*objects;
-	t_object	*next;
-	t_object	*first;
-}				t_parse_objects;
+	t_object		*objects;
+	t_object		*next;
+	t_object		*first;
+}					t_parse_objects;
 
 typedef struct s_data
 {
@@ -302,7 +305,7 @@ typedef struct s_data
 }					t_data;
 
 // main
-void	launching_mlx(t_data *data);
+void				launching_mlx(t_data *data);
 
 /* free.c ******************************************************************* */
 
@@ -336,7 +339,7 @@ int					parse_scene(t_data *data, int fd);
 t_o_a				*parse_ambient_lighting(char *s);
 t_o_l				*parse_light(char *s);
 t_o_c				*parse_camera(char *s);
-void				cylinder_2(t_o_cy *cy,char *s, int i);
+void				cylinder_2(t_o_cy *cy, char *s, int i);
 void				set_top_bottom(t_o_cy *cy);
 t_object			*parse_plane(char *s);
 t_object			*parse_sphere(char *s);
@@ -365,47 +368,55 @@ t_vec3				viewport_center(t_data *data, t_vec3 start_pos);
 void				viewport_local_vectors_and_height(t_data *data);
 void				viewport_trigo(t_data *data);
 
-
 // keypress
 int					handle_keypress(int keycode, t_data *data);
 
 // rendering
+void				blind_scene(t_data *data);
 void				render_scene(t_data *data);
 void				my_mlx_pixel_put(t_img *img, int x, int y, int color);
 t_colour			rgb_to_colour(t_rgb rgb);
+t_colour			ray_colour(t_data *data, t_ray *ray);
+t_ray				*init_ray(void);
+t_object			*inside_object(t_data *data);
+void				inside_scene(t_data *data, t_object *object);
 
 // rotation
-int	rotation(int keycode, t_data *data);
-int	rotate_sphere(t_o_sp *sphere);
-int	rotate_plane(t_o_pl *plane);
-int	rotate_cylinder(t_o_cy *cylinder);
-int	rotate_camera(t_o_c *camera);
-int	rotate_ambient(t_o_a *ambient);
-int	rotate_light(t_o_l *light);
-int	is_cam_rot_key(int keycode);
+int					rotation(int keycode, t_data *data);
+int					rotate_sphere(t_o_sp *sphere);
+int					rotate_plane(t_o_pl *plane);
+int					rotate_cylinder(t_o_cy *cylinder);
+int					rotate_camera(t_o_c *camera);
+int					rotate_ambient(t_o_a *ambient);
+int					rotate_light(t_o_l *light);
+int					is_cam_rot_key(int keycode);
 
 // translation
-int	translation(int keycode, t_data *data);
-int	translate_sphere(t_o_sp *sphere);
-int	translate_plane(t_o_pl *plane);
-int	translate_cylinder(t_o_cy *cylinder);
-int	translate_camera(t_o_c *camera);
-int	translate_ambient(t_o_a *ambient);
-int	translate_light(t_o_l *light);
+int					translation(int keycode, t_data *data);
+int					translate_sphere(t_o_sp *sphere);
+int					translate_plane(t_o_pl *plane);
+int					translate_cylinder(t_o_cy *cylinder);
+int					translate_camera(t_o_c *camera);
+int					translate_ambient(t_o_a *ambient);
+int					translate_light(t_o_l *light);
 
-//hit_object.c
+// hit_object.c
 double				hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj);
 double				hit_cylinder(t_o_cy *cyl, t_ray *ray, t_object ***hit_obj);
 t_point3			point_on_ray(t_ray *ray, double t);
-double				hit_object(t_object *hittables, t_ray *ray, t_object **hit_obj);
+double				hit_object(t_object *hittables, t_ray *ray,
+						t_object **hit_obj);
 
-//normal_vector.c
-t_vec3				normal_vec3(t_point3 hit_point, t_object *hit_obj, t_ray *ray);
+// normal_vector.c
+t_vec3				normal_vec3(t_point3 hit_point, t_object *hit_obj,
+						t_ray *ray);
 
 // light.c
 t_rgb				alter_colour(t_rgb *ref, t_rgb *source);
-void				modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data);
-double				spotlight_intensity(t_hp_data hp_data, t_ray *shadow_ray, t_data *data);
+void				modify_intensity(t_rgb *rgb, t_hp_data hp_data,
+						t_data *data);
+double				spotlight_intensity(t_hp_data hp_data, t_ray *shadow_ray,
+						t_data *data);
 t_rgb				compute_colour(t_object *hitted_object, t_data *data);
 
 #endif

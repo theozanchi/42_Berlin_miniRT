@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 17:24:11 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/29 21:15:38 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,25 @@ t_data	*init_data(void)
 	data->camera = NULL;
 	data->light = NULL;
 	data->first = NULL;
+	data->obj_count++;
 	data->rm_obj = 0;
 	return (data);
 }
 
 void	launching_mlx(t_data *data)
 {
+	t_object	*inside_this;
+
 	viewport(data);
 	if (DEBUG_PARSE)
 		output_parse(data);
-	render_scene(data);
+	inside_this = inside_object(data);
+	if (data->camera->fov == 0.0)
+		blind_scene(data);
+	else if (inside_this != NULL)
+		inside_scene(data, inside_this);
+	else
+		render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img, 0, 0);
 	mlx_hook(data->win_ptr, ON_DESTROY, 0, &free_resources_and_quit, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_keypress, data);
@@ -55,7 +64,7 @@ int	main(int ac, char **av)
 	if (ps || data->rm_obj)
 	{
 		error_parsing(ps, data);
-		if (ps >= 0)
+		if (ps >= 0 || ps == -2)
 			free_resources_and_quit(data, ps, data->rm_obj);
 		return (EXIT_FAILURE);
 	}
