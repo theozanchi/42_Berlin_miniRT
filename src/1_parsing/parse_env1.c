@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 01:21:12 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:21:29 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:04:07 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	check_amount(char **red)
 	i = 0;
 	while (red[i])
 	{
-		if (red[i][0] == 'A')
+		if (red[i][0] == 'A' && ft_isspace(red[i][1]) == 1)
 			acl.a++;
-		if (red[i][0] == 'C')
+		if (red[i][0] == 'C' && ft_isspace(red[i][1]) == 1)
 			acl.c++;
-		if (red[i][0] == 'L')
+		if (red[i][0] == 'L' && ft_isspace(red[i][1]) == 1)
 			acl.l++;
 		if (ft_strlen(red[i]) < 3)
 			return (2);
