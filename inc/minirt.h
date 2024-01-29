@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/29 00:08:19 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:36:15 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,6 +325,7 @@ int					failed_first_check(int ca);
 int					unvalid_type(char *red);
 
 // parsing
+double				get_double(char *s);
 int					get_file_fd(char *s);
 char				**read_file(int fd);
 double				get_double(char *s);
@@ -356,11 +357,14 @@ int					iterate_three_floats(char *red, int i);
 int					valid_env(char *red);
 int					valid_type(char *red);
 int					is_valid_char(char *red);
+int					check_amount(char **red);
 
 // Viewport
 void				viewport(t_data *data);
 t_vec3				viewport_center(t_data *data, t_vec3 start_pos);
 void				viewport_local_vectors_and_height(t_data *data);
+void				viewport_trigo(t_data *data);
+
 
 // keypress
 int					handle_keypress(int keycode, t_data *data);
