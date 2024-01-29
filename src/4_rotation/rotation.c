@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 18:22:19 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 20:43:29 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:14:37 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,26 @@
 
 void	rotate_object(t_object *obj)
 {
-	if(obj->id == SPHERE)
-		rotate_sphere((t_o_sp*)obj);
-	if(obj->id == PLANE)
-		rotate_plane((t_o_pl*)obj);
-	if(obj->id == CYLINDER)
-		rotate_cylinder((t_o_cy*)obj);
+	if (obj->id == SPHERE)
+		rotate_sphere((t_o_sp *)obj);
+	if (obj->id == PLANE)
+		rotate_plane((t_o_pl *)obj);
+	if (obj->id == CYLINDER)
+		rotate_cylinder((t_o_cy *)obj);
 }
 
 int	rotation(int keycode, t_data *data)
 {
 	t_object	*scroll;
 
-	if(is_cam_rot_key(keycode))
+	if (is_cam_rot_key(keycode))
 		rotate_camera(data->camera);
 	else
 	{
 		scroll = data->first;
-		while(scroll != NULL)
+		while (scroll != NULL)
 		{
-			if(keycode == scroll->personal_id)
+			if (keycode == scroll->personal_id)
 				rotate_object(scroll);
 			scroll = scroll->next;
 		}
@@ -46,7 +46,7 @@ int	rotation(int keycode, t_data *data)
 	return (0);
 }
 
-	// else if(keycode == K_A)
-	// 	rotate_ambient(data->ambient_lighting);
-	// else if(keycode == K_L)
-	// 	rotate_light(data->light);
+// else if(keycode == K_A)
+// 	rotate_ambient(data->ambient_lighting);
+// else if(keycode == K_L)
+// 	rotate_light(data->light);

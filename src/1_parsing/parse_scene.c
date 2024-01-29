@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:24 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 00:09:43 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:20:23 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,47 +43,9 @@ int	next_float_index(char *s, int i)
 			i++;
 	while (s[i] && ft_isdigit(s[i]) != 1 && s[i] != '-')
 		i++;
-	if(s[i] == 0)
+	if (s[i] == 0)
 		return (-1);
 	return (i);
-}
-
-double	get_double(char *s)
-{
-	double	ret;
-	int		i;
-	double	div;
-	double	a;
-	int		sign;
-
-	sign = 0;
-	i = 0;
-	if (s[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	ret = 0;
-	div = 10;
-	while (ft_isdigit(s[i]))
-	{
-		ret = ret * 10;
-		ret = ret + s[i] - '0';
-		i++;
-	}
-	if (s[i] == '.')
-		i++;
-	while (s[i] && s[i] != ',' && s[i] != ' ')
-	{
-		a = s[i] - '0';
-		a = a / div;
-		ret = ret + a;
-		i++;
-		div = div * 10;
-	}
-	if (sign < 0)
-		ret = -ret;
-	return (ret);
 }
 
 int	parse_scene(t_data *data, int fd)
@@ -94,7 +56,7 @@ int	parse_scene(t_data *data, int fd)
 	red = read_file(fd);
 	close(fd);
 	pe = parse_environment(red, data);
-	if(pe || parse_objects(red, data))
+	if (pe || parse_objects(red, data))
 	{
 		free_double_str(red);
 		return (pe);

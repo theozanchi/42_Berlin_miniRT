@@ -6,12 +6,12 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:33:41 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 17:38:18 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:29:29 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
 #include "../../inc/algebra.h"
+#include "../../inc/minirt.h"
 
 void	output_local_vectors(double ***points)
 {
@@ -21,9 +21,14 @@ void	output_local_vectors(double ***points)
 	t_vec3	vec_down;
 	t_vec3	vec_right;
 
-	top_left = vec(points[0][0][0], points[0][0][1], points[0][0][2]);
-	bottom_left = vec(points[0][HEIGTH -1][0], points[0][HEIGTH -1][1], points[0][HEIGTH -1][2]);
-	top_right = vec(points[WIDTH -1][0][0], points[WIDTH -1][0][1], points[WIDTH -1][0][2]);
+	top_left = vec(points[0][0][0], \
+	points[0][0][1], points[0][0][2]);
+	bottom_left = vec(points[0][HEIGTH - 1][0], \
+	points[0][HEIGTH - 1][1],
+			points[0][HEIGTH - 1][2]);
+	top_right = vec(points[WIDTH - 1][0][0], \
+	points[WIDTH - 1][0][1],
+			points[WIDTH - 1][0][2]);
 	vec_down = calculate_vector(top_left, bottom_left);
 	vec_right = calculate_vector(top_left, top_right);
 	printf("Vec Down\n");
@@ -54,12 +59,18 @@ void	output_viewport(double ***arr)
 		{
 			if (x == 0 || x == 1079)
 			{
-				printf("arr[%d][%d][0] / POS X = %f\n", x, y, arr[x][y][0]);
-				printf("arr[%d][%d][1] / POS Y = %f\n", x, y, arr[x][y][1]);
-				printf("arr[%d][%d][2] / POS Z = %f\n", x, y, arr[x][y][2]);
-				printf("arr[%d][%d][3] / VEC X = %f\n", x, y, arr[x][y][3]);
-				printf("arr[%d][%d][4] / VEC Y = %f\n", x, y, arr[x][y][4]);
-				printf("arr[%d][%d][5] / VEC Z = %f\n", x, y, arr[x][y][5]);
+				printf("arr[%d][%d][0] \
+				/ POS X = %f\n", x, y, arr[x][y][0]);
+				printf("arr[%d][%d][1] \
+				/ POS Y = %f\n", x, y, arr[x][y][1]);
+				printf("arr[%d][%d][2] \
+				/ POS Z = %f\n", x, y, arr[x][y][2]);
+				printf("arr[%d][%d][3] \
+				/ VEC X = %f\n", x, y, arr[x][y][3]);
+				printf("arr[%d][%d][4] \
+				/ VEC Y = %f\n", x, y, arr[x][y][4]);
+				printf("arr[%d][%d][5] \
+				/ VEC Z = %f\n", x, y, arr[x][y][5]);
 			}
 			y++;
 		}

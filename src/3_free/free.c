@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 00:08:25 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:22:15 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	crappy_norm(t_parse_objects *po)
 
 /**
  * @brief Frees the list of objects
- * 
+ *
  * @param data Main data structure
  */
 void	free_objects(t_data *data)
@@ -49,9 +49,9 @@ void	free_objects(t_data *data)
 
 /**
  * @brief Frees all resources before exiting
- * 
+ *
  * @param data Main data structure
- * @return 0 
+ * @return 0
  */
 int	free_resources_and_quit(t_data *data, int a, int b)
 {
@@ -61,13 +61,13 @@ int	free_resources_and_quit(t_data *data, int a, int b)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	free_objects(data);
-	if(a == 0 && b == 0)
+	if (a == 0 && b == 0)
 	{
 		free_triple_double(data->vp->points, (int)WIDTH, (int)HEIGTH);
 		free(data->vp);
 	}
-	free_and_set_to_null(4, data->ambient_lighting, data->camera,
-		data->light, data);
+	free_and_set_to_null(4, data->ambient_lighting, data->camera, data->light,
+		data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

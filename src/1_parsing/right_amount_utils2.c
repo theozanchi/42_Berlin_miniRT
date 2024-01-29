@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:31:07 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/23 19:09:04 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:20:08 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	iterate_rgb_ints(char *red, int i)
 {
-	int 	count;
+	int	count;
 	int	num;
 
 	count = 0;
 	count = count_ints(red, i);
-	if(count != 3)
+	if (count != 3)
 		return (-1);
 	count = 0;
-	while(count < 3)
+	while (count < 3)
 	{
 		i = next_float_index(red, i);
 		num = ft_atoi(&red[i]);
-		if(num < (double)0 || num > (double)255)
+		if (num < (double)0 || num > (double)255)
 			return (-1);
 		count++;
 	}
@@ -35,14 +35,14 @@ int	iterate_rgb_ints(char *red, int i)
 
 int	iterate_three_floats(char *red, int i)
 {
-	int 	count;
+	int		count;
 	double	num;
 
 	count = 0;
-	while(count < 3)
+	while (count < 3)
 	{
 		i = next_float_index(red, i);
-		if(i < 0)
+		if (i < 0)
 			return (-1);
 		num = get_double(&red[i]);
 		count++;
@@ -52,17 +52,17 @@ int	iterate_three_floats(char *red, int i)
 
 int	iterate_three_one_floats(char *red, int i)
 {
-	int 	count;
+	int		count;
 	double	num;
 
 	count = 0;
-	while(count < 3)
+	while (count < 3)
 	{
 		i = next_float_index(red, i);
-		if(i < 0)
+		if (i < 0)
 			return (-1);
 		num = get_double(&red[i]);
-		if(is_between_one(num))
+		if (is_between_one(num))
 			return (-1);
 		count++;
 	}
@@ -81,7 +81,7 @@ int	move_up_three(char *red, int i)
 	int	count;
 
 	count = 0;
-	while(count < 3)
+	while (count < 3)
 	{
 		i = next_float_index(red, i);
 		count++;

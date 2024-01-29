@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 01:27:59 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 17:35:32 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:22:43 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,9 @@ t_vec3	viewport_center(t_data *data, t_vec3 start_pos)
 {
 	t_vec3	center_vp;
 
-	(void) start_pos;
+	(void)start_pos;
 	data->camera->vector = normalize(data->camera->vector);
-	center_vp = point_travel_by_vec_and_length(data->camera->pos, data->camera->vector, 1.0);
+	center_vp = point_travel_by_vec_and_length(data->camera->pos,
+			data->camera->vector, 1.0);
 	return (center_vp);
 }

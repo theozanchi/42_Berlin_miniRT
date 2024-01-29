@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:22 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/28 23:50:11 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:15:16 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_o_c	*null_cam_vectors_safety(t_o_c *cam)
 {
-	if(cam->vector.x == 0 && cam->vector.y == 0 && cam->vector.z == 0)
+	if (cam->vector.x == 0 && cam->vector.y == 0 && cam->vector.z == 0)
 		cam->vector.z = 1;
 	return (cam);
 }

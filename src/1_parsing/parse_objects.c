@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 01:26:56 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 00:08:33 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:19:56 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 t_object	*parse_objects_one_by_one(char **red, int i)
 {
-	t_object *next;
+	t_object	*next;
 
 	next = NULL;
 	if (red[i][0] == 's' && red[i][1] == 'p')
@@ -29,8 +29,8 @@ t_object	*parse_objects_one_by_one(char **red, int i)
 
 int	is_object(char **red, int i)
 {
-	if ((red[i][0] == 's' && red[i][1] == 'p') || (red[i][0] == 'p' && red[i][1] == 'l')
-		|| (red[i][0] == 'c' && red[i][1] == 'y'))
+	if ((red[i][0] == 's' && red[i][1] == 'p') || (red[i][0] == 'p'
+			&& red[i][1] == 'l') || (red[i][0] == 'c' && red[i][1] == 'y'))
 		return (1);
 	return (0);
 }
@@ -55,7 +55,7 @@ void	link_these_objects(t_parse_objects *po, t_data *data)
 int	error_check(t_data *data, char **red, int i)
 {
 	data->rm_obj = right_amount_obj(red[i]);
-	if(valid_env(red[i]) || data->rm_obj)
+	if (valid_env(red[i]) || data->rm_obj)
 	{
 		free_objects(data);
 		return (1);
@@ -65,7 +65,7 @@ int	error_check(t_data *data, char **red, int i)
 
 int	parse_objects(char **red, t_data *data)
 {
-	int			i;
+	int				i;
 	t_parse_objects	*po;
 
 	i = 0;
@@ -74,13 +74,13 @@ int	parse_objects(char **red, t_data *data)
 	po->objects = NULL;
 	while (red[i])
 	{
-		if (ft_strlen (red[i]) >= 2)
+		if (ft_strlen(red[i]) >= 2)
 		{
 			if (is_object(red, i))
 			{
 				po->next = parse_objects_one_by_one(red, i);
 				link_these_objects(po, data);
-				if(error_check(data, red, i))
+				if (error_check(data, red, i))
 					return (crappy_norm(po));
 			}
 		}

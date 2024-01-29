@@ -6,7 +6,7 @@
 /*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:49:49 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/22 23:56:09 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/29 01:22:05 by helauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int	right_amount_sp(char *red)
 	double	num;
 
 	count = count_floats(red);
-	if(count != 3)
+	if (count != 3)
 		return (4);
 	i = move_up_three(red, 0);
 	i = next_float_index(red, i);
 	num = get_double(&red[i]);
-	if(num < (double)0.0)
+	if (num < (double)0.0)
 		return (4);
 	i = iterate_rgb_ints(red, i);
-	if(i < 0)
+	if (i < 0)
 		return (4);
-	if(empty_end(red, i))
+	if (empty_end(red, i))
 		return (4);
 	return (0);
 }
@@ -41,22 +41,22 @@ int	right_amount_pl(char *red)
 	double	num;
 
 	count = count_floats(red);
-	if(count != 3)
+	if (count != 3)
 		return (5);
 	i = move_up_three(red, 0);
 	i = iterate_three_one_floats(red, i);
 	count = 0;
-	while(count < 3 && i >= 0)
+	while (count < 3 && i >= 0)
 	{
 		i = next_float_index(red, i);
 		num = ft_atoi(&red[i]);
-		if(num < 0 || num > 255)
+		if (num < 0 || num > 255)
 			return (5);
 		count++;
 	}
-	if(i < 0)
+	if (i < 0)
 		return (5);
-	if(empty_end(red, i))
+	if (empty_end(red, i))
 		return (5);
 	return (0);
 }
@@ -69,21 +69,21 @@ int	right_amount_cy(char *red)
 
 	count = count_floats(red);
 	i = move_up_three(red, 0);
-	if(count != 3 || i < 0)
+	if (count != 3 || i < 0)
 		return (6);
 	i = iterate_three_one_floats(red, i);
 	i = next_float_index(red, i);
 	num = get_double(&red[i]);
-	if(num < (double)0.0)
+	if (num < (double)0.0)
 		return (6);
 	i = next_float_index(red, i);
 	num = get_double(&red[i]);
-	if(num < (double)0.0)
+	if (num < (double)0.0)
 		return (6);
 	i = iterate_rgb_ints(red, i);
-	if(i < 0)
+	if (i < 0)
 		return (6);
-	if(empty_end(red, i))
+	if (empty_end(red, i))
 		return (6);
 	return (0);
 }
@@ -93,7 +93,7 @@ int	right_amount_obj(char *red)
 	int	ret;
 
 	ret = 0;
-	if (ft_strlen (red) < 3)
+	if (ft_strlen(red) < 3)
 		return (ret);
 	if (red[0] == 's' && red[1] == 'p')
 		ret = right_amount_sp(&red[2]);
