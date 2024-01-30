@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:59:51 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/30 09:57:05 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/30 10:24:29 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ t_object	*inside_cylinder(t_data *data, t_o_cy *cy)
 
 	cam_to_center = vec_sub(data->camera->pos, cy->pos);
 	projection = dot(cam_to_center, cy->vector);
-	proj_point = vec_sub(cy->pos, mul_scalar(cy->vector, projection));
+	proj_point = vec_add(cy->pos, mul_scalar(cy->vector, projection));
 	distance_to_axis = vec_len(vec_sub(data->camera->pos, proj_point));
 	if (distance_to_axis <= cy->diameter / 2
 		&& projection >= cy->height / -2 && projection <= cy->height / 2)
 		return ((t_object *)cy);
 	else
-		return (NULL);	
+		return (NULL);
 }
 
 t_object	*inside_object(t_data *data)
