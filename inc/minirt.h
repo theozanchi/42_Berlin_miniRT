@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/29 21:09:02 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:42:13 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,12 +239,12 @@ typedef struct s_ray
 
 typedef struct s_trigo
 {
-	int				angle_a;
-	int				angle_b;
-	int				angle_c;
-	int				rad_a;
-	int				rad_b;
-	int				rad_c;
+	double			angle_a;
+	double			angle_b;
+	double			angle_c;
+	double			rad_a;
+	double			rad_b;
+	double			rad_c;
 	double			cote_ab;
 	double			cote_bc;
 	double			cote_ca;

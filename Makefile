@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/30 09:58:35 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/30 14:55:49 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC			=	cc
 HEAD_DIR	=	./inc/minirt.h
-CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) #-fsanitize=address
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a
@@ -73,7 +73,6 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/render_scene.c \
 				2_ray_tracing/blind_scene.c \
 				2_ray_tracing/inside_scene.c \
-				2_ray_tracing/viewport_center.c \
 				2_ray_tracing/viewport_trigo.c \
 				2_ray_tracing/viewport.c \
 				\

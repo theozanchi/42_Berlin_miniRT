@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:24:14 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:55:09 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	viewport_local_vectors_and_height(t_data *data)
 	up_vec.x = 0;
 	up_vec.y = 1;
 	up_vec.z = 0;
+	if (equal(up_vec, data->camera->vector)
+		|| equal(neg(up_vec), data->camera->vector))
+		up_vec = vec(0, 0, 1);
 	data->vp->local_right = prod(up_vec, data->camera->vector);
 	data->vp->local_up = prod(data->vp->local_right, data->camera->vector);
 	data->vp->local_down = data->vp->local_up;
@@ -98,7 +101,7 @@ void	viewport(t_data *data)
 	t_vec3	top_left;
 
 	data->vp = malloc(sizeof(t_vp));
-	center = viewport_center(data, data->camera->pos);
+	center = vec_add(data->camera->pos, normalize(data->camera->vector));
 	viewport_trigo(data);
 	viewport_local_vectors_and_height(data);
 	top_left = find_top_left_ray(data, center);
