@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/30 14:42:13 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/30 15:16:40 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,65 +158,65 @@ typedef struct s_rgb
 
 typedef struct s_o_a // ambient lighting
 {
-	double ratio;
-	t_rgb rgb;
-}					t_o_a;
+	double	ratio;
+	t_rgb	rgb;
+}			t_o_a;
 
 typedef struct s_o_c // camera
 {
-	t_point3 pos;
-	t_vec3 vector;
-	int fov;
-}					t_o_c;
+	t_point3	pos;
+	t_vec3		vector;
+	int			fov;
+}				t_o_c;
 
 typedef struct s_o_l // light
 {
-	t_point3 pos;
-	double brightness_ratio;
-	t_rgb rgb;
-}					t_o_l;
+	t_point3	pos;
+	double		brightness_ratio;
+	t_rgb		rgb;
+}				t_o_l;
 
 typedef struct s_o_sp // sphere
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	char personal_id;
-	t_point3 pos;
-	double diameter;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	char			personal_id;
+	t_point3		pos;
+	double			diameter;
 }					t_o_sp;
 
 typedef struct s_o_pl // plane
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	char personal_id;
-	t_point3 pos;
-	t_vec3 vector;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	char			personal_id;
+	t_point3		pos;
+	t_vec3			vector;
 }					t_o_pl;
 
 typedef struct s_o_cy // cylinder
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	char personal_id;
-	t_point3 pos;
-	t_vec3 vector;
-	double diameter;
-	double height;
-	t_o_pl *top_plane;
-	t_o_pl *bottom_plane;
-	enum e_hit_part hit_part;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	char			personal_id;
+	t_point3		pos;
+	t_vec3			vector;
+	double			diameter;
+	double			height;
+	t_o_pl			*top_plane;
+	t_o_pl			*bottom_plane;
+	enum e_hit_part	hit_part;
 }					t_o_cy;
 
 typedef struct s_object // can be type casted to any object using id
 {
-	int id;
-	t_rgb rgb;
-	struct s_object *next;
-	char personal_id;
+	int				id;
+	t_rgb			rgb;
+	struct s_object	*next;
+	char			personal_id;
 }					t_object;
 
 typedef struct s_img
