@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helauren <helauren@student.42.fr>          +#+  +:+       +#+         #
+#    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/29 19:21:26 by helauren         ###   ########.fr        #
+#    Updated: 2024/01/30 08:12:45 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC			=	cc
 HEAD_DIR	=	./inc/minirt.h
-CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) -fsanitize=address
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a

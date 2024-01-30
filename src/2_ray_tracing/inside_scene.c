@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inside_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:59:51 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 21:16:10 by helauren         ###   ########.fr       */
+/*   Updated: 2024/01/30 09:32:03 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	inside_scene(t_data *data, t_object *object)
 {
 	int		x;
 	int		y;
-	t_ray	*ray;
 	int		colour;
 	t_rgb	rgb;
 
@@ -63,7 +62,6 @@ void	inside_scene(t_data *data, t_object *object)
 	colour = rgb_to_colour(rgb);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
-	ray = init_ray();
 	x = 0;
 	while (x < WIDTH)
 	{
@@ -76,5 +74,4 @@ void	inside_scene(t_data *data, t_object *object)
 		}
 		x++;
 	}
-	free_and_set_to_null(3, ray->origin, ray->direction, ray);
 }
