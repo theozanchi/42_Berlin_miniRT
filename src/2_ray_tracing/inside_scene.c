@@ -6,48 +6,61 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:59:51 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/30 09:32:03 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/01/30 09:57:05 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/minirt.h"
+#include "minirt.h"
 #include "algebra.h"
 
-t_object	*inside_sphere(t_data *data)
+t_object	*inside_sphere(t_data *data, t_o_sp *sp)
 {
-	t_o_sp	*objects;
+	t_vec3	cam_to_center;
 	double	distance;
 
-	objects = (t_o_sp *)data->first;
-	while (objects)
-	{
-		if (objects->id == SPHERE)
-		{
-			distance = calculate_distance(data->camera->pos, objects->pos);
-			if (objects->diameter > distance)
-				return ((t_object *)objects);
-		}
-		objects = (t_o_sp *)objects->next;
-	}
-	return (NULL);
+	cam_to_center = vec_sub(data->camera->pos, sp->pos);
+	distance = vec_len(cam_to_center);
+	if (distance <= sp->diameter / 2)
+		return ((t_object *)sp);
+	else
+		return (NULL);
 }
 
-t_object	*inside_cylinder(t_data *data)
+t_object	*inside_cylinder(t_data *data, t_o_cy *cy)
 {
-	(void)data;
-	return (NULL);
+	t_vec3		cam_to_center;
+	double		projection;
+	t_point3	proj_point;
+	double		distance_to_axis;
+
+	cam_to_center = vec_sub(data->camera->pos, cy->pos);
+	projection = dot(cam_to_center, cy->vector);
+	proj_point = vec_sub(cy->pos, mul_scalar(cy->vector, projection));
+	distance_to_axis = vec_len(vec_sub(data->camera->pos, proj_point));
+	if (distance_to_axis <= cy->diameter / 2
+		&& projection >= cy->height / -2 && projection <= cy->height / 2)
+		return ((t_object *)cy);
+	else
+		return (NULL);	
 }
 
 t_object	*inside_object(t_data *data)
 {
 	t_object	*inside_this;
+	t_object	*ptr;
 
 	inside_this = NULL;
 	if (data->obj_count == 0)
 		return (NULL);
-	inside_this = inside_sphere(data);
-	if (inside_this == NULL)
-		inside_this = inside_cylinder(data);
+	ptr = data->first;
+	while (ptr)
+	{
+		if (ptr->id == SPHERE)
+			inside_this = inside_sphere(data, (t_o_sp *)ptr);
+		else if (ptr->id == CYLINDER)
+			inside_this = inside_cylinder(data, (t_o_cy *)ptr);
+		ptr = ptr->next;
+	}
 	return (inside_this);
 }
 
