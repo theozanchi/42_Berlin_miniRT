@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/01/30 14:55:49 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/01/31 17:16:37 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/inside_scene.c \
 				2_ray_tracing/viewport_trigo.c \
 				2_ray_tracing/viewport.c \
+				2_ray_tracing/temp.c \
 				\
 				3_free/free.c \
 				\
