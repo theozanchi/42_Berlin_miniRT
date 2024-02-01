@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/30 15:16:40 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/01 16:13:20 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # endif
 
 # ifndef SPECULAR
-#  define SPECULAR 1
+#  define SPECULAR 0
 # endif
 
 # ifndef DEBUG

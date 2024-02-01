@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:29:22 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 18:11:12 by helauren         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:06:12 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_o_c	*parse_camera(char *s)
 	camera->vector.z = get_double(&s[i]);
 	i = next_float_index(s, i);
 	camera->fov = ft_atoi(&s[i]);
+	if (camera->fov == 180)
+		camera->fov -= EPSILON;
 	camera = null_cam_vectors_safety(camera);
 	return (camera);
 }
