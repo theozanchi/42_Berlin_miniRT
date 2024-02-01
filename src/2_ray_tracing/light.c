@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/01/29 21:09:35 by helauren         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:58:41 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ double	spotlight_intensity(t_hp_data hp_data, t_ray *shadow_ray, t_data *data)
 
 	t = hit_object(data->first, shadow_ray, NULL);
 	if (SHADOW
-		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hp_data.hit_point)))
+		&& t > 0.0 && t < vec_len(vec_sub(data->light->pos, hp_data.hit_point)) - EPSILON)
 		intensity = 0.0;
 	else
 		intensity = dot(hp_data.n, *shadow_ray->direction);
@@ -95,12 +95,12 @@ void	modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data)
 	shdw_ray = create_shadow_ray(hp_data, data);
 	spotlight = spotlight_intensity(hp_data, shdw_ray, data);
 	specular = 0.0;
-	if (spotlight)
-	{
-		*rgb = alter_colour(rgb, &data->light->rgb);
-		if (SPECULAR)
-			specular = specular_intensity(hp_data, shdw_ray);
-	}
+	// if (spotlight)
+	// {
+	// 	// *rgb = alter_colour(rgb, &data->light->rgb);
+	// 	if (SPECULAR)
+	// 		specular = specular_intensity(hp_data, shdw_ray);
+	// }
 	final = (spotlight + specular) * data->light->brightness_ratio
 		+ data->ambient_lighting->ratio;
 	if (final > 1.0)
