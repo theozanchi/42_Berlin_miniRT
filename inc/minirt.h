@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/02/01 16:13:20 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/01 18:29:34 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "keys.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -312,6 +311,7 @@ void				launching_mlx(t_data *data);
 int					free_resources_and_quit(t_data *data, int a, int b);
 void				free_objects(t_data *data);
 int					crappy_norm(t_parse_objects *po);
+int					quit_from_cross(t_data *data);
 
 // debugging
 void				output_parse(t_data *data);

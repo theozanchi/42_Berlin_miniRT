@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helauren <helauren@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:31 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/29 01:22:15 by helauren         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:25:00 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ void	free_objects(t_data *data)
 		}
 	}
 	data->first = NULL;
+}
+
+int	quit_from_cross(t_data *data)
+{
+	free_resources_and_quit(data, 0, 0);
+	return (1);
 }
 
 /**
