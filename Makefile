@@ -6,12 +6,11 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/02/02 10:52:10 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/02/02 11:07:01 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
-
 CC			=	cc
 HEAD_DIR	=	./inc/minirt.h
 CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) -O3 #-fsanitize=address
@@ -25,7 +24,7 @@ SRCS_DIR	=	./src/
 HEAD_DIR	=	./inc/
 LIBFT_DIR	=	./libft/
 LIBMLX_DIR	=	./minilibx-linux/
-OBJ_DIR		=	${SRCS_DIR}.o
+OBJ_DIR		=	./obj/
 
 # Colours, symbols and utils
 GREEN		=	\033[1;32m
@@ -89,9 +88,9 @@ SRC_NR		=	${words ${SRCS}}
 OBJS		=	${patsubst ${SRCS_DIR}%, ${OBJ_DIR}/%, ${SRCS:.c=.o}}
 
 all:			project_logo ${OBJ_DIR}
-				@make -s ${LIBFT}
-				@make -s ${LIBMLX}
-				@make -s ${NAME}
+				@make -s ${LIBFT};
+				@make -s ${LIBMLX};
+				@make -s ${NAME};
 
 ${LIBFT}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBFT} | tr '[:lower:]' '[:upper:]')${NC}"
@@ -111,8 +110,12 @@ ${LIBMLX}:
 				make -C ${LIBMLX_DIR}
 
 ${NAME}:		entry_message ${OBJS}
-				@${CC} ${CFLAGS} ${OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} ${LDFLAGS} -o ${NAME}
-				@echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"
+				@if [ -e ${NAME} ] && [ "$(shell find ${OBJ_DIR} -newer ${NAME} 2>/dev/null)" = "" ]; then \
+					echo "Nothing to do"; \
+				else \
+					${CC} ${CFLAGS} ${OBJS} -I${HEAD_DIR} ${LIBFT_DIR}${LIBFT} ${LIBMLX_DIR}${LIBMLX} ${LDFLAGS} -o ${NAME}; \
+					echo "${YELLOW}\nCompilation complete, ${NAME} executable at the root of the directory${NC}\n"; \
+				fi
 
 ${OBJ_DIR}:
 				@if [ ! -d "${OBJ_DIR}" ]; \
