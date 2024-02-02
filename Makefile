@@ -6,14 +6,14 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/02/02 13:00:20 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/02/02 13:14:47 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Compiler targets and libraries
 CC			=	cc
 HEAD_DIR	=	./inc/minirt.h
-CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) -O3 #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -I$(HEAD_DIR) -O3
 LDFLAGS		=	-Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 NAME		=	miniRT
 LIBFT		=	libft.a
@@ -132,8 +132,6 @@ ${OBJ_DIR}/%.o:	${SRCS_DIR}%.c
 
 
 clean:
-				@make -sC ${LIBFT_DIR} clean >/dev/null 2>&1
-				@make -sC ${LIBMLX_DIR} clean >/dev/null 2>&1
 				@if [ ! -d "${OBJ_DIR}" ]; \
 				then \
 					echo "Repo already clean"; \
@@ -143,8 +141,6 @@ clean:
 				fi
 
 fclean:			clean
-				@make -sC ${LIBFT_DIR} fclean >/dev/null 2>&1
-				@make -sC ${LIBMLX_DIR} clean >/dev/null 2>&1
 				@echo "Removing archive files ${LIBFT} and ${LIBMLX}, removing ${NAME} executable from root"
 				@rm -f ${NAME}
 
