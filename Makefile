@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/02/01 18:27:38 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/02/02 10:52:10 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ SRC			=	0.0_utils/algebra_utils_0.c \
 				2_ray_tracing/viewport.c \
 				2_ray_tracing/temp.c \
 				\
-				3_free/free.c \
+				3_free/free_1.c \
+				3_free/free_2.c \
 				\
 				keypress.c \
 				main.c
@@ -102,7 +103,7 @@ ${LIBFT}:
 
 ${LIBMLX}:
 				@echo "${CYAN}\nCOMPILING $$(echo ${LIBMLX} | tr '[:lower:]' '[:upper:]')${NC}"
-				@if [ -d ${LIBFT_DIR} ]; then \
+				@if [ ! -d $(shell basename $(LIBMLX_DIR) | sed 's/\///g') ]; then \
 					wget https://cdn.intra.42.fr/document/document/22740/minilibx-linux.tgz; \
 					tar -xf minilibx-linux.tgz; \
 					rm minilibx-linux.tgz; \
@@ -154,7 +155,7 @@ project_logo:
 				@echo "${LIGHT_YELLOW} #    #  #  #  # #  #  #   #       #    ${NC}"
 				@echo "${RED} #    #  #  #   ##  #  #    #      #    ${NC}"
 				@echo "${LIGHT_RED} #    #  #  #    #  #  #     #     #    ${NC}"
-				@echo "\n              Henri Lauren, Théo Zanchi"
+				@echo "\n            Henri Laurence, Théo Zanchi"
 				
 entry_message:
 				@echo "${CYAN}\nCOMPILING $$(echo ${NAME} | tr '[:lower:]' '[:upper:]')\n${NC}${BOLD}Compiling necessary .o files out of $(SRC_NR) files${NC}"

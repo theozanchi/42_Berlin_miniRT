@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/02/01 18:29:34 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/02 10:26:19 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,6 @@
 
 # ifndef DEBUG
 #  define DEBUG 1
-# endif
-
-# ifndef DEBUG_VIEWPORT
-#  define DEBUG_VIEWPORT 0
-# endif
-
-# ifndef DEBUG_SPOTLIGHT
-#  define DEBUG_SPOTLIGHT 0
-# endif
-
-# ifndef DEBUG_COLOR
-#  define DEBUG_COLOR 0
-# endif
-
-# ifndef DEBUG_PARSE
-#  define DEBUG_PARSE 0
 # endif
 
 /* ************************************************************************** */
@@ -312,12 +296,11 @@ int					free_resources_and_quit(t_data *data, int a, int b);
 void				free_objects(t_data *data);
 int					crappy_norm(t_parse_objects *po);
 int					quit_from_cross(t_data *data);
+void				free_double_str(char **s);
+void				free_triple_double(double ***points, int x, int y);
 
 // debugging
-void				output_parse(t_data *data);
 void				render_loading_bar(void);
-void				output_ray_vectors(t_data *data);
-void				output_viewport(double ***arr);
 void				output_vec3(t_vec3 vec);
 void				output_local_vectors(double ***points);
 
@@ -364,7 +347,6 @@ int					check_amount(char **red);
 
 // Viewport
 void				viewport(t_data *data);
-t_vec3				viewport_center(t_data *data, t_vec3 start_pos);
 void				viewport_local_vectors_and_height(t_data *data);
 void				viewport_trigo(t_data *data);
 
@@ -380,25 +362,6 @@ t_colour			ray_colour(t_data *data, t_ray *ray);
 t_ray				*init_ray(void);
 t_object			*inside_object(t_data *data);
 void				inside_scene(t_data *data, t_object *object);
-
-// rotation
-int					rotation(int keycode, t_data *data);
-int					rotate_sphere(t_o_sp *sphere);
-int					rotate_plane(t_o_pl *plane);
-int					rotate_cylinder(t_o_cy *cylinder);
-int					rotate_camera(t_o_c *camera);
-int					rotate_ambient(t_o_a *ambient);
-int					rotate_light(t_o_l *light);
-int					is_cam_rot_key(int keycode);
-
-// translation
-int					translation(int keycode, t_data *data);
-int					translate_sphere(t_o_sp *sphere);
-int					translate_plane(t_o_pl *plane);
-int					translate_cylinder(t_o_cy *cylinder);
-int					translate_camera(t_o_c *camera);
-int					translate_ambient(t_o_a *ambient);
-int					translate_light(t_o_l *light);
 
 // hit_object.c
 double				hit_plane(t_o_pl *plane, t_ray *ray, t_object ***hit_obj);

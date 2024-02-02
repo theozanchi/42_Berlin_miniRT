@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:24:49 by tzanchi           #+#    #+#             */
-/*   Updated: 2024/02/01 16:11:44 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/01 18:33:23 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	modify_intensity(t_rgb *rgb, t_hp_data hp_data, t_data *data)
 	specular = 0.0;
 	if (spotlight)
 	{
-		// *rgb = alter_colour(rgb, &data->light->rgb);
+		*rgb = alter_colour(rgb, &data->light->rgb);
 		if (SPECULAR)
 			specular = specular_intensity(hp_data, shdw_ray);
 	}

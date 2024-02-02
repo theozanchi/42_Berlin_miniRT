@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 20:01:36 by helauren          #+#    #+#             */
-/*   Updated: 2024/01/30 14:55:09 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/02 10:26:05 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,4 @@ void	viewport(t_data *data)
 	viewport_local_vectors_and_height(data);
 	top_left = find_top_left_ray(data, center);
 	data->vp->points = parse_dem_points(data, top_left);
-	if (DEBUG_VIEWPORT)
-	{
-		output_local_vectors(data->vp->points);
-		output_viewport(data->vp->points);
-	}
 }

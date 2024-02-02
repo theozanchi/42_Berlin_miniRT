@@ -6,7 +6,7 @@
 /*   By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:11:26 by helauren          #+#    #+#             */
-/*   Updated: 2024/02/01 18:25:18 by tzanchi          ###   ########.fr       */
+/*   Updated: 2024/02/02 10:26:33 by tzanchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	launching_mlx(t_data *data)
 	t_object	*inside_this;
 
 	viewport(data);
-	if (DEBUG_PARSE)
-		output_parse(data);
 	inside_this = inside_object(data);
 	if (data->camera->fov == 0.0)
 		blind_scene(data);
