@@ -6,7 +6,7 @@
 #    By: tzanchi <tzanchi@student.42berlin.de>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/14 15:19:38 by tzanchi           #+#    #+#              #
-#    Updated: 2024/02/02 11:07:01 by tzanchi          ###   ########.fr        #
+#    Updated: 2024/02/02 13:00:20 by tzanchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS_DIR	=	./src/
 HEAD_DIR	=	./inc/
 LIBFT_DIR	=	./libft/
 LIBMLX_DIR	=	./minilibx-linux/
-OBJ_DIR		=	./obj/
+OBJ_DIR		=	${SRCS_DIR}.o
 
 # Colours, symbols and utils
 GREEN		=	\033[1;32m
